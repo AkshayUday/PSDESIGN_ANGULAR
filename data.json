@@ -1,0 +1,113 @@
+{
+	"ReadFeaturesResponse": {
+		"feature": [{
+			"featureIdentifier": {
+				"idSource": "110004",
+				"idValue": "HeaOppAssessment",
+				"idType": "features",
+				"resourceId": "110004~HeaOppAssessment"
+			},
+			"name": "Health Opportunity Assessment (HOA)",
+			"enabled": false
+		}, {
+			"featureIdentifier": {
+				"idSource": "110004",
+				"idValue": "BenTracker",
+				"idType": "features",
+				"resourceId": "110004~BenTracker"
+			},
+			"name": "Benefits Tracker",
+			"enabled": true
+		}, {
+			"featureIdentifier": {
+				"idSource": "110004",
+				"idValue": "ClaimsList",
+				"idType": "features",
+				"resourceId": "110004~ClaimsList"
+			},
+			"name": "ClaimsList",
+			"enabled": true
+		}, {
+			"featureIdentifier": {
+				"idSource": "110004",
+				"idValue": "Pricing",
+				"idType": "features",
+				"resourceId": "110004~Pricing"
+			},
+			"name": "Cost Transparency",
+			"enabled": true
+		}, {
+			"featureIdentifier": {
+				"idSource": "110004",
+				"idValue": "RewAction",
+				"idType": "features",
+				"resourceId": "110004~RewAction"
+			},
+			"name": "Reward Action",
+			"enabled": false
+		}, {
+			"featureIdentifier": {
+				"idSource": "110004",
+				"idValue": "HeaAction",
+				"idType": "features",
+				"resourceId": "110004~HeaAction"
+			},
+			"name": "Health Action",
+			"enabled": false
+		}, {
+			"featureIdentifier": {
+				"idSource": "110004",
+				"idValue": "DigitalCoaching",
+				"idType": "features",
+				"resourceId": "110004~DigitalCoaching"
+			},
+			"name": "Digital Coaching",
+			"enabled": false
+		}, {
+			"featureIdentifier": {
+				"idSource": "110004",
+				"idValue": "PersonalHealthRecord",
+				"idType": "features",
+				"resourceId": "110004~PersonalHealthRecord"
+			},
+			"name": "Personal Health Record",
+			"enabled": false
+		}, {
+			"featureIdentifier": {
+				"idSource": "110004",
+				"idValue": "NurseEmail",
+				"idType": "features",
+				"resourceId": "110004~NurseEmail"
+			},
+			"name": "Nurse / Coach Communication",
+			"enabled": false
+		}, {
+			"featureIdentifier": {
+				"idSource": "110004",
+				"idValue": "Trackers",
+				"idType": "features",
+				"resourceId": "110004~Trackers"
+			},
+			"name": "Trackers",
+			"enabled": true
+		}, {
+			"featureIdentifier": {
+				"idSource": "110004",
+				"idValue": "ProviderSearch",
+				"idType": "features",
+				"resourceId": "110004~ProviderSearch"
+			},
+			"name": "Provider Search",
+			"enabled": true
+		}, {
+			"featureIdentifier": {
+				"idSource": "110004",
+				"idValue": "IdCard",
+				"idType": "features",
+				"resourceId": "110004~IdCard"
+			},
+			"name": "ID Cards",
+			"enabled": true
+		}]
+	}
+}
