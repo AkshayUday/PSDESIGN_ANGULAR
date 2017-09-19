@@ -266,3 +266,10 @@ hr.style7 {
 	border-top: 1px solid #8c8b8b;
 	border-bottom: 1px solid #fff;
 }
+.ats-switch{
+    min-width:66px;
+}
+.pos-relative{
+    display: inline;
+    margin-right: 14px;
+}
