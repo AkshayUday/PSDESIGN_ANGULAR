@@ -1,0 +1,171 @@
+package com.aetna.dt.dtpsadmin.home.web.controller;
+
+import java.io.IOException;
+
+import org.apache.commons.logging.LogFactory;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestTemplate;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import com.aetna.dt.dtpsadmin.home.web.exception.PropertyConfigurerException;
+import com.aetna.dt.dtpsadmin.home.web.util.AccessToken;
+import com.aetna.dt.dtpsadmin.home.web.util.AppTokenGenerator;
+import com.aetna.framework.context.BeanResolver;
+import com.google.api.client.auth.oauth2.TokenResponse;
+
+@Component
+@Controller
+public class UpdateGlobalFeaturesController {
+
+	@Value("${updateGlobalFeatures.url}")
+	private String updateGlobalFeaturesURL;
+
+	public String clientID = "";
+
+	public String secretCode = "";
+
+	public String scope = "";
+
+	public String tokenURL = "";
+	
+	private static final Log log = LogFactory.getLog(UpdateGlobalFeaturesController.class);
+
+	@RequestMapping(value = "/updateGlobalFeatures", method = RequestMethod.PUT)
+	public @ResponseBody String updateGlobalFeatures(
+			@RequestParam("name") String name,
+			@RequestParam("enabled") boolean enabled,
+			@RequestParam("resourceId") String resourceId) throws IOException,
+			JSONException, PropertyConfigurerException {
+		
+		if (updateGlobalFeaturesURL == null || updateGlobalFeaturesURL.isEmpty()) {
+			throw new PropertyConfigurerException(
+					"Update Global Features URL is not configured in property file");
+		}
+
+		String updateGlobalFeatures = updateGlobalFeaturesURL + resourceId;
+
+		JSONObject userJson = new JSONObject();
+
+		AccessToken tokenGenerator = (AccessToken) BeanResolver
+				.getBean("accessToken");
+		clientID = tokenGenerator.getClientID();
+		secretCode = tokenGenerator.getSecretCode();
+		scope = tokenGenerator.getScope();
+		tokenURL = tokenGenerator.getTokenURL();
+
+		AppTokenGenerator appTokenGenerator = new AppTokenGenerator();
+
+		if (clientID == null || clientID.isEmpty()) {
+
+			throw new PropertyConfigurerException(
+					"ClientID is not configured in property file");
+		}
+		if (secretCode == null || secretCode.isEmpty()) {
+			throw new PropertyConfigurerException(
+					"Secret code is not configured in property file");
+		}
+		if (scope == null || scope.isEmpty()) {
+			throw new PropertyConfigurerException(
+					"Scope is not configured in property file");
+		}
+		if (tokenURL == null || tokenURL.isEmpty()) {
+			throw new PropertyConfigurerException(
+					"Token URL is not configured in property file");
+		}
+		
+
+		TokenResponse response = appTokenGenerator.getAccessToken(clientID,
+				secretCode, scope, tokenURL);
+
+		JSONObject json = new JSONObject();
+
+		json.put("name", name);
+		json.put("enabled", enabled);
+		System.out.println("Created JSON String :" + json.toString());
+		JSONObject json1 = new JSONObject();
+		json1.put("feature", json);
+		System.out.println("Created JSON1 String :" + json1.toString());
+		JSONObject json2 = new JSONObject();
+		json2.put("UpdateFeatureRequest", json1);
+		log.debug("Created JSON String :" + json2.toString());
+
+		// String updateFeatures =
+		// "{\"UpdateFeatureRequest\":{\"feature\":{\"name\":\"Health Action\",\"enabled\":true}}}";
+
+		String updateFeatures = json2.toString();
+
+		RestTemplate restTemplate = new RestTemplate();
+		// set headers
+		HttpHeaders headers = new HttpHeaders();
+		headers.set("Authorization", "Bearer " + response.getAccessToken());
+		// headers.set("ID_TOKEN",
+		// "eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiQTI1NktXIiwiY3R5IjoiSldUIn0.tEa-wj-ANJeBxjaRnd4g4aU3zcdm-ae-f92xXh5C-zd7mtLLjaKVIg.sXOVczFym1gIlDcB2233Yw.gIo3aFTztjxoU55vWjZCR8qHCI8l8ZTtgxGVdGEn_R9n8UhQ23s9cpx38nQNtviMz-bKlWx_zTgmIe_aTyHnODavLLNC5czVN3OwNnxC9JQCVb1P1SWZnqMSGafmUF1O-p2Kue2TMKslVGlgixo0hk-S6WQROUCVOHcwdk0PUPzTm7mON300OX-knkbh9SQW16QQTAZB1W1NqEHxMTkpQWps7KfO1hKox1ak7bhqU4TKzdGytTbHw0OkZFirozsiusnEZoh1-9yrCKkEQ4m1jG8BEQj-7rugQ5fPPEIZ0uPrWKbkY11eufgVjaDCmQQt3IAN5ZkDwLESw0h8NDm0QTHYlUHu90Y4GFhvy_HblmuMzr4JbtCg6Wf8SUsdhojBHKckwrvl5Q599j5HIErC12RWKi_14OPCpSKtOaEhgt6bqLi7s87LesCct6LuzhxvGTF5i_4u58BCoSt4itAWRyFC1dXqMxKgLAU5YnSIN1WKWYg9piYwYl_Bpv21vB0aq7TUoqc01roPNrhVHB5FT2yM6D51spTOb9ycXmFwHwN6wl6qI1TQezt4WT5Z1hqd5Prrb2dGWSK7OYhcYi1ECu-5mVgQQwrxRGa87rf5RAaLuJpVPSEdrRm1dMI542oTJ3uJfVyC8AbdlPCuDIACmyky-EmdJaFdrRlkFP4Iax4w-CtlBIpYLXQ8DIoQeb86H_dh3X9Ra95s-DL6Syv1QbJlgOJkkGVvBs8Wd0YCBQe23vVSCwBpKFwImWewPB1eGR3oOsRJoYyIRx3oNfQJcC5NfGWq3CYAjMmWDmUQ936IWH5tcYmZUOTBdy3e18NB7IqwxEKYGtxdoASW2DLDXg.CefG5fQufokTdE7fgP0RLQ");
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		HttpEntity<String> entity = new HttpEntity<String>(updateFeatures,
+				headers);
+
+		// send request and parse result
+		ResponseEntity<String> updateResponse = restTemplate.exchange(
+				updateGlobalFeatures, HttpMethod.PUT, entity, String.class);
+		log.debug("Response for updateGlobalFeatures : "
+				+ updateResponse.getBody());
+
+		if (updateResponse.getStatusCode() == HttpStatus.OK) {
+
+			try {
+				userJson = new JSONObject(updateResponse.getBody());
+				log.debug("Response for updateGlobalFeatures : "
+						+ userJson.toString());
+
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				log.debug("Exception :" + e);
+			}
+
+		} else if (updateResponse.getStatusCode() == HttpStatus.UNAUTHORIZED) {
+			log.debug("UNAUTHORIZED(401) :" + userJson.toString());
+			throw new PropertyConfigurerException("UNAUTHORIZED(401) : " + userJson.toString());
+
+		} else if (updateResponse.getStatusCode() == HttpStatus.NOT_FOUND) {
+			log.debug("NOT_FOUND(404) :" + userJson.toString());
+			throw new PropertyConfigurerException("NOT_FOUND(404) : " + userJson.toString());
+
+		} else if (updateResponse.getStatusCode() == HttpStatus.METHOD_NOT_ALLOWED) {
+			log.debug("METHOD_NOT_ALLOWED(405) :" + userJson.toString());
+			throw new PropertyConfigurerException("METHOD_NOT_ALLOWED(405) : " + userJson.toString());
+
+		} else if (updateResponse.getStatusCode() == HttpStatus.NOT_ACCEPTABLE) {
+			log.debug("NOT_ACCEPTABLE(406) :" + userJson.toString());
+			throw new PropertyConfigurerException("NOT_ACCEPTABLE(406) : " + userJson.toString());
+
+		} else if (updateResponse.getStatusCode() == HttpStatus.INTERNAL_SERVER_ERROR) {
+			log.debug("INTERNAL_SERVER_ERROR(500) :" + userJson.toString());
+			throw new PropertyConfigurerException("INTERNAL_SERVER_ERROR(500) : " + userJson.toString());
+
+		} else if (updateResponse.getStatusCode() == HttpStatus.SERVICE_UNAVAILABLE) {
+			log.debug("SERVICE_UNAVAILABLE(503) :" + userJson.toString());
+			throw new PropertyConfigurerException("SERVICE_UNAVAILABLE(503) : " + userJson.toString());
+
+		}
+
+		return userJson.toString();
+
+	}
+}
