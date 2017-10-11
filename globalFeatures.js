@@ -40,22 +40,30 @@ $scope.counter = 0;
 resourceId};
 
 
-			    // Simple POST request example:
-			  $http({
+			    // Show saving gif spinner.
+				  $scope.loading = true;
+				  $scope.inx1 = inx;
+
+				    // POST request :
+				$timeout(function () {$http({
 				  method: 'POST',
 				  url: 'updateGlobalFeatures',
 				  data: Pdata,
 				  headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-				}).then(function successCallback(response) {
-				  console.log('success response', response)
-				    // this callback will be called asynchronously
-				    // when the response is available
-
-				  }, function errorCallback(response) {
-				    console.log('failure response', response.status)
-				    // called asynchronously if an error occurs
-				    // or server returns response with an error status.
-				  });
+				}).success(function (data) {
+				      // Do stuff with data.
+				      console.log('success response', data)
+				    })
+				    .catch(function (err) {
+				      // Log error somehow.
+					console.log('failure response', err)
+				    })
+				    .finally(function () {
+				      // Hide loading spinner whether our call succeeded or failed.
+				      console.log('checking whether loading is working')
+				      $scope.loading = false;
+				    });
+				  }, 2000);
 
 				    console.log('changed1', obj.enabled);
 				  };  
