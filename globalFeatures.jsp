@@ -234,7 +234,8 @@
 									<!-- ng-repeat row -->
 									<tr ng-repeat="feature in myData track by $index">
 										<td>
-											<div class="checkbox" ng-click="feature.enabled = !feature.enabled">
+											<div class="loading"  ng-show="loading && $index==inx1"><img src="http://www.nasa.gov/multimedia/videogallery/ajax-loader.gif" width="20" height="20" />Saving...</div>
+											<div class="checkbox" ng-hide="loading && $index==inx1" ng-click="feature.enabled = !feature.enabled">
 												<label ng-click="change(feature,$index)">
 
 											<div ng-class="test(feature.enabled)" style="width: 72.9375px; height: 36px;">
