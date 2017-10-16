@@ -53,15 +53,9 @@
  			<div class="row">
  				<div class="col-md-3">
  					<div class="shadow-box">
- 						<ul class="left-menu">
- 
- 							<li><a href="#" class="active">View All <i class="fa fa-caret-right pull-right fa-3" aria-hidden="true"></i></a></li>
- 						<!--  
- 							<li><a href="#">General</a></li>
- 							<li><a href="#" class="active"=>Care Management <i class="fa fa-caret-right pull-right fa-3" aria-hidden="true"></i></a></li>
- 							<li><a href="#">Rewards</a></li>
- 						<li><a href="#">Payments</a></li>
- 							-->
+ 							<ul class="left-menu">
+							<li><a href="#" ng-click="show('ShowAll')" class="active">View All <i class="fa fa-caret-right pull-right fa-3" aria-hidden="true"></i></a></li>
+							<li ng-repeat="data1 in myData | unique : 'categoryName' "><a href="#" ng-click="show(data1.featureCategory.categoryName)">{{data1.featureCategory.categoryName}}</a></li>
 						</ul>
  					</div>
  				</div>
@@ -232,7 +226,7 @@
 									</tr>
 									-->
 									<!-- ng-repeat row -->
-									<tr ng-repeat="feature in myData track by $index">
+									<tr ng-repeat="feature in myData | myFilter: showItems track by $index">
 										<td>
 											<div class="loading"  ng-show="loading && $index==inx1"><img src="http://www.nasa.gov/multimedia/videogallery/ajax-loader.gif" width="20" height="20" />Saving...</div>
 											<div class="checkbox" ng-hide="loading && $index==inx1" ng-click="feature.enabled = !feature.enabled">
