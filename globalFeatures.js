@@ -129,7 +129,7 @@ $timeout(function () {$http({
       alert('test');
     }
   }
-  $http.get("./categoryData.json").success(function(response) {
+  $http.get("./data.json").success(function(response) {
     console.log('response is ', response.ReadFeaturesResponse.features)
       $scope.myData = (response.ReadFeaturesResponse.features);
   });
