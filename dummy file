@@ -1,0 +1,120 @@
+		<td class="pos-relative"> <span class="status">{{feature.featureStatus}}</span><button id="example" data-toggle="popover"  data-placement="bottom" ng-click="showPopover= !showPopover;"
+
+							<i class="fa fa-pencil pull-right btn btn-pencil btn-green " aria-hidden="true"></i>
+							</button>
+
+							<div class="popover fade size bottom in" ng-show="showPopover" role="tooltip" id="popover948578" style="top: 51.6333px; left: -305.133px; display: block;"><div class="arrow" style="left: 58.5177%;"></div><h3 class="popover-title" style="display: none;"></h3><div class="popover-content"><div>
+								<h3> Status edit</h3>
+								 <div class="form-group">
+								<label class="radio-inline">
+							  <input id="inlineCheckbox1" value="option1" type="radio"> Scheduled offline
+							</label>
+							<label class="radio-inline">
+							  <input id="inlineCheckbox2" value="option2" type="radio"> Temporary offline
+							</label>
+							<label class="radio-inline">
+							  <input id="inlineCheckbox3" value="option3" type="radio"> Online
+							</label>
+							<label class="radio-inline">
+							  <input id="inlineCheckbox4" value="option4" type="radio"> N/A
+							</label>
+							</div>
+							<div class="form-group row">
+							<div class="col-sm-2">
+							    <label>Start date</label>
+								<input class="form-control" id="inputPassword2" type="text">
+								</div>
+								<div class="col-sm-1 mt30 p0 calendar-icon"> <i class="fa fa-calendar fa-3" aria-hidden="true"></i></div>
+							                                            <div class="col-sm-3 time p0">
+							                                            <label>Time</label>
+							                                            <div class="row time-selection">
+							                                            <div class="input-group col-sm-3 pull-left">
+							                                                <input class="input-group-addon" min="1" max="12" type="number">
+							                                                    <span class="input-group-addon p0">
+							                                                        <i class="fa fa-sort-asc" aria-hidden="true"></i>
+							                                                        <i class="fa fa-sort-desc" aria-hidden="true"></i>
+							                                                    </span>
+							                                            </div>
+							                                            <span class="col-sm-1 time-division">:</span>
+							                                            <div class="input-group col-sm-3 pull-left">
+							                                                <input class="input-group-addon" min="1" max="60" type="number">
+							                                                    <span class="input-group-addon p0">
+							                                                        <i class="fa fa-sort-asc" aria-hidden="true"></i>
+							                                                        <i class="fa fa-sort-desc" aria-hidden="true"></i>
+							                                                    </span>
+
+							                                            </div>
+							                                            <div class="time-format col-sm-2 p0">
+							                                            <span class="active-format">AM</span><span>PM</span>
+							                                            </div>
+							                                            </div>
+							                                            </div>
+							    <div class="col-sm-2">
+							       <label>Expiry date</label>
+								<input class="form-control" id="inputPassword2" type="text">
+							    </div>
+								<div class="col-sm-1 mt30 p0 calendar-icon">  <i class="fa fa-calendar fa-3" aria-hidden="true"></i></div>
+							                                            <div class="col-sm-3 time p0">
+							                                            <label>Time</label>
+							                                            <div class="row time-selection">
+							                                            <div class="input-group col-sm-3 pull-left">
+							                                                <input class="input-group-addon" min="1" max="12" type="number">
+							                                                    <span class="input-group-addon p0">
+							                                                        <i class="fa fa-sort-asc" aria-hidden="true"></i>
+							                                                        <i class="fa fa-sort-desc" aria-hidden="true"></i>
+							                                                    </span>
+							                                            </div>
+							                                            <span class="col-sm-1 time-division">:</span>
+							                                            <div class="input-group col-sm-3 pull-left">
+							                                                <input class="input-group-addon" min="1" max="60" type="number">
+							                                                    <span class="input-group-addon p0">
+							                                                        <i class="fa fa-sort-asc" aria-hidden="true"></i>
+							                                                        <i class="fa fa-sort-desc" aria-hidden="true"></i>
+							                                                    </span>
+							                                            </div>
+							                                            <div class="time-format col-sm-2 p0">
+							                                            <span class="active-format">AM</span><span>PM</span>
+							                                            </div>
+							                                            </div>
+							                                            </div>
+							  </div>
+							<div class="form-group">
+							<div class="radio">
+							  <label>
+							    <input name="optionsRadios" id="optionsRadios1" value="option1" checked="" type="radio">
+							    Option one is this and that—be sure to include why its great
+							  </label>
+							</div>
+							<div class="radio">
+							  <label>
+							    <input name="optionsRadios" id="optionsRadios2" value="option2" type="radio">
+							    Option two can be something else and selecting it will deselect option one
+							  </label>
+							</div>
+							<div class="radio ">
+							  <label>
+							    <input name="optionsRadios" id="optionsRadios3" value="option3" type="radio">
+							    Option three is disabled
+							  </label>
+							</div>
+							<div class="radio ">
+							  <label>
+							    <input name="optionsRadios" id="optionsRadios3" value="option3" type="radio">
+							    other
+							  </label>
+							</div>
+							</div>
+							 <div class="form-group ">
+								<textarea class="form-control"> </textarea>
+							 </div>
+							  <div class="form-group ">
+								<button type="submit" class="btn btn-default btn-green">Save</button>
+								<button type="submit" class="btn btn-default btn-green " id="my modal" data-dismiss="modal" aria-hidden="true">Cancel</button>
+							  </div>
+
+							</div></div></div>
+
+
+							<!--  popover testing-->
+
+						</td>
