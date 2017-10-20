@@ -33,8 +33,8 @@ myapp.filter('unique', function() {
 myapp.filter('myFilter', function () {
     return function(inputs,filterValues) {
       var output = [];
-
-      if(filterValues == 'ShowAll'){
+     
+      if(filterValues == 'View All'){
           output = inputs;
           return output;
       }else{
@@ -51,10 +51,13 @@ myapp.filter('myFilter', function () {
 
 myapp.controller('globalCtrl', function($scope, $http, $timeout) {
   $scope.myArrayData = [];
-  $scope.showItems = 'ShowAll'
-
-  $scope.show = function(selItemName) {
-    $scope.showItems = selItemName;
+  $scope.showItems = 'View All'
+$scope.showPopover=false;
+  $scope.selected = 0;
+  $scope.show = function(selItemName,ind) {
+    $scope.showItems = selItemName.featureCategory.categoryName;
+    $scope.categorydescription = selItemName.featureCategory.categoryDescription;
+    $scope.selected = ind;
   }
 
   $scope.test = function(v) {
@@ -70,7 +73,7 @@ myapp.controller('globalCtrl', function($scope, $http, $timeout) {
   };
   $scope.toggle = function(id, dat) {
     $scope.variable = !$scope.variable
-  }
+  };
 
   $scope.counter = 0;
   $scope.change = function(obj, inx) {
@@ -129,9 +132,8 @@ $timeout(function () {$http({
       alert('test');
     }
   }
-  $http.get("./data.json").success(function(response) {
+  $http.get("script/data.json").success(function(response) {
     console.log('response is ', response.ReadFeaturesResponse.features)
       $scope.myData = (response.ReadFeaturesResponse.features);
   });
 });
-
