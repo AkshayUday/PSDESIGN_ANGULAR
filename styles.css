@@ -7,8 +7,7 @@
     font-style: normal;
 
 }
-
-@font-face {
+f
     font-family: 'open_sanssemibold';
     src: url('fonts/open-sans.semibold-webfont.woff2') format('woff2'),
          url('fonts/open-sans.semibold-webfont.woff') format('woff');
@@ -16,7 +15,6 @@
     font-style: normal;
 
 }
-
 
 @font-face {
     font-family: 'open_sanslight';
@@ -34,9 +32,8 @@ body{font-family: 'open_sansregular';  font-size:16px; background:#eef2f4}
 }
 } */
 
-
 .purple-header {
-    background: #7d3f98;
+    background: #7d3f98 !important;
     color: #fff;
 	padding: 8px 0;
 }
@@ -48,24 +45,20 @@ body{font-family: 'open_sansregular';  font-size:16px; background:#eef2f4}
 .logo{ font-size:30px;}
 .f-bold{ font-family: 'open_sanssemibold';}
 .f-light{ font-family: 'open_sanslight';}
-.logout {
-    font-size: 13px;
+#logout {
+    font-size: 14px;
     font-family: 'open_sanslight';
     color: #fff !important;
     padding-bottom: 9px;
     margin-right: 9px;
-    margin-left: -14px;
 }
-
-
 @media screen and (-ms-high-contrast: active), screen and (-ms-high-contrast: none) {
     /* IE10+ specific styles go here */
 
-
-
-
 }
-
+input[type=radio] {    display: none;}
+input[type=radio] + label:before {    content: "\f10c";  font-family:   FontAwesome;  font-size: 1.1em;    color: purple;    letter-spacing: 10px;  display: inline-block;}
+input[type=radio]:checked + label:before {    content: "\f192";  font-family: FontAwesome;}
 
 .menu ul{ list-style:none; padding-left:0; margin-bottom:0;}
 .menu ul li{ float:left; margin-right:35px;}
@@ -77,8 +70,6 @@ input[type=number]::-webkit-inner-spin-button {
   -webkit-appearance: none;
 }
 
-
-
 .btn-green , .btn-green:hover {
     background: #00A78E;
     color: #fff;
@@ -86,7 +77,8 @@ input[type=number]::-webkit-inner-spin-button {
 }
 .btn-pencil {
     padding: 3px 9px;
-    margin-top: -4.5px;
+    margin-top: -2.5px;
+    margin-left: 31px;
 }
 .btn{ font-size:16px;}
 .fa-2{font-size:22px; margin-left:15px;}
@@ -121,11 +113,11 @@ input[type=number]::-webkit-inner-spin-button {
 	padding:13px 18px;
 }
 .fa-3 { font-size: 26px;
-    line-height: 0.8;}
+    line-height: 0.6;}
 	.right-container{
 		padding:25px;
 	}
-
+	
 .right-header h3 {
     margin: 0 0 15px;
 }
@@ -142,19 +134,20 @@ padding-left: 15px;}
     background: #7d3f98;
     font-family: 'open_sanslight';
     color: #fff;
+
 }
 .table-section {
     margin-top: 30px;
 }
 .CareManagement-table th , .CareManagement-table td{
     padding: 20px !important;
-    vertical-align: initial !important;
+    vertical-align: initial !important; 
 }
 .status {
     padding: 5px 5px;
     background: #eef2f4;
     border-radius: 5px;
-    margin: 0 5px 0 -20px;
+    margin: 0 5px 0 -4px;
 }
 td .checkbox{ margin:0;}
 .checkbox .btn-primary{
@@ -167,7 +160,7 @@ td .checkbox{ margin:0;}
     left: 16px;
 }
 .toggle-on.btn {
-    padding-right: 43px;
+    padding-right: 43px!important;
 }
 .toggle-handle {
     right: 16px;
@@ -178,7 +171,8 @@ td .checkbox{ margin:0;}
     padding-left: 35px;
 }
 .popover {
-    width: 800px !important;
+    width: 779px !important;
+    margin-left:17px!important;
   }
 .popover.size {
     left: inherit !important;
@@ -201,12 +195,14 @@ td .checkbox{ margin:0;}
     border: #8EB92D;
     color: #fff;
 	font-size:16px;
+	
+	
 }
 .popover.success > .arrow{
     left: 11% !important;
     border: #8EB92D;
 }
-.popover.success > .arrow:after {
+.popover.success > .arrow:after { 
     border-bottom-color: #8EB92D;
 }
 .popover.error > .arrow{
@@ -227,12 +223,9 @@ td .checkbox{ margin:0;}
 .calendar-icon{ width:5%;}
 .time{ width:28%;}
 .active-format{ font-weight: bold; }
-
-
 .border_bottom{
     border-bottom:1pt solid black;
 }
-
 .fa-sort-asc {
     color:purple!important;
 }
@@ -247,4 +240,37 @@ td .checkbox{ margin:0;}
 }
 .pos-relative{
 	position:relative;
+}
+.cancel{
+background:none!important;
+color:#008000!important;
+
+}
+.copyright{
+    margin-top: 20px;
+    text-align: left;
+    color: #6A6A6A;
+    margin-left: 40px;
+    font-size: 13px;
+}
+hr.style7 {
+	border-top: 1px solid #8c8b8b;
+	border-bottom: 1px solid #fff;
+}
+.ats-switch{
+    min-width:66px;
+}
+.pos-relative{
+    
+    position: relative;
+    width: 200px;
+}
+
+#description{
+
+}
+
+
+.table_Des {
+width: 300px !important;
 }
