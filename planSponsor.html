@@ -1,0 +1,125 @@
+
+<html>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="themes/css2/bootstrap.css">
+	<link rel="stylesheet" href="themes/css2/font-awesome.css">
+ 	<link rel="stylesheet" href="themes/css2/stylesplanSponsor.css">
+ 	<link rel="stylesheet" href="themes/css2/bootstrap-toggle.css">
+	<script src="script/bootstrap-toggle.js" type ="text/javascript"></script>
+	<script src="script/jquery-2.2.4.min.js"></script>
+	<script src="script/bootstrap.min.js" type ="text/javascript"></script>
+	<script src="script/angular.min.js" type ="text/javascript"></script>
+	<script src="script/angular-sanitize.js" type ="text/javascript"></script>
+	<script src="script/globalFeatures.js" type ="text/javascript"></script>
+
+
+	<script src="script/jquery-2.2.4.min.js" type ="text/javascript"></script>
+	<script src="script/bootstrap.min.js" type ="text/javascript"></script>
+	<script src="script/angular.min.js" type ="text/javascript"></script>
+	<script src="script/angular-cookies.js" type ="text/javascript"></script>
+	<script src="script/login.js" type ="text/javascript"></script>
+
+	<script>window.cardData=${getGlobalFeaturesList}</script>
+</head>
+<body>
+	<header>
+		<div class="purple-header ">
+ 			<div class="container">
+ 				<div class="clearfix ">
+ 				<div class="pull-left logo"><span class="f-bold">PS</span> <span class="f-light">Admin </span></div>
+ 					<div class="pull-right mt10"><span class="user-name"><img src="images/icons/icon_features_user.png"/>${userName}</span>
+ 				 <a href="logout" id=logout> Logout</a>
+ 					</div>
+ 				</div>
+ 			</div>
+ 		</div>
+ 		<div class="main-menu">
+ 			<div class="container">
+ 				<nav class="menu">
+ 					<ul class="clearfix">
+ 						<li><a href="" class="active" disabled="disabled">Home </a></li>
+ 						<li><a href="" class="active" disabled="disabled"> Features </a></li>
+ 						<li><a href="script/planSponsor.html" class="active" disabled="disabled">Plan Sponsor </a></li>
+ 					</ul>
+ 				</nav>
+ 			</div>
+ 		</div>
+
+ 	</header>
+	<div class="container">
+		<div class="clearfix mt25">
+
+			<div class="pull-left form-group ">
+				<h3> Search Plan Sponsors</h3>
+            <hr>
+                <div class="radiobuttons">
+                <input type="radio" name="status" value="option1"  id="inlineradio1"     />
+                <label class="radio-inline " for="inlineradio1">All</label>
+
+                <input type="radio" name="status" value="option2"  id="inlineradio2" />
+                <label class="radio-inline" for="inlineradio2">Name</label>
+
+                <input type="radio" name="status" value="option3" id="inlineradio3" />
+                <label class="radio-inline" for="inlineradio3">PSUID</label>
+
+                <input type="radio" name="status" value="option4" checked="" id="inlineradio4" />
+                <label class="radio-inline p0 active" for="inlineradio4">Control No</label>
+                </div>
+		</div>
+            <div class="container pull-left ">
+				<div class="form-inline">
+
+					<div class="inner-addon right-addon">
+						<i class="fa fa-times fa-2x"></i>
+						<input type="text" class="form-control " placeholder="Search" />
+						<button type="submit" class="btn btn-primary searchButton">Search</button>
+					</div>
+
+
+					<!--<input type="form-control  " ng-model="searchAll" />-->
+					<!--<span class="fa fa-times"></span>-->
+					<!--<a class="clear" ng-click="searchAll = null">-->
+						<!--<span class="fa fa-times"></span>-->
+					<!--</a>-->
+				</div>
+            </div>
+        </div>
+	</div>
+
+	<br>
+
+
+	<div class="jumbotron SearchResults">
+		<a class="searchtext">Search Results for</a>
+		<a class="selectedSearch label label-default">A43201</a>
+		<br>
+		<br>
+
+
+
+		<div class="container">
+			<div class="purple-label">
+				<span class="psuid ">PSUID</span>
+				<span class="fa fa-sort"></span>
+				<span class="psname">Name</span>
+				<span class="controlnumber">Control Number</span>
+			</div>
+		</div>
+  <br>
+		<div class="container searchresultspage">
+				<span class="psuid text-black">12345</span>
+				<span class="psname text-black">AETNA</span>
+				<span class="controlnumber text-black">12345,1234512345,1234512345,1234512345,1234512345,12345</span>
+
+		</div>
+	</div>
+
+
+</body>
+<script>
+	$scope.clearSearch = function() {
+		$scope.searchAll = null;
+	}
+</script>
+</html>
