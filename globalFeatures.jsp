@@ -31,8 +31,9 @@
  			<div class="container">
  				<nav class="menu">
  					<ul class="clearfix">
- 						<li><a href="" class="btn" disabled="disabled">Home </a></li>
+ 						<li><a href="" class="active" disabled="disabled">Home </a></li>
  						<li><a href="" class="active" disabled="disabled"> Features </a></li>
+ 						<li><a href="script/planSponsor.html" class="active" disabled="disabled">Plan Sponsor </a></li>
  					</ul>
  				</nav>
  			</div>
@@ -53,21 +54,22 @@
  			<div class="row">
  				<div class="col-md-3">
  					<div class="shadow-box">
- 							<ul class="left-menu">
-							<li><a href="#" ng-click="show('ShowAll')" class="active">View All <i class="fa fa-caret-right pull-right fa-3" aria-hidden="true"></i></a></li>
-							<li ng-repeat="data1 in myData | unique : 'categoryName' "><a href="#" ng-click="show(data1.featureCategory.categoryName)">{{data1.featureCategory.categoryName}}</a></li>
+ 						<ul class="left-menu">
+ 
+ 														<li><a href="#" ng-click="show('View All')">View All</a></li>
+							<li ng-repeat="data1 in myData | unique : 'categoryName' "><a href="#" ng-click="show(data1,$index)"ng-class="{active:$index == selected}">{{data1.featureCategory.categoryName}}<i  ng-class="{fa fa-caret-right pull-right fa-3:$index == selected}" aria-hidden="true"></i</a></li>
+ 							
 						</ul>
  					</div>
  				</div>
  				<div class="col-md-9">
  					<div class="shadow-box right-container">
  						<div class="right-header">
-							<h3> View All</h3>
+							<h3>{{showItems}}</h3>
  						</div>
  						<div class="right-content-wrap">
- 							<!--  <p>Placeholder text....orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
- 							</p>
- 							-->
+ 						<p>{{categorydescription}}</p>
+ 						
  							<div class="table-section">
  								<table class="table CareManagement-table">
  									<tr>
@@ -255,9 +257,127 @@
 								<button type="submit" class="btn btn-default ">Close</button></div></div></div>' data-placement="bottom" data-class="error">
 									{{feature.name}} </p>
 						</td>
-						<td>NA</td>
-						<td class="pos-fixed"> <span class="status">N/A</span> <button type="button" class="btn btn-default btn-green btn-pencil pull-right"> <i class="fa fa-pencil " aria-hidden="true"></i></button></td>
-						</tr>
+						<td class="table_Des">{{feature.description}}</td>
+								<td class="pos-relative"> <span class="status">{{feature.featureStatus}}</span><button id="example" data-toggle="popover"  data-placement="bottom" ng-click="showPopover= !showPopover;"
+
+							<i class="fa fa-pencil pull-right btn btn-pencil btn-green " aria-hidden="true"></i>
+							</button>
+
+							<div class="popover fade size bottom in" ng-show="showPopover" role="tooltip" id="popover948578" style="top: 51.6333px; left: -305.133px; display: block;"><div class="arrow" style="left: 58.5177%;"></div><h3 class="popover-title" style="display: none;"></h3><div class="popover-content"><div>
+								<h3> Status edit</h3>
+								 <div class="form-group">
+								<label class="radio-inline">
+							  <input id="inlineCheckbox1" value="option1" type="radio"> Scheduled offline
+							</label>
+							<label class="radio-inline">
+							  <input id="inlineCheckbox2" value="option2" type="radio"> Temporary offline
+							</label>
+							<label class="radio-inline">
+							  <input id="inlineCheckbox3" value="option3" type="radio"> Online
+							</label>
+							<label class="radio-inline">
+							  <input id="inlineCheckbox4" value="option4" type="radio"> N/A
+							</label>
+							</div>
+							<div class="form-group row">
+							<div class="col-sm-2">
+							    <label>Start date</label>
+								<input class="form-control" id="inputPassword2" type="text">
+								</div>
+								<div class="col-sm-1 mt30 p0 calendar-icon"> <i class="fa fa-calendar fa-3" aria-hidden="true"></i></div>
+							                                            <div class="col-sm-3 time p0">
+							                                            <label>Time</label>
+							                                            <div class="row time-selection">
+							                                            <div class="input-group col-sm-3 pull-left">
+							                                                <input class="input-group-addon" min="1" max="12" type="number">
+							                                                    <span class="input-group-addon p0">
+							                                                        <i class="fa fa-sort-asc" aria-hidden="true"></i>
+							                                                        <i class="fa fa-sort-desc" aria-hidden="true"></i>
+							                                                    </span>
+							                                            </div>
+							                                            <span class="col-sm-1 time-division">:</span>
+							                                            <div class="input-group col-sm-3 pull-left">
+							                                                <input class="input-group-addon" min="1" max="60" type="number">
+							                                                    <span class="input-group-addon p0">
+							                                                        <i class="fa fa-sort-asc" aria-hidden="true"></i>
+							                                                        <i class="fa fa-sort-desc" aria-hidden="true"></i>
+							                                                    </span>
+
+							                                            </div>
+							                                            <div class="time-format col-sm-2 p0">
+							                                            <span class="active-format">AM</span><span>PM</span>
+							                                            </div>
+							                                            </div>
+							                                            </div>
+							    <div class="col-sm-2">
+							       <label>Expiry date</label>
+								<input class="form-control" id="inputPassword2" type="text">
+							    </div>
+								<div class="col-sm-1 mt30 p0 calendar-icon">  <i class="fa fa-calendar fa-3" aria-hidden="true"></i></div>
+							                                            <div class="col-sm-3 time p0">
+							                                            <label>Time</label>
+							                                            <div class="row time-selection">
+							                                            <div class="input-group col-sm-3 pull-left">
+							                                                <input class="input-group-addon" min="1" max="12" type="number">
+							                                                    <span class="input-group-addon p0">
+							                                                        <i class="fa fa-sort-asc" aria-hidden="true"></i>
+							                                                        <i class="fa fa-sort-desc" aria-hidden="true"></i>
+							                                                    </span>
+							                                            </div>
+							                                            <span class="col-sm-1 time-division">:</span>
+							                                            <div class="input-group col-sm-3 pull-left">
+							                                                <input class="input-group-addon" min="1" max="60" type="number">
+							                                                    <span class="input-group-addon p0">
+							                                                        <i class="fa fa-sort-asc" aria-hidden="true"></i>
+							                                                        <i class="fa fa-sort-desc" aria-hidden="true"></i>
+							                                                    </span>
+							                                            </div>
+							                                            <div class="time-format col-sm-2 p0">
+							                                            <span class="active-format">AM</span><span>PM</span>
+							                                            </div>
+							                                            </div>
+							                                            </div>
+							  </div>
+							<div class="form-group">
+							<div class="radio">
+							  <label>
+							    <input name="optionsRadios" id="optionsRadios1" value="option1" checked="" type="radio">
+							    Option one is this and that—be sure to include why its great
+							  </label>
+							</div>
+							<div class="radio">
+							  <label>
+							    <input name="optionsRadios" id="optionsRadios2" value="option2" type="radio">
+							    Option two can be something else and selecting it will deselect option one
+							  </label>
+							</div>
+							<div class="radio ">
+							  <label>
+							    <input name="optionsRadios" id="optionsRadios3" value="option3" type="radio">
+							    Option three is disabled
+							  </label>
+							</div>
+							<div class="radio ">
+							  <label>
+							    <input name="optionsRadios" id="optionsRadios3" value="option3" type="radio">
+							    other
+							  </label>
+							</div>
+							</div>
+							 <div class="form-group ">
+								<textarea class="form-control"> </textarea>
+							 </div>
+							  <div class="form-group ">
+								<button type="submit" class="btn btn-default btn-green">Save</button>
+								<button type="submit" class="btn btn-default btn-green " id="my modal" data-dismiss="modal" aria-hidden="true">Cancel</button>
+							  </div>
+
+							</div></div></div>
+
+
+							<!--  popover testing-->
+
+						</td>
 						<tr class="border_bottom"></tr>
 						</table>
 				
@@ -304,7 +424,6 @@
 					return 'bottom';
 				}
 			});
-		});
 	</script>
 </body>
 
