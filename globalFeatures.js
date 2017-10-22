@@ -1,4 +1,38 @@
-myapp = angular.module('myApp', ['ngSanitize']);
+myapp = angular.module('myApp', ['ngSanitize','ui.router']);
+
+var states = [{
+      name: 'HOME',
+      state: {
+        url: "/",
+        templateUrl: './feature.html',
+        controller: "globalCtrl"
+      }
+    },
+    {
+      name: 'FEATURES',
+      state: {
+        url: "#",
+        templateUrl: './feature.html',
+        controller: "globalCtrl"
+      }
+    },
+    {
+      name: 'PLANSPONSOR',
+      state: {
+        url: "#",
+        templateUrl: './planSponsor.html',
+        controller: "globalCtrl"
+      }
+    }]
+
+    myapp.config(function($stateProvider, $urlRouterProvider) {
+
+   $urlRouterProvider.otherwise('/');
+
+   angular.forEach(states, function(state) {
+     $stateProvider.state(state.name, state.state);
+   });
+ });
 
 // here we define our unique filter
 myapp.filter('unique', function() {
@@ -33,8 +67,8 @@ myapp.filter('unique', function() {
 myapp.filter('myFilter', function () {
     return function(inputs,filterValues) {
       var output = [];
-     
-      if(filterValues == 'View All'){
+
+      if(filterValues == 'ShowAll'){
           output = inputs;
           return output;
       }else{
@@ -51,13 +85,29 @@ myapp.filter('myFilter', function () {
 
 myapp.controller('globalCtrl', function($scope, $http, $timeout) {
   $scope.myArrayData = [];
-  $scope.showItems = 'View All'
-$scope.showPopover=false;
-  $scope.selected = 0;
+  $scope.showItems = 'ShowAll';
+  $scope.showPopover=false;
+  $scope.expand=false;
+  $scope.selected = 'ShowAll';
+  $scope.viewAll = true;
+  $scope.categorydescription = 'View All';
+
   $scope.show = function(selItemName,ind) {
-    $scope.showItems = selItemName.featureCategory.categoryName;
-    $scope.categorydescription = selItemName.featureCategory.categoryDescription;
-    $scope.selected = ind;
+    // $scope.viewAll = false;
+console.log('selected is ',selItemName);
+    if(selItemName == 'ShowAll'){
+      $scope.viewAll = true;
+      $scope.showItems = 'ShowAll';
+      $scope.myData = $scope.resData;
+      $scope.categorydescription = 'View All';
+       $scope.selected = ind;
+    }else{
+      $scope.viewAll = false;
+      $scope.showItems = selItemName.featureCategory.categoryName;
+       $scope.categorydescription = selItemName.featureCategory.categoryDescription;
+       $scope.selected = ind;
+    }
+
   }
 
   $scope.test = function(v) {
@@ -73,7 +123,7 @@ $scope.showPopover=false;
   };
   $scope.toggle = function(id, dat) {
     $scope.variable = !$scope.variable
-  };
+  }
 
   $scope.counter = 0;
   $scope.change = function(obj, inx) {
@@ -132,8 +182,9 @@ $timeout(function () {$http({
       alert('test');
     }
   }
-  $http.get("script/data.json").success(function(response) {
+  $http.get("./categoryData.json").success(function(response) {
     console.log('response is ', response.ReadFeaturesResponse.features)
-      $scope.myData = (response.ReadFeaturesResponse.features);
+    $scope.resData = response.ReadFeaturesResponse.features;
+      $scope.myData = $scope.resData;
   });
 });
