@@ -7,6 +7,7 @@
 	<link rel="stylesheet" href="themes/css2/font-awesome.css">
  	<link rel="stylesheet" href="themes/css2/styles.css">
  	<link rel="stylesheet" href="themes/css2/bootstrap-toggle.css">
+	<link rel="stylesheet" href="themes/css2/stylesplanSponsor.css">
 	<script src="script/bootstrap-toggle.js" type ="text/javascript"></script
 	<script src="script/jquery-2.2.4.min.js"></script>
 	<script src="script/bootstrap.min.js" type ="text/javascript"></script>
