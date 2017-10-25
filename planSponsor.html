@@ -1,21 +1,22 @@
+<div class ="plansponsor">
 
 
-		<div class="clearfix mt25">
+		<div class="clearfix mt25 plansponsorfont">
 
 			<div class="form-group ">
 				<h3 class="selTitle"> Search Plan Sponsors</h3>
                 <div class="radiobuttons">
-                <input type="radio" name="status" value="option1"  id="inlineradio1"     />
+                <input type="radio" name="status" value="option1"  id="inlineradio1"   disabled  />
                 <label class="radio-inline checkboxTitle " for="inlineradio1">All</label>
 
-                <input type="radio" name="status" value="option2"  id="inlineradio2" />
+                <input type="radio" name="status" value="option2"  id="inlineradio2" disabled/>
                 <label class="radio-inline checkboxTitle" for="inlineradio2">Name</label>
 
-                <input type="radio" name="status" value="option3" id="inlineradio3" />
+                <input type="radio" name="status" value="option3" id="inlineradio3" disabled/>
                 <label class="radio-inline checkboxTitle" for="inlineradio3">PSUID</label>
 
                 <input type="radio" name="status" value="option4" checked="" id="inlineradio4" />
-                <label class="radio-inline active checkboxTitle" for="inlineradio4">Control No</label>
+                <label class="radio-inline active checkboxTitlecontrol" for="inlineradio4">Control No</label>
                 </div>
 		</div>
             <div class="container pull-left ">
@@ -23,22 +24,16 @@
 
 					<div class="inner-addon right-addon">
 						<i class="fa fa-times fa-2x"></i>
-						<input type="text" class="form-control " placeholder="Search" />
+						<input type="number" class="form-control " />
 						<button type="submit" class="btn btn-primary searchButton">Search</button>
 					</div>
-
-
-					<!--<input type="form-control  " ng-model="searchAll" />-->
-					<!--<span class="fa fa-times"></span>-->
-					<!--<a class="clear" ng-click="searchAll = null">-->
-						<!--<span class="fa fa-times"></span>-->
-					<!--</a>-->
 				</div>
             </div>
         </div>
 	</div>
 
 	<br>
+
 
 
 	<div class="jumbotron SearchResults">
@@ -61,17 +56,22 @@
 
 
       <tbody class="tableSepeator">
-          <tr>
-            <td>12345</td>
-            <td>AETNA</td>
+          <tr class="Searchbarplace">
+            <td class= "psuidata">12345</td>
+            <td class= "psnamedata">AETNA</td>
             <td style="position:relative;"><ul class="listStyle " ng-class="{'listfullview': expand}"><li class="controlNumbers"><span>12345,12345,12345,12345,12345,12345,12345,12345,12345,12345</span></li>
             <li class="controlNumbers"><span>12345,12345,12345,12345,12345,12345,12345,12345,12345,12345</span></li>
           <li class="controlNumbers"><span>12345,12345,12345,12345,12345,12345,12345,12345,12345,12345</span></li>
         <li class="controlNumbers"><span>12345,12345,12345,12345,12345,12345,12345,12345,12345,12345</span></li>
       <li class="controlNumbers"><span>12345,12345,12345,12345,12345,12345,12345,12345,12345,12345</span></li>
-</ul><image ng-click="expand = !expand" class="lessArrow" ng-src="{{expand && './icons/LessArrow.png' || './icons/MoreArrow.png'}}" />
-<image  class="rightDirectIcon"src="./icons/right-arrow.png">
-    </td>
+</ul>
+<!--<image ng-click="expand = !expand" class="lessArrow"
+ ng-src="{{expand && 'themes/css2/icons/more-arrow.png' || 'themes/css2/icons/more-arrow.png'}}" />  -->
+ 
+ 
+  <image  class="lessArrow" src="themes/css2/icons/more-arrow.png"> 
+<!-- <image  class="rightDirectIcon"src="themes/css2/icons/less-arrow.png">    
+    </td> -->
           </tr>
       </tbody>
         </table>
@@ -90,7 +90,7 @@
 		</div> -->
 
 
-
+</div>
 
 <script>
 	$scope.clearSearch = function() {
