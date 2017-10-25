@@ -7,7 +7,6 @@
     font-style: normal;
 
 }
-f
     font-family: 'open_sanssemibold';
     src: url('fonts/open-sans.semibold-webfont.woff2') format('woff2'),
          url('fonts/open-sans.semibold-webfont.woff') format('woff');
@@ -15,7 +14,6 @@ f
     font-style: normal;
 
 }
-
 @font-face {
     font-family: 'open_sanslight';
     src: url('fonts/open-sans.light-webfont.woff2') format('woff2'),
@@ -24,7 +22,6 @@ f
     font-style: normal;
 
 }
-
 body{font-family: 'open_sansregular';  font-size:16px; background:#eef2f4}
 /* @media (min-width: 1200px){
 .container {
@@ -37,7 +34,9 @@ body{font-family: 'open_sansregular';  font-size:16px; background:#eef2f4}
     color: #fff;
 	padding: 8px 0;
 }
-
+.user-name {
+margin-right:16px !important;
+}
 .main-menu {
     background: #fff;
     box-shadow: 0 1px 10px 0px #d2d2d2;
@@ -46,19 +45,28 @@ body{font-family: 'open_sansregular';  font-size:16px; background:#eef2f4}
 .f-bold{ font-family: 'open_sanssemibold';}
 .f-light{ font-family: 'open_sanslight';}
 #logout {
-    font-size: 14px;
+    font-size: 18px;
     font-family: 'open_sanslight';
     color: #fff !important;
     padding-bottom: 9px;
     margin-right: 9px;
+    font :bold;
 }
 @media screen and (-ms-high-contrast: active), screen and (-ms-high-contrast: none) {
     /* IE10+ specific styles go here */
 
 }
 input[type=radio] {    display: none;}
-input[type=radio] + label:before {    content: "\f10c";  font-family:   FontAwesome;  font-size: 1.1em;    color: purple;    letter-spacing: 10px;  display: inline-block;}
-input[type=radio]:checked + label:before {    content: "\f192";  font-family: FontAwesome;}
+input[type=radio] + label:before {    
+content: "\f10c";  
+font-family:   FontAwesome; 
+ font-size: 1.1em;   
+  color: purple;  
+    letter-spacing: 10px;  
+    display: inline-block;}
+input[type=radio]:checked + label:before {   
+ content: "\f192"; 
+  font-family: FontAwesome;}
 
 .menu ul{ list-style:none; padding-left:0; margin-bottom:0;}
 .menu ul li{ float:left; margin-right:35px;}
@@ -263,13 +271,14 @@ hr.style7 {
 .pos-relative{
     
     position: relative;
-    width: 200px;
+    width: 326px !important
 }
-
-#description{
-
+ 
+.someinput:: -ms-clear {
+width :0px;
+height: 0px;
+display: none;
 }
-
 
 .table_Des {
 width: 300px !important;
