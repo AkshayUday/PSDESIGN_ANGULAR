@@ -7,13 +7,18 @@
 	<link rel="stylesheet" href="themes/css2/font-awesome.css">
  	<link rel="stylesheet" href="themes/css2/styles.css">
  	<link rel="stylesheet" href="themes/css2/bootstrap-toggle.css">
-	<link rel="stylesheet" href="themes/css2/stylesplanSponsor.css">
-	<script src="script/bootstrap-toggle.js" type ="text/javascript"></script
-	<script src="script/jquery-2.2.4.min.js"></script>
+ <link rel="stylesheet" href="themes/css2/stylesplanSponsor.css"> 
+ <script src="script/jquery-2.2.4.min.js"></script>
+	<script src="script/bootstrap-toggle.js" type ="text/javascript"></script>
+	
+
 	<script src="script/bootstrap.min.js" type ="text/javascript"></script>
 	<script src="script/angular.min.js" type ="text/javascript"></script>
+	
 	<script src="script/angular-sanitize.js" type ="text/javascript"></script>
+	<script src="script/angular-ui-router.min.js" type ="text/javascript"></script>
 	<script src="script/globalFeatures.js" type ="text/javascript"></script>
+	
 	<script>window.cardData=${getGlobalFeaturesList}</script>
 </head>
 <body ng-app="myApp" ng-controller="globalCtrl">
@@ -22,7 +27,7 @@
  			<div class="container">
  				<div class="clearfix ">
  				<div class="pull-left logo"><span class="f-bold">PS</span> <span class="f-light">Admin </span></div>
- 					<div class="pull-right mt10"><span class="user-name"><img src="images/icons/icon_features_user.png"/>${userName}</span>
+ 					<div class="pull-right mt10"><span class="user-name"><img src="images/icons/icon_features_user.png"/>${userName},</span>
  				 <a href="logout" id=logout> Logout</a>  
  					</div>
  				</div>
@@ -32,9 +37,14 @@
  			<div class="container">
  				<nav class="menu">
  					<ul class="clearfix">
- 						<li><a href="" class="active" disabled="disabled">Home </a></li>
+ 						<!--  <li><a href="" class="active" disabled="disabled">Home </a></li>
  						<li><a href="" class="active" disabled="disabled"> Features </a></li>
  						<li><a href="script/planSponsor.html" class="active" disabled="disabled">Plan Sponsor </a></li>
+ 						-->
+ 						
+ 						<li><a ui-sref="HOME"> Home </a></li>
+						<li><a ui-sref="FEATURES" ui-sref-active="active"> Features </a></li>
+						<li><a ui-sref="PLANSPONSOR" ui-sref-active="active">Plan Sponsor</a></li>
  					</ul>
  				</nav>
  			</div>
@@ -42,11 +52,17 @@
  
  	</header>
  	<div class="container">
-		<div ui-view></div>
+		<div ui-view>
+		</div>
+	</div>
+	<!--Footer-->
+                <div class="copyright">
+                <p>Copyright &copy; 2001-2017 Aetna Inc.</p>
+                </div>
 	</div>
 	<!-- jQuery first, then Tether, then Bootstrap JS. -->
 
-	<script>
+<!--  	<script>
 		$(function() {
 
 			$('myModal').modal();
@@ -73,7 +89,7 @@
 					return 'bottom';
 				}
 			});
-	</script>
+	</script> -->
 </body>
 
 </html>
