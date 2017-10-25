@@ -1,18 +1,20 @@
 myapp = angular.module('myApp', ['ngSanitize','ui.router']);
 
-var states = [{
-      name: 'HOME',
-      state: {
-        url: "/",
-        templateUrl: './feature.html',
-        controller: "globalCtrl"
-      }
-    },
+var states = [
+//              {
+//      name: 'HOME',
+//      state: {
+//        url: "/",
+//        templateUrl: 'script/feature.html',
+//        controller: "globalCtrl"
+//      }
+//    },
+   
     {
       name: 'FEATURES',
       state: {
-        url: "#",
-        templateUrl: './feature.html',
+        url: "/",
+        templateUrl: 'script/feature.html',
         controller: "globalCtrl"
       }
     },
@@ -20,12 +22,12 @@ var states = [{
       name: 'PLANSPONSOR',
       state: {
         url: "#",
-        templateUrl: './planSponsor.html',
+        templateUrl: 'script/planSponsor.html',
         controller: "globalCtrl"
       }
     }]
 
-    myapp.config(function($stateProvider, $urlRouterProvider) {
+   myapp.config(function($stateProvider, $urlRouterProvider) {
 
    $urlRouterProvider.otherwise('/');
 
@@ -68,7 +70,7 @@ myapp.filter('myFilter', function () {
     return function(inputs,filterValues) {
       var output = [];
 
-      if(filterValues == 'ShowAll'){
+      if(filterValues == 'View All'){
           output = inputs;
           return output;
       }else{
@@ -83,21 +85,26 @@ myapp.filter('myFilter', function () {
    };
 });
 
-myapp.controller('globalCtrl', function($scope, $http, $timeout) {
+myapp.controller('globalCtrl', function($scope, $http, $timeout, $window) {
+	$scope.resData = ($window.cardData.ReadFeaturesResponse.feature);
+	$('.home-state a').removeClass('.active');
+	$('.feature-state a').addClass('.active');
+      $scope.myData = $scope.resData;
+	
   $scope.myArrayData = [];
-  $scope.showItems = 'ShowAll';
+  $scope.showItems = 'View All';
   $scope.showPopover=false;
   $scope.expand=false;
-  $scope.selected = 'ShowAll';
+  $scope.selected = 'View All';
   $scope.viewAll = true;
   $scope.categorydescription = 'View All';
 
   $scope.show = function(selItemName,ind) {
     // $scope.viewAll = false;
 console.log('selected is ',selItemName);
-    if(selItemName == 'ShowAll'){
+    if(selItemName == 'View All'){
       $scope.viewAll = true;
-      $scope.showItems = 'ShowAll';
+      $scope.showItems = 'View All';
       $scope.myData = $scope.resData;
       $scope.categorydescription = 'View All';
        $scope.selected = ind;
@@ -122,33 +129,45 @@ console.log('selected is ',selItemName);
 
   };
   $scope.toggle = function(id, dat) {
-    $scope.variable = !$scope.variable
+    $scope.variable = !$scope.variable;
   }
 
   $scope.counter = 0;
+ /* $scope.toggleSuccess =false;
+  $scope.toggleFailure = false;*/
   $scope.change = function(obj, inx) {
-    if (!obj.enabled) {
-      $scope.showMessage = inx;
-    }
+	  $scope.showMessage = inx;
+	  
+  //  if (!obj.enabled) {
+  //    $scope.showMessage = inx;
+    //}
 
-  var Pdata = { name: obj.name, enabled: !obj.enabled, resourceId: obj.resourceId}
+  var Pdata = { name: obj.name, enabled: !obj.enabled, resourceId: obj.featureIdentifier.
+		  resourceId}
 
 
-
-  // Show saving gif spinner.
+  // Show saving gif spinner and msg part. 
   $scope.loading = true;
+  $scope.msgtimeout = true;
   $scope.inx1 = inx;
 
     // POST request :
-$timeout(function () {$http({
-  method: 'POST',
-  url: 'updateGlobalFeatures',
-  data: Pdata,
-  headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-}).success(function (data) {
-      // Do stuff with data.
-      console.log('success response', data)
-    })
+  $timeout(function () {$http({
+	  method: 'POST',
+	  url: 'updateGlobalFeatures',
+	  data: JSON.stringify(Pdata)
+	  //headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+	}).success(function (data) {
+		//alert(data);
+		// Do stuff with data.
+	      console.log('success response', data);
+	      /*if(data.UpdateFeatureResponse.updateStatus == 'SUCCESS'){
+	    	  $scope.toggleSuccess =true;
+	      }
+	      else{
+	    	  $scope.toggleFailure = true;
+	      }*/
+	    })
     .catch(function (err) {
       // Log error somehow.
         console.log('failure response', err)
@@ -157,6 +176,9 @@ $timeout(function () {$http({
       // Hide loading spinner whether our call succeeded or failed.
       console.log('checking whether loading is working')
       $scope.loading = false;
+      $timeout(function(){
+    	  $scope.msgtimeout = false;
+      },4000);
     });
   }, 2000);
 
@@ -182,9 +204,44 @@ $timeout(function () {$http({
       alert('test');
     }
   }
-  $http.get("./categoryData.json").success(function(response) {
-    console.log('response is ', response.ReadFeaturesResponse.features)
-    $scope.resData = response.ReadFeaturesResponse.features;
-      $scope.myData = $scope.resData;
-  });
+ // $http.get("script/data.json").success(function(response) {
+   // console.log('response is ', response.ReadFeaturesResponse.features)
+   // $scope.resData = response.ReadFeaturesResponse.features;
+   //   $scope.myData = $scope.resData;
+ // });
 });
+myapp.directive('statusPopover', function($compile) {
+    return {
+        restrict: 'A',
+//        transclude: false,
+//        scope: {},
+        controller: function($scope){
+        	 $scope.setStatus =function(feature){
+        		 //var setFeatureStatus = JSON.stringify(feature.status);
+        		  $scope.statusoptions = feature.status;
+        	  };
+        },
+        link: function(scope, element, attrs) {
+        	 
+        	 var content = $(".popover-content").html();
+             var compiledContent = $compile(content)(scope);
+             var options = {
+                 content: compiledContent,
+                 html: true,
+                 placement: function(context, src) {
+             		$(context).addClass('size');
+             		return 'bottom';
+             	//}
+             	}
+             };
+             element.popover(options);
+             $('html').off('click', function(e) {
+            	  if (typeof $(e.target).data('original-title') == 'undefined' &&
+            	     !$(e.target).parents().is('.popover.in')) {
+            	    $('[data-original-title]').popover('hide');
+            	  }
+             });
+
+        }
+      };
+    });
