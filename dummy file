@@ -1,3 +1,18 @@
-<li><a ui-sref="HOME"> Home </a></li>
-						<li><a ui-sref="FEATURES" class="active"> Features </a></li>
-						<li><a ui-sref="PLANSPONSOR" class="active"> Plan Sponsor</a></li>
+ng-repeat="data2 in myData | unique : 'categoryName' | myFilter: showItems track by $index"
+
+<p>{{showItems = data2.featureCategory.categoryName}}</p>
+
+  <tr ng-repeat="feature in myData | myFilter: showItems ">
+  
+  ng-show="loading && $index==inx1 && showItems == showingitems"
+  
+  ng-click="change(feature,$index,showItems)"
+  
+  
+  
+  
+  ///in .js file
+  
+    $scope.change = function(obj, inx, showingitems) {
+    $scope.showMessage = inx;
+    $scope.showingitems = showingitems
