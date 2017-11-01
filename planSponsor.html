@@ -24,7 +24,7 @@
 
 					<div class="inner-addon right-addon">
 						<i class="fa fa-times fa-2x"></i>
-						<input type="number" class="form-control " />
+						<input type="number" oninput="checkNumberFieldLength(this);" min="1" max="7" ng-model="search" value ="{{search}}" class="form-control " />
 						<button type="submit" class="btn btn-primary searchButton">Search</button>
 					</div>
 				</div>
@@ -33,10 +33,11 @@
 	</div>
 
 	<br>
-
-
-
-	<div class="jumbotron SearchResults">
+	
+	
+	<!-- Search Results jumbotron -->
+	
+	div class="jumbotron SearchResults" ng-show = "searchkey==1">
 		<a class="resultHead">Search Results for</a>
 		<a class="selectedSearch label label-default">A43201</a>
 
@@ -59,11 +60,12 @@
           <tr class="Searchbarplace">
             <td class= "psuidata">12345</td>
             <td class= "psnamedata">AETNA</td>
-            <td style="position:relative;"><ul class="listStyle " ng-class="{'listfullview': expand}"><li class="controlNumbers"><span>12345,12345,12345,12345,12345,12345,12345,12345,12345,12345</span></li>
-            <li class="controlNumbers"><span>12345,12345,12345,12345,12345,12345,12345,12345,12345,12345</span></li>
-          <li class="controlNumbers"><span>12345,12345,12345,12345,12345,12345,12345,12345,12345,12345</span></li>
-        <li class="controlNumbers"><span>12345,12345,12345,12345,12345,12345,12345,12345,12345,12345</span></li>
-      <li class="controlNumbers"><span>12345,12345,12345,12345,12345,12345,12345,12345,12345,12345</span></li>
+            <td style="position:relative;"><ul class="listStyle " ng-class="{'listfullview': expand}"><li class="controlNumbers">
+            <span>12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345</span></li>
+            <li class="controlNumbers"><span>12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345</span></li>
+          <li class="controlNumbers"><span>12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345</span></li>
+        <li class="controlNumbers"><span>12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345</span></li>
+      <li class="controlNumbers"><span>12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345</span></li>
 </ul>
 <!--<image ng-click="expand = !expand" class="lessArrow"
  ng-src="{{expand && 'themes/css2/icons/more-arrow.png' || 'themes/css2/icons/more-arrow.png'}}" />  -->
@@ -76,24 +78,52 @@
       </tbody>
         </table>
       </div>
-
-
-  </div>
-
-		<!-- <div class="container">
-			<div class="purple-label">
-				<span class="psuid ">PSUID</span>
-				<span class="fa fa-sort"></span>
-				<span class="psname">Name</span>
-				<span class="controlnumber">Control Number</span>
+	
+	
+	
+	
+	
+	
+<!-- DIV ERROR 1 -->
+	<div class= "jumbotron SearchResults">
+			<div class = "panel panel-default errordiv">
+				<div class = "panel-panel-default errorplans">
+					<i class="fa fa-exclamation-triangle fa-2x icondesign" aria-hidden="true"></i> 
+					 <p class ="textcontrol"> No Control Number Found. </p>
+				</div>
 			</div>
-		</div> -->
-
-
+	</div>
+	
+	<!-- DIV ERROR 2 -->
+		<div class= "jumbotron SearchResults">
+			<div class = "panel panel-default errordiv">
+				<div class = "panel-panel-default errorplans">
+					<i class="fa fa-minus-circle fa-2x icondesign" aria-hidden="true"></i> 
+					 <p class ="textcontrol"> Control Number is disabled. </p>
+				</div>
+			</div>
+	</div>
+	
+	
+	<!-- DIV ERROR 3-->
+			<div class= "jumbotron SearchResults">
+			<div class = "panel panel-default errordiv">
+				<div class = "panel-panel-default errorplans">
+					<i class="fa fa-times-circle-o fa-2x icondesign" aria-hidden="true"></i> 
+					 <p class ="textcontrol">System is down. </p>
+				</div>
+			</div>
+	</div>
+	
 </div>
 
 <script>
 	$scope.clearSearch = function() {
 		$scope.searchAll = null;
 	}
+	function checkNumberFieldLength(elem){
+    if (elem.value.length > 7) {
+        elem.value = elem.value.slice(0,7); 
+    }
+}
 </script>
