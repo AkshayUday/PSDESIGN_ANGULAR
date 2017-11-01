@@ -1,18 +1,4 @@
-ng-repeat="data2 in myData | unique : 'categoryName' | myFilter: showItems track by $index"
-
-<p>{{showItems = data2.featureCategory.categoryName}}</p>
-
-  <tr ng-repeat="feature in myData | myFilter: showItems ">
-  
-  ng-show="loading && $index==inx1 && showItems == showingitems"
-  
-  ng-click="change(feature,$index,showItems)"
-  
-  
-  
-  
-  ///in .js file
-  
-    $scope.change = function(obj, inx, showingitems) {
-    $scope.showMessage = inx;
-    $scope.showingitems = showingitems
+//Inside feature.html
+//step 1. search for key word--> unique : 'categoryName' 
+( you have to find 2 words in the file)
+//step 2 . replace the string with--> | unique : 'categoryName' | orderBy:'featureCategory.categoryName'
