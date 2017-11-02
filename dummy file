@@ -1,4 +1,8 @@
-//Inside feature.html
-//step 1. search for key word--> unique : 'categoryName' 
-( you have to find 2 words in the file)
-//step 2 . replace the string with--> | unique : 'categoryName' | orderBy:'featureCategory.categoryName'
+//copy below lines in .js file below controller code after $scope variables declarations
+//as per github code of .js file u need to paste it after line number 101.
+
+
+
+  $scope.searchFun = function(){
+    $scope.searchKey = $scope.DataEntered;
+  }
