@@ -1,129 +1,134 @@
-<div class ="plansponsor">
+<div class="plansponsor">
 
 
-		<div class="clearfix mt25 plansponsorfont">
+	<div class="clearfix mt25 plansponsorfont">
 
-			<div class="form-group ">
-				<h3 class="selTitle"> Search Plan Sponsors</h3>
-                <div class="radiobuttons">
-                <input type="radio" name="status" value="option1"  id="inlineradio1"   disabled  />
-                <label class="radio-inline checkboxTitle " for="inlineradio1">All</label>
+		<div class="form-group ">
+			<h3 class="selTitle"> Search Plan Sponsors</h3>
+			<div class="radiobuttons">
+				<input type="radio" name="status" value="option1" id="inlineradio1" disabled />
+				<label class="radio-inline checkboxTitle " for="inlineradio1">All</label>
 
-                <input type="radio" name="status" value="option2"  id="inlineradio2" disabled/>
-                <label class="radio-inline checkboxTitle" for="inlineradio2">Name</label>
+				<input type="radio" name="status" value="option2" id="inlineradio2" disabled/>
+				<label class="radio-inline checkboxTitle" for="inlineradio2">Name</label>
 
-                <input type="radio" name="status" value="option3" id="inlineradio3" disabled/>
-                <label class="radio-inline checkboxTitle" for="inlineradio3">PSUID</label>
+				<input type="radio" name="status" value="option3" id="inlineradio3" disabled/>
+				<label class="radio-inline checkboxTitle" for="inlineradio3">PSUID</label>
 
-                <input type="radio" name="status" value="option4" checked="" id="inlineradio4" />
-                <label class="radio-inline active checkboxTitlecontrol" for="inlineradio4">Control No</label>
-                </div>
+				<input type="radio" name="status" value="option4" checked="" id="inlineradio4" />
+				<label class="radio-inline active checkboxTitlecontrol" for="inlineradio4">Control No</label>
+			</div>
 		</div>
-            <div class="container pull-left ">
-				<div class="form-inline">
+		<div class="container pull-left ">
+			<div class="form-inline">
 
-					<div class="inner-addon right-addon">
-						<i class="fa fa-times fa-2x"></i>
-						<input type="number" oninput="checkNumberFieldLength(this);" min="1" max="7" ng-model="search" value ="{{search}}" class="form-control " />
-						<button type="submit" class="btn btn-primary searchButton">Search</button>
-					</div>
-				</div>
-            </div>
-        </div>
-	</div>
-
-	<br>
-	
-	
-	<!-- Search Results jumbotron -->
-	
-	div class="jumbotron SearchResults" ng-show = "searchkey==1">
-		<a class="resultHead">Search Results for</a>
-		<a class="selectedSearch label label-default">A43201</a>
+				<div class="inner-addon right-addon">
+					<i class="fa fa-times fa-2x"></i>
 
 
-
-
-    <div class="table-section table-responsive">
-      <table class="table CareManagement-table">
-         <thead>
-        <tr class="spaceUnder">
-          <th class="tabHead psuid">PSUID <span class="fa fa-sort"></span></th>
-          <th class="tabHead">PS Name</th>
-          <th class="tabHead">Control Number</th>
-
-        </tr>
-         </thead>
-
-
-      <tbody class="tableSepeator">
-          <tr class="Searchbarplace">
-            <td class= "psuidata">12345</td>
-            <td class= "psnamedata">AETNA</td>
-            <td style="position:relative;"><ul class="listStyle " ng-class="{'listfullview': expand}"><li class="controlNumbers">
-            <span>12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345</span></li>
-            <li class="controlNumbers"><span>12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345</span></li>
-          <li class="controlNumbers"><span>12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345</span></li>
-        <li class="controlNumbers"><span>12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345</span></li>
-      <li class="controlNumbers"><span>12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345</span></li>
-</ul>
-<!--<image ng-click="expand = !expand" class="lessArrow"
- ng-src="{{expand && 'themes/css2/icons/more-arrow.png' || 'themes/css2/icons/more-arrow.png'}}" />  -->
- 
- 
-  <image  class="lessArrow" src="themes/css2/icons/more-arrow.png"> 
-<!-- <image  class="rightDirectIcon"src="themes/css2/icons/less-arrow.png">    
-    </td> -->
-          </tr>
-      </tbody>
-        </table>
-      </div>
-	
-	
-	
-	
-	
-	
-<!-- DIV ERROR 1 -->
-	<div class= "jumbotron SearchResults">
-			<div class = "panel panel-default errordiv">
-				<div class = "panel-panel-default errorplans">
-					<i class="fa fa-exclamation-triangle fa-2x icondesign" aria-hidden="true"></i> 
-					 <p class ="textcontrol"> No Control Number Found. </p>
+					<input type="number" oninput="checkNumberFieldLength(this);"  ng-model="DataEntered" class="form-control " />
+					<button type="submit" class="btn btn-primary searchButton" ng-click="searchFun()">Search</button>
 				</div>
 			</div>
+		</div>
 	</div>
-	
-	<!-- DIV ERROR 2 -->
-		<div class= "jumbotron SearchResults">
-			<div class = "panel panel-default errordiv">
-				<div class = "panel-panel-default errorplans">
-					<i class="fa fa-minus-circle fa-2x icondesign" aria-hidden="true"></i> 
-					 <p class ="textcontrol"> Control Number is disabled. </p>
-				</div>
-			</div>
-	</div>
-	
-	
-	<!-- DIV ERROR 3-->
-			<div class= "jumbotron SearchResults">
-			<div class = "panel panel-default errordiv">
-				<div class = "panel-panel-default errorplans">
-					<i class="fa fa-times-circle-o fa-2x icondesign" aria-hidden="true"></i> 
-					 <p class ="textcontrol">System is down. </p>
-				</div>
-			</div>
-	</div>
-	
 </div>
+
+<br>
+
+
+<!-- Search Results jumbotron -->
+
+<div class="jumbotron SearchResults" ng-show = "searchKey==1">
+<a class="resultHead">Search Results for</a>
+<a class="selectedSearch label label-default">A43201</a>
+
+
+
+
+<div class="table-section table-responsive">
+	<table class="table CareManagement-table">
+		<thead>
+			<tr class="spaceUnder">
+				<th class="tabHead psuid">PSUID <span class="fa fa-sort"></span></th>
+				<th class="tabHead">PS Name</th>
+				<th class="tabHead">Control Number</th>
+
+			</tr>
+		</thead>
+
+
+		<tbody class="tableSepeator">
+			<tr class="Searchbarplace">
+				<td class="psuidata">12345</td>
+				<td class="psnamedata">AETNA</td>
+				<td style="position:relative;">
+					<ul class="listStyle " ng-class="{'listfullview': expand}">
+						<li class="controlNumbers">
+							<span>12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345</span></li>
+						<li class="controlNumbers"><span>12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345</span></li>
+						<li class="controlNumbers"><span>12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345</span></li>
+						<li class="controlNumbers"><span>12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345</span></li>
+						<li class="controlNumbers"><span>12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345</span></li>
+					</ul>
+					<!--<image ng-click="expand = !expand" class="lessArrow"
+ ng-src="{{expand && 'themes/css2/icons/more-arrow.png' || 'themes/css2/icons/more-arrow.png'}}" />  -->
+
+
+					<image class="lessArrow" src="themes/css2/icons/more-arrow.png">
+						<!-- <image  class="rightDirectIcon"src="themes/css2/icons/less-arrow.png">
+    </td> -->
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+
+
+</div>
+
+
+<!-- DIV ERROR 1 -->
+<div class="jumbotron SearchResults" ng-show = "searchKey==2">
+	<div class="panel panel-default errordiv">
+		<div class="panel-panel-default errorplans">
+			<i class="fa fa-exclamation-triangle fa-2x icondesign" aria-hidden="true"></i>
+			<p class="textcontrol"> No Control Number Found. </p>
+		</div>
+	</div>
+</div>
+
+<!-- DIV ERROR 2 -->
+<div class="jumbotron SearchResults" ng-show = "searchKey==3">
+	<div class="panel panel-default errordiv">
+		<div class="panel-panel-default errorplans">
+			<i class="fa fa-minus-circle fa-2x icondesign" aria-hidden="true"></i>
+			<p class="textcontrol"> Control Number is disabled. </p>
+		</div>
+	</div>
+</div>
+
+
+<!-- DIV ERROR 3-->
+<div class="jumbotron SearchResults" ng-show = "searchKey==4">
+	<div class="panel panel-default errordiv">
+		<div class="panel-panel-default errorplans">
+			<i class="fa fa-times-circle-o fa-2x icondesign" aria-hidden="true"></i>
+			<p class="textcontrol">System is down. </p>
+		</div>
+	</div>
+</div>
+
+
 
 <script>
 	$scope.clearSearch = function() {
 		$scope.searchAll = null;
 	}
-	function checkNumberFieldLength(elem){
-    if (elem.value.length > 7) {
-        elem.value = elem.value.slice(0,7); 
-    }
-}
+
+	function checkNumberFieldLength(elem) {
+		if (elem.value.length > 7) {
+			elem.value = elem.value.slice(0, 7);
+		}
+	}
 </script>
