@@ -2,23 +2,32 @@
 <html>
 
 <head>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="themes/css2/bootstrap.css">
-	<link rel="stylesheet" href="themes/css2/font-awesome.css">
- 	<link rel="stylesheet" href="themes/css2/styles.css">
- 	<link rel="stylesheet" href="themes/css2/bootstrap-toggle.css">
- <link rel="stylesheet" href="themes/css2/stylesplanSponsor.css"> 
- <script src="script/jquery-2.2.4.min.js"></script>
-	<script src="script/bootstrap-toggle.js" type ="text/javascript"></script>
-	
 
-	<script src="script/bootstrap.min.js" type ="text/javascript"></script>
-	<script src="script/angular.min.js" type ="text/javascript"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../themes/css2/bootstrap-3.3.2.min.css">
+	<link rel="stylesheet" href="../themes/css2/font-awesome-4.3.0.min.css">
+ 	<link rel="stylesheet" href="../themes/css2/bootstrap-toggle.css">
+	<link rel="stylesheet" href="../themes/css2/bootstrap-datetimepicker.min.css">
+	 <link rel="stylesheet" href="../themes/css2/styles.css">
+ <link rel="stylesheet" href="../themes/css2/stylesplanSponsor.css"> 
+ 
+ 
+ 
+ 	<script src="../script/jquery-2.2.4.min.js"></script>
+	<script src="../script/bootstrap-toggle.js" type ="text/javascript"></script>
+	<script src="../script/bootstrap-3.3.2.min.js" type ="text/javascript"></script>
+ 
+
 	
-	<script src="script/angular-sanitize.js" type ="text/javascript"></script>
-	<script src="script/angular-ui-router.min.js" type ="text/javascript"></script>
-	<script src="script/globalFeatures.js" type ="text/javascript"></script>
+    <script src="../script/angular.min.js" type ="text/javascript"></script>
+	<script src="../script/angular-sanitize.js" type ="text/javascript"></script>
+	<script src="../script/angular-ui-router.min.js" type ="text/javascript"></script>
 	
+	<script type='text/javascript' src="../script/moment-with-locales.min.js"></script>
+	<script type='text/javascript' src="../script/bootstrap-datetimepicker-3.1.4.min.js"></script>
+	
+	<script src="../script/globalFeatures.js" type ="text/javascript"></script>
+	<script src="../script/planSponsor.js" type ="text/javascript"></script>
 	<script>window.cardData=${getGlobalFeaturesList}</script>
 </head>
 <body ng-app="myApp" ng-controller="globalCtrl">
@@ -27,7 +36,7 @@
  			<div class="container">
  				<div class="clearfix ">
  				<div class="pull-left logo"><span class="f-bold">PS</span> <span class="f-light">Admin </span></div>
- 					<div class="pull-right mt10"><span class="user-name"><img src="images/icons/icon_features_user.png"/>${userName},</span>
+ 					<div class="pull-right mt10"><span class="user-name"><img src="../images/icons/icon_features_user.png"/>${userName},</span>
  				 <a href="logout" id=logout> Logout</a>  
  					</div>
  				</div>
