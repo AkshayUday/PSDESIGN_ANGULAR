@@ -23,7 +23,7 @@ var states = [
       state: {
         url: "#",
         templateUrl: '../script/planSponsor.html',
-        controller: "globalCtrl"
+        controller: "planCtrl"
       }
     }]
 
