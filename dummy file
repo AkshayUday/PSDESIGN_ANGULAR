@@ -18,7 +18,7 @@ myapp.directive('scrollOnClick', function() {
 });
 
 // add below as inline tag to <td> in feature.html file
-<td scroll-on-click id="tabs" class="pos-relative"> <span class="status">{{feature.featureStatus}}</span>
+<td scroll-on-click class="pos-relative"> <span class="status">{{feature.featureStatus}}</span>
 
 
 
