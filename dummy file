@@ -2,16 +2,7 @@ $scope.$watch('startTime', validateDates);
 $scope.$watch('endTime', validateDates);
  
 function validateDates() {
-    if (!$scope.model) return;
-    if ($scope.form.startDate.$error.invalidDate || $scope.form.endDate.$error.invalidDate) {
-        $scope.form.startDate.$setValidity("endBeforeStart", true);  //already invalid (per validDate directive)
-    } else {
-        //depending on whether the user used the date picker or typed it, this will be different (text or date type).  
-        //creating a new date object takes care of that.  
-        var endDate = new Date($scope.model.Template.EndDate);
-        var startDate = new Date($scope.model.Template.StartDate);
-        $scope.form.startDate.$setValidity("endBeforeStart", endDate >= startDate);
-    }
+ console.log('@@@@@@@@@@@@@@@@@@@@@date is changed')
 }
 
 
