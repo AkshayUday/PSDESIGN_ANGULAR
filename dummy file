@@ -1,59 +1,22 @@
-//////scroll to selected area//
+paste below code in globalfeatures.js file
 
 
 
-//add below directive in js file bottom
-
-myapp.directive('scrollOnClick', function() {
-  return {
-    restrict: 'A',
-    link: function(scope, $elm) {
-      $elm.on('click', function() {
-
-         $("html, body").stop().animate({scrollTop: $elm.offset().top}, "slow");
-
-      });
-    }
-  }
-});
-
-// add below as inline tag to <td> in feature.html file
-<td scroll-on-click class="pos-relative"> <span class="status">{{feature.featureStatus}}</span>
-
-
-
-///////////scroll to top of screen on category selection//
-
-//add this line in if and else state of $scope.show function in .js file 
-$window.scrollTo(0,0);
-
-
-
-
-
-
-
-
-
-
-
-/////////////////////////////planspor error pages changes//////
-step: 1
-// a new file with other controller is created  in planSponsor.js
-
-
-step: 2
-// place below line after this line "<script src="./globalFeatures.js" type="text/javascript"></script>" in .jsp file
-
-<script src="./planSponsor.js" type="text/javascript"></script>
-
-
-
-step 3:
-
-// remove below code from your exising globalFeature.js file
-
-  $scope.searchFun = function(){
-    $scope.searchKey = $scope.DataEntered;
-  }
-
+//designed to work with the angular bootstrap date control. 
+//sets an error invalidDate when user types the date. 
+.directive('validDate', function () {
+    return {
+        restrict: 'A',
+        require: 'ngModel',
+        link: function (scope, element, attrs, control) {
+            control.$parsers.push(function (viewValue) {
+                var newDate = model.$viewValue;
+                control.$setValidity("invalidDate", true);  
+                if (typeof newDate === "object" || newDate == "") return newDate;  // pass through if we clicked date from popup
+                if (!newDate.match(/^\d{1,2}\/\d{1,2}\/((\d{2})|(\d{4}))$/))
+                    control.$setValidity("invalidDate", false);
+                return viewValue;
+            });
+        }
+    };
+})
