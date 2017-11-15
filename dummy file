@@ -1,3 +1,13 @@
+<form name="myForm">
+     <input valid-date datepicker-popup="MM/dd/yyyy" type="text" ng-model="myStartDate" class="form-control" name="startDate" ng-required="true" />
+     <span ng-show="myForm.startDate.$error.invalidDate">Invalid start date.</span>
+     <span ng-show="myForm.startDate.$error.required">Start date is required.</span>
+</form>
+
+
+
+
+//////////////////
 paste below code in globalfeatures.js file
 
 
