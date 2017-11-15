@@ -1,5 +1,5 @@
-$scope.$watch('model.Template.StartDate', validateDates);
-$scope.$watch('model.Template.EndDate', validateDates);
+$scope.$watch('startTime', validateDates);
+$scope.$watch('endTime', validateDates);
  
 function validateDates() {
     if (!$scope.model) return;
