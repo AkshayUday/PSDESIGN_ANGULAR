@@ -59,7 +59,7 @@ myapp.filter('unique', function() {
               output.push(item);
           }
       });
-      console.log('output is', output)
+    //  console.log('output is', output)
       // return our array which should be devoid of
       // any duplicates
       return output;
@@ -88,10 +88,13 @@ myapp.filter('myFilter', function () {
 
 
 
-myapp.controller('globalCtrl', function($scope, $http, $timeout, $window) {
+myapp.controller('globalCtrl',['$scope', '$http', '$timeout', '$window', function($scope, $http, $timeout, $window) {
 	
-	
-	
+	if(!$window.cardData){
+		$scope.isDataAvailable = false;
+	}
+	else{
+	$scope.isDataAvailable = true;	
 	$scope.resData = ($window.cardData.ReadFeaturesResponse.feature);
 	$('.home-state a').removeClass('.active');
 	$('.feature-state a').addClass('.active');
@@ -104,6 +107,12 @@ myapp.controller('globalCtrl', function($scope, $http, $timeout, $window) {
   $scope.selected = 'View All';
   $scope.viewAll = true;
   $scope.categorydescription = 'View All';
+  $scope.errormessage = ''
+	  $scope.closeError = function($event){
+      $scope.toggleFailure = false;
+      $event.stopPropagation();
+       }
+
   
 
   
@@ -123,6 +132,7 @@ console.log('selected is ',selItemName);
        $scope.categorydescription = selItemName.featureCategory.categoryDescription;
        $scope.selected = ind;
     }
+    $window.scrollTo(0, angular.element('.shadow-box').offsetTop);
 
   }
   
@@ -144,12 +154,13 @@ console.log('selected is ',selItemName);
   }
 
   $scope.counter = 0;
- /* $scope.toggleSuccess =false;
-  $scope.toggleFailure = false;*/
-  $scope.change = function(obj, inx, showingitems) {
+  $scope.toggleSuccess =false;
+  $scope.toggleFailure = false;
+  
+  $scope.change = function(obj, inx, showingitems,$event) {
 	    $scope.showMessage = inx;
-	    $scope.showingitems = showingitems
-	  
+	    $scope.showingitems = showingitems;
+	    $scope.currentEnabled = obj.enabled;
   //  if (!obj.enabled) {
   //    $scope.showMessage = inx;
     //}
@@ -167,30 +178,59 @@ console.log('selected is ',selItemName);
   $timeout(function () {$http({
 	  method: 'POST',
 	  url: 'updateGlobalFeatures',
-	  data: JSON.stringify(Pdata)
+	 data: JSON.stringify(Pdata)
 	  //headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 	}).success(function (data) {
 		//alert(data);
 		// Do stuff with data.
 	      console.log('success response', data);
-	      /*if(data.UpdateFeatureResponse.updateStatus == 'SUCCESS'){
+	    
+	      if(data.code == 200){
 	    	  $scope.toggleSuccess =true;
+	    	  obj.status=data.status; 
+	      }
+	      else if (data.code == 500){
+	    	  $scope.toggleFailure = true;
+	    	  $scope.exceptionMsg = data.errorMsg;
+	    	  $scope.showException = false;
+	    	  // console.log('500',data.errorMsg);
+	    	  if($scope.currentEnabled == false){
+	    	  obj.enabled =false;
+	    	  }
+	    	  else{obj.enabled = true;}
+    	 
 	      }
 	      else{
 	    	  $scope.toggleFailure = true;
-	      }*/
+	    	  $scope.exceptionMsg = data.errorMsg;
+	    	  $scope.showException = false;	  
+	    	  //obj.enabled =!obj.enabled;
+	    	  if($scope.currentEnabled == false){
+		    	  obj.enabled =false;
+		    	  }
+	    	  else{obj.enabled = true;}
+	    	  console.log('500',data.errorMsg);
+	    	  $event.stopPropagation();
+	    	  $event.preventDefault();
+	    	  
+	      }
+	
 	    })
     .catch(function (err) {
       // Log error somehow.
+    	obj.enabled =!obj.enabled;
         console.log('failure response', err)
     })
     .finally(function () {
       // Hide loading spinner whether our call succeeded or failed.
       console.log('checking whether loading is working')
       $scope.loading = false;
-      $timeout(function(){
-    	  $scope.msgtimeout = false;
-      },4000);
+     
+    // $timeout(function(){
+    // $scope.msgtimeout = false;
+   //  $scope.toggleSuccess = false;
+     //$scope.toggleFailure = false;
+     // },4000);
     });
   }, 2000);
 
@@ -216,20 +256,23 @@ console.log('selected is ',selItemName);
       alert('test');
     }
   }
+}
  // $http.get("script/data.json").success(function(response) {
    // console.log('response is ', response.ReadFeaturesResponse.features)
    // $scope.resData = response.ReadFeaturesResponse.features;
    //   $scope.myData = $scope.resData;
  // });
-});
+}]);
+
+//myapp.controller('planCtrl',['$scope', '$http', '$timeout', '$window', function($scope, $http, $timeout, $window) {
+//               alert("load this");               
+//
+//                            }]);
 
 
-
-myapp.directive('statusPopover', function($compile) {
+myapp.directive('statusPopover', function($compile,$timeout) {
     return {
         restrict: 'A',
-//        transclude: false,
-//        scope: {},
         controller: function($scope){
 //        	 var convertTimezone = function(date){
 //       		  var newDate = new Date(date.setTime(date.getTime() + (date.getTimezoneOffset() * 60000)));
@@ -238,29 +281,66 @@ myapp.directive('statusPopover', function($compile) {
 //       		  newDate.setHours(hours - offset);
 //       		  return newDate;
 //       	  };
-        	 $scope.setStatus =function(feature){
+        	$scope.hideCalendar = function(typeOfCal){
+	
+     		 	if(typeOfCal == 'from'){
+      		 		angular.element('.end-date').data("DateTimePicker").hide();      	        	    	        	
+      		 	}
+      		 	else if(typeOfCal == 'to'){
+      		 		angular.element('.start-date').data("DateTimePicker").hide();
+      		    	 	}
+      	           };
+	           $scope.convertDate = function(givenDate){      	        	
+	        	var dateSet = givenDate.split(/[^0-9]/);
+	        	var converted =new Date (dateSet[0],dateSet[1]-1,dateSet[2],dateSet[3],dateSet[4]);
+	        	return converted;
+	           };
+	          $scope.statusChanged = function(currentValue){
+	        	  if($scope.getFeatures.status == currentValue){
+	        		  $scope.isStatusChanged = true;
+	        	  }
+	        	  else{
+	        		  $scope.isStatusChanged = false;
+	        	  }
+	          }
+        	 $scope.setStatus =function(feature,$event){
+        		// hide all other popovers                 
+        		 angular.element('.status-column button').not($event.target).popover('hide');
+        		 $scope.isStatusChanged = true;
+        		 $scope.getFeatures = feature;
         		 $scope.statusOptions = {};
-        		 $scope.statusOptions.status = feature.status;
-        		// $scope.startTime = moment(feature.scheduledPeriod.datetimeBegin,'YYYY-MM-DD HH.mm.ss.SSSSSS').format();
-        		// $scope.endTime = moment(feature.scheduledPeriod.datetimeEnd,'YYYY-MM-DD HH.mm.ss.SSSSSS').format('MMMM Do YYYY, h:mm:ss a');
-        		 $scope.startTime =new Date(feature.scheduledPeriod.datetimeBegin);
-        		 $scope.endTime = new Date(feature.scheduledPeriod.datetimeEnd);
-        		 $scope.startMessage = moment($scope.startTime).format('MM/DD/YYYY hh:mm A');
-        		 $scope.endMessage = moment($scope.endTime).format('MM/DD/YYYY hh:mm A');
-        		 //var isoDate = new Date('yourdatehere').toISOString();
-        		 //$('.datepicker1').data("DateTimePicker").date(feature.scheduledPeriod.datetimeBegin);
-        	  };
-        	  $scope.saveStatus = function(){
-        		  var datetimeStart = $('.start-input').val();
-        		  var datetimeEnd = $('.end-input').val();
-        		  if(Date.parse(datetimeStart) < Date.parse(datetimeEnd)){
-        			   //start is less than End
-        			  alert("yes");
-        			}else{
-        			   //end is less than start
-        				alert("no");
-        			}
-        	  }
+        		 $scope.statusOptions.status = feature.status;        		
+        		 if(feature.status == 'Scheduled offline'){
+        		 $scope.displaySOMessage = feature.statusMessage;
+        		 $scope.datetimeBegin = $scope.convertDate(feature.scheduledPeriod.datetimeBegin);
+        		 $scope.datetimeEnd =  $scope.convertDate(feature.scheduledPeriod.datetimeEnd);
+        		 $scope.startTime = moment($scope.datetimeBegin).format('MM/DD/YYYY hh:mm A');
+        		 $scope.endTime = moment($scope.datetimeEnd).format('MM/DD/YYYY hh:mm A');
+        		
+	        		 if(angular.element('.start-date').hasClass('ng-pristine')){
+	        			// angular.element('.start-date').data("DateTimePicker").setDate($scope.startTime);        			
+	        			 }
+	        		// if(angular.element('.end-date').hasClass('ng-pristine')){angular.element('.end-date').data("DateTimePicker").setDate($scope.endTime); }       		         		 
+        		 }
+        		 else if(feature.status == 'Temporary offline'){
+        			 $scope.displayTOMessage = feature.statusMessage;
+        		 }
+        	 };
+        		        	  
+        		        	
+	  
+        		        	
+//        	  $scope.saveStatus = function(){
+//        		  var datetimeStart = $('.start-input').val();
+//        		  var datetimeEnd = $('.end-input').val();
+//        		  if(Date.parse(datetimeStart) < Date.parse(datetimeEnd)){
+//        			   //start is less than End
+//        			 $scope.startTimeError = true;
+//        			}else{
+//        			   //end is less than start
+//        				alert("no");
+//        			}
+//        	  }
         	 
         },
         link: function(scope, element, attrs) {
@@ -275,6 +355,7 @@ myapp.directive('statusPopover', function($compile) {
              		return 'bottom';
              	}
              };
+             $('.collapsiblock').not(this)
              element.popover(options);
              scope.cancel = function() {
             	 element.popover('hide');
@@ -285,54 +366,46 @@ myapp.directive('statusPopover', function($compile) {
         }
       };
     });
+myapp.directive('scrollOnClick', function() {
+	  return {
+	    restrict: 'A',
+	    link: function(scope, $elm) {
+	      $elm.on('click', function() {
+
+	         $("html, body").stop().animate({scrollTop: $elm.offset().top}, "slow");
+
+	      });
+	    }
+	  }
+	});
 myapp.directive('datePicker', function($compile) {
     return {
     	restrict: 'A',
     	scope: {
     	    setDateObj: '=ngModel'
     	  },
+    	  
     	
         link: function(scope, elem, attrs, ngModel) {
         	
         	
-//        	var datecontent = $(".datepicker1").html();
-//            var datecompiledContent = $compile(datecontent)(scope);
-//            var dateoptions = {
-//                content: datecompiledContent,
-//                orientation: "auto",
-//                todayHighlight: true,
-//                format: 'mm/dd/yy',
-//                autoclose: true
-//            	
-//            };
-//            elem.datepicker(dateoptions);
-//            console.log("executed");
-        	//elem.data("DatePicker").date(scope.setDate);
-        	//scope.setDate = $filter('date')(scope.setDate, "dd/MM/yyyy");
-//        	scope.setDateFormatted = new Date(scope.setDate);
         	if(elem.hasClass(".start-date")){
         		scope.setDateObj = scope.startTime;
+        		
         	}
         	else if(elem.hasClass(".end-date")){
         		scope.setDateObj = scope.endTime;
+        		
         	}
+        	
         	elem.datetimepicker({
         		defaultDate:scope.setDateObj,
         		autoclose:true,
-        		
-  
-        		
-        	      
-//        		change:function (date) {
-//
-//                    // Triggers a digest to update your model
-//                    scope.$apply(function () {
-//                        ngModelCtrl.$setViewValue(date);
-//                    });
-//
-//                }
         	});
-        	
+        	elem.on('dp.hide', function(e) {
+        		//elem.data("DateTimePicker").options();
+        		//widget.find('.picker-switch.accordion-toggle').click();
+        	});
         }
       };
     });
