@@ -1,3 +1,17 @@
+<div ng-show ="!isDataAvailable">
+
+	<div class="jumbotron SearchResults">
+	<div class="panel panel-default exceptiondiv">
+		<div class="panel-panel-default errorexceptions">
+			<i class="fa fa-times-circle fa-2x icondesign" aria-hidden="true"></i>
+			<p class="textcontrol"> We are Sorry! <br>
+						<span>A System Exception occured and had prevented your request being processed. If the problem persists,please contact support service.</span> 
+						 </p>
+		</div>
+	</div>
+</div>
+</div>
+<div ng-show = "isDataAvailable">
 <div class="clearfix mt25">
  			<div class="pull-left">
  				<h3> Global Features</h3>
@@ -36,7 +50,7 @@
  										<th class = "width-fix">Toggle </th>
  										<th class = "width-fix">Feature</th>
  										<th class = "width-fix">Description</th>
- 										<th class = "width-fix">Status </th>
+ 										<th class = "width-fixstatus">Status </th>
  									</tr>			
  									
  										
@@ -46,10 +60,10 @@
 										<td class = "width-fix">
 											<div class="loading"  ng-show="loading && $index==inx1 && showItems == showingitems"><img src="http://www.nasa.gov/multimedia/videogallery/ajax-loader.gif" width="20" height="20" />Saving...</div>
 											<div class="checkbox" ng-hide="loading && $index==inx1 && showItems == showingitems" ng-click="feature.enabled = !feature.enabled">
-												<label   ng-click="change(feature,$index,showItems)">
+												<label ng-click="change(feature,$index,showItems,$event)">
 
 											<div ng-class="test(feature.enabled)" style="width: 72.9375px; height: 36px;">
-											  <input type="checkbox"  ng-model="feature.enabled" data-toggle="toggle" ng-changed="showMessage">
+											  <input type="checkbox"  ng-model="feature.enabled"   ng-changed="showMessage">
 											  <div class="toggle-group">
 											  
 												<label class="btn btn-primary toggle-on">On</label>
@@ -60,19 +74,26 @@
 												</div>
 										</div>
 							</label>
-							<div ng-if="msgtimeout && $index==showMessage && showItems == showingitems" class="popover fade success bottom in" role="tooltip" id="popover529523" style="top: 36px; left: -357.5px; display: block;"><div class="arrow" style="left: 50%;"></div><h3 class="popover-title" style="display: none;"></h3><div class="popover-content"><div class="row"> <div class="col-md-1"> <i class="fa fa-check-circle fa-3" aria-hidden="true"></i>
-																			</div> <div class="col-md-6"><p> Your requested feature change was successfully saved. It will be visible in few minutes.</p> <div class="form-group "></div></div></div></div></div>
+							<div ng-if="msgtimeout && $index==showMessage && showItems == showingitems && toggleFailure "
+							ng-click="$event.stopPropagation()" class="popover error bottom in error500" role="tooltip" id="popover529523"
+							 style="top: 46px; left: -357.5px; display: block;"><div class="arrow"></div><h3 class="popover-title" 
+							 style="display: none;"></h3><div class="popover-content"><div class="row"> <div class="col-md-1">
+							  <i class="fa fa-warning fa-3 failureToggle" aria-hidden="true"></i>
+																			</div> <div class="col-md-10"><p>Sorry! we are unable to save {{feature.name}} toggle, Please contact your support service if the problem persists</p>
+																			<button type="submit" class="btn btn-default" ng-show="!showException" ng-click ="showException = true"> <i class="fa fa-plus"  aria-hidden="true"></i> View more</button>
+																			<button type="submit" class="btn btn-default" ng-show="showException" ng-click ="showException = false"> <i class="fa fa-minus"  aria-hidden="true"></i> Show less</button>
+	                                                                        <button type="cancel" class="btn btn-default " ng-click = "closeError($event)">Close</button>
+	                                                                        <br>
+	                                                                        <p class="exception-msg" ng-show="showException">{{exceptionMsg}}</p>
+	                                                                        </div></div></div>
+						 <div class="form-group "></div></div></div></div></div>
 						</div>
 						</td>
-						<td class= "width-fix">
-								<p data-toggle="popover" id="error-popover" data-content='<div class="row"> <div class="col-md-1"> <i class="fa fa-warning fa-2" aria-hidden="true"></i>
-								</div> <div class="col-md-10"><p>  Unable to save the healthy HOA </p> <div class="form-group ">
-								<button type="submit" class="btn btn-default"> <i class="fa fa-plus" aria-hidden="true"></i> View more</button>
-								<button type="submit" class="btn btn-default ">Close</button></div></div></div>' data-placement="bottom" data-class="error">
-									{{feature.name}} </p>
+						<td class= "width-fix featurename">
+						{{feature.name}}
 						</td>
 						<td class="table_Des width-fix">{{feature.description}}</td>
-								<td class="pos-relative width-fix"> <span class="status">{{feature.status}}</span><button id="example"  ng-click="setStatus(feature)" data-placement="bottom" status-popover
+								<td scroll-on-click id="tabs" class="pos-relative width-fix status-column"> <span class="status">{{feature.status}}</span><button id="example"  ng-click="setStatus(feature,$event)" data-placement="bottom" status-popover
 
 							<i class="fa fa-pencil pull-right btn btn-pencil btn-green " aria-hidden="true"></i>
 							</button>
@@ -89,19 +110,20 @@
 	</div>
 
 	</section>
+	</div>
 	<script type="text/ng-template" class="popover-content">
 		<div >
             <form ng-submit="saveStatus()">
-	        <h3> Status-Edit</h2>
+	        <h3> Status-Detail</h2>
 
             <div class="form-group">
-                <input type="radio" name="status"  value="Scheduled offline" id="inlineradio1"  ng-model="statusOptions.status"  ng-disabled="statusOptions.status == 'N/A'"/>
+                <input type="radio" name="status"  value="Scheduled offline" id="inlineradio1"  ng-model="statusOptions.status"  ng-change="statusChanged(statusOptions.status)"  ng-disabled="statusOptions.status == 'N/A'"/>
                 <label class="radio-inline p0" for="inlineradio1">Scheduled offline</label>
 
-                <input type="radio" name="status" value="Temporary offline"  id="inlineradio2"  ng-model="statusOptions.status"  ng-disabled="statusOptions.status == 'N/A'"/>
+                <input type="radio" name="status" value="Temporary offline"  id="inlineradio2"  ng-model="statusOptions.status"  ng-change="statusChanged(statusOptions.status)"   ng-disabled="statusOptions.status == 'N/A'"/>
                 <label class="radio-inline" for="inlineradio2">Temporary offline</label>
 
-                <input type="radio" name="status" value="Online" id="inlineradio3"  ng-model="statusOptions.status"  ng-disabled="statusOptions.status == 'N/A'"/>
+                <input type="radio" name="status" value="Online" id="inlineradio3"  ng-model="statusOptions.status" ng-change="statusChanged(statusOptions.status)" ng-disabled="statusOptions.status == 'N/A'"/>
                 <label class="radio-inline" for="inlineradio3">Online</label>
                                             
                 <input type="radio" name="status" value="N/A" id="inlineradio4" ng-model="statusOptions.status" ng-disabled="statusOptions.status != 'N/A'"/>
@@ -113,10 +135,10 @@
 <div class="col-sm-10 pl0 pull-left">
     <label for="date">Start date</label>
                                         
-	<input type="text" class="form-control start-input" name="date"  >  
+	<input type="text" class="form-control start-input" name="date"> </input>
 	</div>
-	<span class="input-group-addon mt30 p0 pull-left col-sm-1">
-        <i class="fa fa-calendar fa-3"></i>
+	<span class="input-group-addon mt30 p0 pull-left col-sm-1" ng-click="hideCalendar('from')">
+        <i class="fa fa-calendar fa-3 "></i>
     </span>
  </div>
 </div>
@@ -124,10 +146,10 @@
 <div class="col-sm-10 pl0">
     <label for="date">End date</label>
                                         
-	<input type="text" class="form-control end-input" name="date">  
+	<input type="text" class="form-control end-input" name="date"> </input>  
 	</div>
-	<span class="input-group-addon mt30 p0 pull-left">
-        <i class="fa fa-calendar fa-3"></i>
+	<span class="input-group-addon mt30 p0 pull-left" ng-click="hideCalendar('to')">
+        <i class="fa fa-calendar fa-3 "></i>
     </span>
                                             </div>
 
@@ -137,26 +159,26 @@
   
   <br>
 <div class="form-group">
-<div class="Message" ng-if="statusOptions.status=='Temporary offline'">
+<div class="Message" ng-if="statusOptions.status=='Temporary offline' && displayTOMessage">
   <label>
    MESSAGE
   </label>
    <br>
    <br>
-      <p>We are currently offline due to unplanned maintenance.</p>
+      <p>{{displayTOMessage}}</p>
 </div>
-<div class="Message" ng-if="statusOptions.status=='Scheduled offline'">
+<div class="Message" ng-if="statusOptions.status=='Scheduled offline' && displaySOMessage">
   <label>
    MESSAGE
   </label>
    <br>
    <br>
-      <p>We are scheduled for maintenance from <span>{{startMessage}}</span> to <span>{{endMessage}}<span>.</p>
+      <p>{{displaySOMessage}}</p>
 </div>
 <br>
 
 <div class="form-group ">
-	<button type="submit" class="btn btn-default btn-green">Save</button>
+	<button type="submit" class="btn btn-default btn-green" ng-disabled="isStatusChanged" ng-if="statusOptions.status != 'N/A'" >Save</button>
 	<button type="button" class="btn btn-default btn-green " id="my modal" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">Cancel</button>
   </div>
                                                                                                   
@@ -165,4 +187,13 @@
   </form>  
   
 </div>
+
+
+	<p data-toggle="popover" id="error-popover" data-content='<div class="row"> <div class="col-md-1"> <i class="fa fa-warning fa-2" aria-hidden="true"></i>
+								</div> <div class="col-md-10"><p>  Unable to save the {{feature.name}} </p> <div class="form-group ">
+								<button type="submit" class="btn btn-default"> <i class="fa fa-plus" aria-hidden="true"></i> View more</button>
+								<button type="submit" class="btn btn-default ">Close</button></div></div></div>' data-placement="bottom" data-class="error">
+									 </p>
+
+
 	</script>
