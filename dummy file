@@ -5,7 +5,33 @@
 2) paste below code in 116 in globalfeature.js
 
 $scope.checkDateFormatErr = function(startTime,endTime) {
-console.log('checking erorr format',startTime,endTime)
+
+    var datetimeStart = $('.start-input').val();
+ var datetimeEnd = $('.end-input').val();
+
+    alert('clicked')
+  console.log('checking erorr format',datetimeStart,datetimeEnd)
+
+  var statusPost = { 'name': obj.name, 'startTime': datetimeStart, 'endTime': datetimeEnd}
+
+  // POST request :
+$http({
+method: 'POST',
+url: 'updateGlobalFeatures',
+data: statusPost,
+headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+}).success(function (data) {
+    // Do stuff with data.
+    console.log('success response', data)
+  })
+  .catch(function (err) {
+    // Log error somehow.
+      console.log('failure response', err)
+  })
+  .finally(function () {
+    // Hide loading spinner whether our call succeeded or failed.
+    console.log('checking whether loading is working')
+  })
 }
 
 ////////////////////////////
