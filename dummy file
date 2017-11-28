@@ -2,7 +2,9 @@ in planSponson.html
 
 at line 66: <div class="ctrlNumbers pull-left" ng-class="{'min-data' : toggle }">
 
-at line 81: <image class="lessArrow pull-left" src="./icons/more-arrow.png" ng-click="toggle = ! toggle">
+at line 81: 
+<image ng-show="toggle" class="lessArrow pull-left" src="./icons/more-arrow.png" ng-click="toggle = ! toggle">
+ <image ng-show="!toggle" class="lessArrow pull-left" src="./icons/less-arrow.png" ng-click="toggle = ! toggle">
 
 ---------------------------------------
 in stylesplanSponsor.css
