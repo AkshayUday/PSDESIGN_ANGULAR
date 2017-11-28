@@ -1,92 +1,91 @@
-<div  class="plansponsor">
+<div class ="plansponsor">
 
 
-	<div class="clearfix mt25 plansponsorfont">
+		<div class="clearfix mt25 plansponsorfont">
 
-		<div class="form-group ">
-			<h3 class="selTitle"> Search Plan Sponsors</h3>
-			<div class="radiobuttons">
-				<input type="radio" name="status" value="option1" id="inlineradio1" disabled />
-				<label class="radio-inline checkboxTitle " for="inlineradio1">All</label>
+			<div class="form-group ">
+				<h3 class="selTitle"> Search Plan Sponsors</h3>
+                <div class="radiobuttons">
+                <input type="radio" name="status" value="option1"  id="inlineradio1"   disabled  />
+                <label class="radio-inline checkboxTitle " for="inlineradio1">All</label>
 
-				<input type="radio" name="status" value="option2" id="inlineradio2" disabled/>
-				<label class="radio-inline checkboxTitle" for="inlineradio2">Name</label>
+                <input type="radio" name="status" value="option2"  id="inlineradio2" disabled/>
+                <label class="radio-inline checkboxTitle" for="inlineradio2">Name</label>
 
-				<input type="radio" name="status" value="option3" id="inlineradio3" disabled/>
-				<label class="radio-inline checkboxTitle" for="inlineradio3">PSUID</label>
+                <input type="radio" name="status" value="option3" id="inlineradio3" disabled/>
+                <label class="radio-inline checkboxTitle" for="inlineradio3">PSUID</label>
 
-				<input type="radio" name="status" value="option4" checked="" id="inlineradio4" />
-				<label class="radio-inline active checkboxTitlecontrol" for="inlineradio4">Control No</label>
-			</div>
+                <input type="radio" name="status" value="option4" checked="" id="inlineradio4" />
+                <label class="radio-inline active checkboxTitlecontrol" for="inlineradio4">Control No</label>
+                </div>
 		</div>
-		<div class="container pull-left ">
-			<div class="form-inline">
+            <div class="container pull-left ">
+				<div class="form-inline">
 
 				<div class="inner-addon right-addon">
-					<i class="fa fa-times fa-2x"></i>
+					 <i class="fa fa-times fa-2x" ng-click = "clearData()" ></i>
 
 
-					<input type="number" oninput="checkNumberFieldLength(this);" placeholder="Enter Control Number" ng-model="DataEntered" class="form-control " />
+					<input type="search"  placeholder="Enter Control Number" ng-model="DataEntered" ng-change="checkNumberFieldLength(DataEntered)" class="form-control " />
 					<button type="submit" class="btn btn-primary searchButton" ng-click="searchFun()">Search</button>
 				</div>
 			</div>
+			<span class="error-msg" ng-show="showLimitError">Enter 7 digit control number</span>
 		</div>
 	</div>
 </div>
 
-<br>
+	<br>
 
 
-<!-- Search Results jumbotron -->
 
-<div class="jumbotron SearchResults" ng-show = "searchKey==1">
+<div class="jumbotron SearchResults" ng-show = "searchKey==1111111">
 <a class="resultHead">Search Results for</a>
 <a class="selectedSearch label label-default">A43201</a>
 
 
 
 
-<div class="table-section table-responsive">
-	<table class="table CareManagement-table">
-		<thead>
-			<tr class="spaceUnder">
-				<th class="tabHead psuid">PSUID <span class="fa fa-sort"></span></th>
-				<th class="tabHead">PS Name</th>
-				<th class="tabHead">Control Number</th>
+    <div class="table-section table-responsive">
+      <table class="table CareManagement-table">
+         <thead>
+        <tr class="spaceUnder">
+          <th class="tabHead psuid">PSUID <span class="fa fa-sort"></span></th>
+          <th class="tabHead">PS Name</th>
+          <th class="tabHead">Control Number</th>
 
-			</tr>
-		</thead>
+        </tr>
+         </thead>
 
 
 		<tbody class="tableSepeator">
 			<tr class="Searchbarplace">
 				<td class="psuidata">12345</td>
 				<td class="psnamedata">AETNA</td>
-				<td style="position:relative;">
-					<ul class="listStyle " ng-class="{'listfullview': expand}">
+				<td style="position:relative;" class="pscntrlnumber clearfix">
+				<div class="ctrlNumbers pull-left">
+				<span ng-repeat="controlNumber in psDetails | limitTo : 5">{{controlNumber}}</span>
+				</div>
+				<!-- 	<ul class="listStyle " ng-class="{'listfullview': expand}">
 						<li class="controlNumbers">
-							<span>12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345</span></li>
-						<li class="controlNumbers"><span>12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345</span></li>
-						<li class="controlNumbers"><span>12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345</span></li>
-						<li class="controlNumbers"><span>12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345</span></li>
-						<li class="controlNumbers"><span>12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345</span></li>
-					</ul>
+							<span>12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345</span></li>
+						<li class="controlNumbers"><span>12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345</span></li>
+						<li class="controlNumbers"><span>12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345</span></li>
+						<li class="controlNumbers"><span>12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345</span></li>
+						<li class="controlNumbers"><span>12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345,12345</span></li>
+					</ul>-->
 					<!--<image ng-click="expand = !expand" class="lessArrow"
  ng-src="{{expand && 'themes/css2/icons/more-arrow.png' || 'themes/css2/icons/more-arrow.png'}}" />  -->
 
 
-					<image class="lessArrow" src="../themes/css2/icons/more-arrow.png">
-					themes/css2/icons/disabled_icon-2x.png
-						<!-- <image  class="rightDirectIcon"src="themes/css2/icons/less-arrow.png">
-    </td> -->
-			</tr>
-		</tbody>
-	</table>
-</div>
+					<image class="lessArrow pull-left" src="../themes/css2/icons/more-arrow.png">
+          </tr>
+      </tbody>
+        </table>
+      </div>
 
 
-
-</div>
+  </div>
 
 
 <!-- DIV ERROR 1 -->
@@ -120,16 +119,7 @@
 	</div>
 </div>
 
+<!-- <script src="../script/planSponsor.js" type="javascript"></script>-->
+	
 
 
-<script>
-	$scope.clearSearch = function() {
-		$scope.searchAll = null;
-	}
-
-	function checkNumberFieldLength(elem) {
-		if (elem.value.length > 7) {
-			elem.value = elem.value.slice(0, 7);
-		}
-	}
-</script>
