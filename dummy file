@@ -1,93 +1,13 @@
-$scope.errMessage = '';
-if (typeof dateTimestart != 'undefined'){
-//write post code
+in planSponson.html
+
+at line 66: <div class="ctrlNumbers pull-left" ng-class="{'min-data' : toggle }">
+
+at line 81: <image class="lessArrow pull-left" src="./icons/more-arrow.png" ng-click="toggle = ! toggle">
+
+---------------------------------------
+in stylesplanSponsor.css
+
+.min-data {
+  max-height: 74px;
+overflow: hidden;
 }
-else{
-$scope.errMessage = 'start date cannot be empty';
-}
-
-
-2)<span>{{errMessage}}</span>
-
-///////////////////////////
-1) paste below line at 181 line of button tag in feature.html
-
-<button type="submit" class="btn btn-default btn-green" ng-disabled="isStatusChanged" ng-if="statusOptions.status != 'N/A'" ng-click="checkDateFormatErr(startTime,endTime)" >Save</button>
-
-2) paste below code in 116 in globalfeature.js
-
-$scope.checkDateFormatErr = function(startTime,endTime) {
-
-    var datetimeStart = $('.start-input').val();
- var datetimeEnd = $('.end-input').val();
-
-    alert('clicked')
-  console.log('checking erorr format',datetimeStart,datetimeEnd)
-
-  var statusPost = { 'name': obj.name, 'startTime': datetimeStart, 'endTime': datetimeEnd}
-
-  // POST request :
-$http({
-method: 'POST',
-url: 'updateGlobalFeatures',
-data: statusPost,
-headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-}).success(function (data) {
-    // Do stuff with data.
-    console.log('success response', data)
-  })
-  .catch(function (err) {
-    // Log error somehow.
-      console.log('failure response', err)
-  })
-  .finally(function () {
-    // Hide loading spinner whether our call succeeded or failed.
-    console.log('checking whether loading is working')
-  })
-}
-
-////////////////////////////
-
-$scope.$watch('startTime', validateDates);
-$scope.$watch('endTime', validateDates);
- 
-function validateDates() {
- console.log('@@@@@@@@@@@@@@@@@@@@@date is changed')
-}
-
-
-
-
-/////////////
-<form name="myForm">
-     <input valid-date datepicker-popup="MM/dd/yyyy" type="text" ng-model="myStartDate" class="form-control" name="startDate" ng-required="true" />
-     <span ng-show="myForm.startDate.$error.invalidDate">Invalid start date.</span>
-     <span ng-show="myForm.startDate.$error.required">Start date is required.</span>
-</form>
-
-
-
-
-//////////////////
-paste below code in globalfeatures.js file
-
-
-
-//designed to work with the angular bootstrap date control. 
-//sets an error invalidDate when user types the date. 
-.directive('validDate', function () {
-    return {
-        restrict: 'A',
-        require: 'ngModel',
-        link: function (scope, element, attrs, control) {
-            control.$parsers.push(function (viewValue) {
-                var newDate = model.$viewValue;
-                control.$setValidity("invalidDate", true);  
-                if (typeof newDate === "object" || newDate == "") return newDate;  // pass through if we clicked date from popup
-                if (!newDate.match(/^\d{1,2}\/\d{1,2}\/((\d{2})|(\d{4}))$/))
-                    control.$setValidity("invalidDate", false);
-                return viewValue;
-            });
-        }
-    };
-})
