@@ -4,14 +4,14 @@
 
 
 .plansponsorfont {
-font-family: OpenSans !important;
+font-family: Open Sans !important;
 }
 
 
 
 
 .checkboxTitle{
-font-family: OpenSans !important;
+font-family: Open Sans !important;
 }
 
 .radioplan {
@@ -45,9 +45,9 @@ font-family: OpenSans !important;
 
 .inner-addon .fa-times {
   position: absolute;
-  padding: 10px;
-  pointer-events: none;
-  margin-top: -1px;
+     width: 50px;
+    height: 50px;
+    padding: 8px 5px;
 }
 
 
@@ -83,7 +83,7 @@ font-family: OpenSans !important;
 .searchtext {
   width: 396px;
   height: 24px;
-  font-family: OpenSans;
+  font-family: Open Sans;
   font-size: 17px;
   text-align: left;
   color: #414141;
@@ -96,7 +96,7 @@ font-family: OpenSans !important;
   color: #ffffff;
   font-size: 16px;
       letter-spacing: 1px;
-      font-family:'open_sanslight';
+      font-family:'Open Sans';
 }
 
 
@@ -123,7 +123,7 @@ font-family: OpenSans !important;
   overflow: hidden;
   position: relative;
   padding-left: 0px;
-  font-family: OpenSans;
+  font-family: Open Sans;
   font-size: 18px;
 }
 
@@ -133,7 +133,7 @@ font-family: OpenSans !important;
 
 .controlNumbers {
   font-size: 18px;
-  font-family: OpenSans;
+  font-family: Open Sans;
   padding: 6px;
   display:block;
     width:100%;
@@ -175,7 +175,7 @@ font-family: OpenSans !important;
 .resultHead {
   font-size: 18px;
   color: #414141;
-  font-family: 'open_sanslight';
+  font-family: 'Open Sans';
   font-weight: 600;
 }
 
@@ -184,13 +184,13 @@ background-color:#fff;
 }
 
 .psuidata {
-  font-family: 'open_sanslight';
+  font-family: 'Open Sans';
   color: #414141;
   font-size: 18px;
 }
 
 .psnamedata{
-  font-family: 'open_sanslight';
+  font-family: 'Open Sans';
   color: #414141;
   font-size: 18px;
 }
@@ -216,6 +216,23 @@ overflow-x: visible !important;
     border-radius: 10px;
 }
 
+.errorexceptions{
+	height: 80px;
+   
+    margin: 0 30px;
+    margin-top: 19px;
+    background-color: #fff0f7;
+    border: 1px solid #d20962;
+    border-radius: 10px;
+}
+.errorexceptions .icondesign{
+	margin-top:25px;
+}
+.exceptiondiv{
+    height: 120px;
+    width: 1140px;
+    margin: auto;
+}
 .textcontrol{
 	font-family: 'Open Sans';
 	font-size: 16px !important;
@@ -237,4 +254,53 @@ input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button { 
   -webkit-appearance: none; 
   margin: 0; 
+}
+/*input[type="search"] {
+  -webkit-appearance: searchfield;
+}
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: searchfield-cancel-button;
+  
+   
+  width:30px;
+  height:30px;
+  color:#ccc;
+ 
+}*/
+input[type="search"]::-ms-clear {
+
+display:none;
+}
+
+.error-heading{
+	 background: #fff;
+	 padding-top: 3px;
+}
+.error-heading div{
+	box-shadow: 0 1px 10px 0px #d2d2d2;
+}
+.error-heading h4{
+	width: 1170px;
+    margin: auto;
+    padding: 25px 15px;
+}
+.errorexceptions .textcontrol span{
+	font-weight:normal !important;
+}
+.pscntrlnumber{
+	width:80%;
+}
+.ctrlNumbers{
+	width:90%;
+}
+.ctrlNumbers span{
+	padding:5px 8px;
+	font-size: 18px;
+	display:inline-block;
+}
+.ctrlNumbers span:first-child{
+	background-color: #7d3f98;
+	color:#fff; 
+	font-weight: 600;
+	border-radius:4px;
 }
