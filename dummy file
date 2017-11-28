@@ -13,3 +13,11 @@ in stylesplanSponsor.css
   max-height: 74px;
 overflow: hidden;
 }
+
+
+
+-------------
+
+  else if($scope.DataEntered = ''){
+      $scope.showLimitError = true;
+    }
