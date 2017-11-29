@@ -1,1 +1,2 @@
 $scope.valCount = Object.keys($scope.psDetails).length;
+&& valCount >18
