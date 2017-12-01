@@ -4,7 +4,10 @@
 		<div class="clearfix mt25 plansponsorfont">
 
 			<div class="form-group ">
+			
 				<h3 class="selTitle"> Search Plan Sponsors</h3>
+			
+			<!--   <a ui-sref="PLANSPONSOR.SUMMARY" ui-sref-active="active">Plan Sponsor</a> -->
                 <div class="radiobuttons">
                 <input type="radio" name="status" value="option1"  id="inlineradio1"   disabled  />
                 <label class="radio-inline checkboxTitle " for="inlineradio1">All</label>
@@ -21,16 +24,21 @@
 		</div>
             <div class="container pull-left ">
 				<div class="form-inline">
-
+				
+				
+	<div ui-view ng-show = "!showResultTable"></div>
+	
+	
 				<div class="inner-addon right-addon">
-					 <i class="fa fa-times fa-2x" ng-click = "clearData()" ></i>
+					 <image class="searchclose" src="../themes/css2/icons/close.png" ng-click = "clearData()" ></image>
 
 
-					<input type="search"  placeholder="Enter Control Number" ng-model="DataEntered" ng-change="checkNumberFieldLength(DataEntered)" class="form-control " />
+					<input type="text" ng-class ="{'errorborder':showLimitError}" placeholder="Enter 7 digit Control Number" numbers-only ng-model="DataEntered"   class="form-control " maxlength ="7"/>
+					
 					<button type="submit" class="btn btn-primary searchButton" ng-click="searchFun()">Search</button>
 				</div>
 			</div>
-			<span class="error-msg" ng-show="showLimitError">Enter 7 digit control number</span>
+			<span class="error-msg" ng-show="showLimitError"><image class = "validationimage"src="../themes/css2/icons/icon_Validation.png"></image>Please enter 7 digit control number</span>
 		</div>
 	</div>
 </div>
@@ -39,32 +47,32 @@
 
 
 
-<div class="jumbotron SearchResults" ng-show = "searchKey==1111111">
+<div class="jumbotron SearchResults" ng-show = "showResultTable" >
 <a class="resultHead">Search Results for</a>
-<a class="selectedSearch label label-default">A43201</a>
+<a class="selectedSearch label label-default">{{DataEntered}}</a>
 
 
 
 
     <div class="table-section table-responsive">
-      <table class="table CareManagement-table">
+      <table class="table CareManagement-table  ">
          <thead>
         <tr class="spaceUnder">
-          <th class="tabHead psuid">PSUID <span class="fa fa-sort"></span></th>
-          <th class="tabHead">PS Name</th>
-          <th class="tabHead">Control Number</th>
+          <th class="tabHead psuid ">PSUID <span class="fa fa-sort"></span></th>
+          <th class="tabHead psname ">PS Name</th>
+          <th class="tabHead controlnumber">Control Number</th>
 
         </tr>
          </thead>
 
 
 		<tbody class="tableSepeator">
-			<tr class="Searchbarplace">
-				<td class="psuidata">12345</td>
-				<td class="psnamedata">AETNA</td>
+			<tr class="Searchbarplace ">
+				<td class="psuidata "style = "vertical-align:top!important;padding-top: 26px!important;"><a ui-sref="SUMMARY" ng-click ="showResultTable = !showResultTable">{{psDetails.planSponsorId}} </a></td>
+				<td class="psnamedata  "style = "vertical-align:top!important;padding-top: 26px!important;"><a ui-sref="SUMMARY">{{psDetails.nameFull}}</a></td>
 				<td style="position:relative;" class="pscntrlnumber clearfix">
-				<div class="ctrlNumbers pull-left">
-				<span ng-repeat="controlNumber in psDetails | limitTo : 5">{{controlNumber}}</span>
+				<div class="ctrlNumbers pull-left" ng-class="{'min-data' : !toggle }">
+				<span ng-repeat="controlNumber in psDetails.accountStructure" ng-class="{'hlight-cnum' : DataEntered == controlNumber.code}">{{controlNumber.code}}</span>
 				</div>
 				<!-- 	<ul class="listStyle " ng-class="{'listfullview': expand}">
 						<li class="controlNumbers">
@@ -78,7 +86,12 @@
  ng-src="{{expand && 'themes/css2/icons/more-arrow.png' || 'themes/css2/icons/more-arrow.png'}}" />  -->
 
 
-					<image class="lessArrow pull-left" src="../themes/css2/icons/more-arrow.png">
+
+					<image ng-show="toggle && valCount >18" class="lessArrow pull-left" src="../themes/css2/icons/less-arrow.png" ng-click="toggle = ! toggle">
+ <image ng-show="!toggle && valCount >18" class="lessArrow pull-left"src="../themes/css2/icons/more-arrow.png"  ng-click="toggle = ! toggle">
+ 
+					
+					
           </tr>
       </tbody>
         </table>
@@ -89,32 +102,33 @@
 
 
 <!-- DIV ERROR 1 -->
-<div class="jumbotron SearchResults" ng-show = "searchKey==2">
-	<div class="panel panel-default errordiv">
+<div class="jumbotron SearchResults" ng-show = "errorSet">
+	<div class=" errordiv">
 		<div class="panel-panel-default errorplans">
-			<i class="fa fa-exclamation-triangle fa-2x icondesign" aria-hidden="true"></i>
-			<p class="textcontrol"> No Control Number Found. </p>
+		
+			<image class="icondesign"src="../themes/css2/icons/erroricon.png"  aria-hidden="true"></image>
+			<p class="textcontrol">{{errorData}} </p>
 		</div>
 	</div>
 </div>
 
-<!-- DIV ERROR 2 -->
+<!-- DIV ERROR 2 
 <div class="jumbotron SearchResults" ng-show = "searchKey==3">
-	<div class="panel panel-default errordiv">
+	<div class=" errordiv">
 		<div class="panel-panel-default errorplans">
 			<i class="fa fa-minus-circle fa-2x icondesign" aria-hidden="true"></i>
 			<p class="textcontrol"> Control Number is disabled. </p>
 		</div>
 	</div>
-</div>
+</div>-->
 
 
 <!-- DIV ERROR 3-->
-<div class="jumbotron SearchResults" ng-show = "searchKey==4">
-	<div class="panel panel-default errordiv">
+<div class="jumbotron SearchResults" ng-show = "systemDown">
+	<div class="errordiv">
 		<div class="panel-panel-default errorplans">
-			<i class="fa fa-times-circle-o fa-2x icondesign" aria-hidden="true"></i>
-			<p class="textcontrol">System is down. </p>
+			<image class="icondesign" src="../themes/css2/icons/systemdown_icon.png"  aria-hidden="true"></image>
+			<p class="textcontrol">We are Sorry! <span>A system exception has occurred and prevented your request from being processed. Please contact the support service, if the problem persists.</span>  </p>
 		</div>
 	</div>
 </div>
