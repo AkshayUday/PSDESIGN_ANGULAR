@@ -1,77 +1,114 @@
-myapp.controller('planCtrl',function($scope,$timeout,$http) {
-    //alert("load this"); 
-	$scope.showLimitError = false;
-        $scope.checkNumberFieldLength = function(elem) {
-    	if (elem > 9999999) {
-            elem= elem.toString().slice(0,7); 
+
+myapp.directive('numbersOnly', function () {
+    return {
+        require: 'ngModel',
+        link: function (scope, element, attr, ngModelCtrl) {
+            function fromUser(text) {
+                if (text) {
+                    var transformedInput = text.replace(/[^0-9]/g, '');
+
+                    if (transformedInput !== text) {
+                        ngModelCtrl.$setViewValue(transformedInput);
+                        ngModelCtrl.$render();
+                    }
+                    return transformedInput;
+                }
+                return undefined;
+            }            
+            ngModelCtrl.$parsers.push(fromUser);
         }
-    	$scope.DataEntered = parseInt(elem);
-	};
+    };
+});
+myapp.controller('planCtrl',function($scope,$timeout,$http,$state) {
+    //alert("load this"); 
+	$('#searchInput').focus();
+	$scope.showLimitError = $scope.showResultTable = $scope.systemDown = $scope.errorSet = $scope.serviceTimeout = false;
+	     
+	
 	$scope.searchFun = function(){
-		if($scope.DataEntered < 1000000){
+		
+		$scope.showLimitError = $scope.showResultTable = $scope.systemDown = $scope.errorSet = $scope.serviceTimeout = false;
+		$scope.toggle = false;
+		if(!$scope.DataEntered || $scope.DataEntered.length < 7 ){
 			$scope.showLimitError = true;
 		}
+		
 		else{
 			$scope.showLimitError = false;
 			$scope.searchKey = $scope.DataEntered;
-//			$scope.psDetails = { ss:{1234567,1234567,1234567,1234567,1234567,1234567,1234567,1234567,1234567,1234567,1234567,1234567,1234567,1234567,1234567}};
-			$scope.psDetails = {
-					0:1234567,
-					1:1234567,
-					2:1234567,
-					3:1234567,
-					4:1234567,
-					5:1234567,
-					6:1234567,
-					7:1234567,
-					8:1234567,
-					9:1234567,
-					10:1234567,
-					11:1234567,
-					12:1234567,
-					13:1234567,
-					14:1234567,
-					15:1234567,
-					16:1234567,
-					17:1234567,
-					18:1234567,
-					19:1234567,
-					20:1234567,
-					21:1234567
-					
-			};
-			$scope.cnCount = 10;
+			waitingDialog.show();
 			$timeout(function () {$http({
 				  method: 'GET',
-				  url: 'getPSDetails',
-				 data: JSON.stringify($scope.DataEntered),
-				  headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-				}).success(function (data) {
-					  console.log('success response', data);
-				    
+				  url: 'plansponsorSearch?controlNumber='+$scope.DataEntered,
+				  	}).success(function (data) {
+				  	 console.log('success response', data);					  
 				      if(data.code == 200){
-				    	
+				    	  $scope.psDetails = data.plansponsorResponse.ReadPlanSponsorsResponse.planSponsors[0];
+				    	  $scope.psuid = $scope.psDetails.planSponsorId;
+				    	  $scope.valCount = $scope.psDetails.accountStructure.length;
+						  $scope.showResultTable = true;
+						  //$scope.selectControlNumber = parseInt($scope.DataEntered);
 				      }
 				      else if (data.code == 500){
 				    	 
-			    	 
+				    	  $scope.systemDown = true;
+				      }
+				      else if(data.code ==  555){
+				    	  $scope.errorSet = true;
+				    	  var errorObject = data.errorMessage;
+				    	  $scope.errorData = errorObject.split('|')[1].split(']')[0];
+				    	  console.log($scope.errorData);
 				      }
 				      else{
-				    	  
+				    	  //$scope.serviceTimeout = true;
+				    	  console.log('Session timed out');
+				    	  $(location).attr('href', '../service/home');					      
 				      }
 				
 				    })
 			    .catch(function (err) {
-			      
-			        console.log('failure response', err)
+			    	$scope.serviceTimeout = true;
+			    	console.log('failure response', err);
 			    })
 			    .finally(function () {
-			     
+			    	waitingDialog.hide();
 			    });
 			  }, 2000);
 		}
 	  }
 	$scope.clearData = function() {
 		$scope.DataEntered = "";
+		$('#searchInput').focus();
 	};
-                 });
+	$scope.getPSDetails = function() 
+	{
+
+		$timeout(function () {$http({
+			  method: 'GET',
+			  url: 'getPSDetails?psuid='+$scope.psuid,
+			  	}).success(function (data) {
+			  	 console.log('success response', data);					  
+			      if(data.code == 200){
+			    	  console.log(data);
+			    	  $state.go('PLANSPONSOR.SUMMARY');
+			    	  
+			      }
+			      else if (data.code == 500){
+			    	 
+			    	  console.log(data);
+			      }
+			      else if(data.code ==  555){
+			    	  console.log(data);
+			      }
+			
+			    })
+		    .catch(function (err) {
+		      
+		        console.log('failure response', err)
+		    })
+		    .finally(function () {
+		    	
+		    });
+		  }, 2000);
+		}                 
+	});
