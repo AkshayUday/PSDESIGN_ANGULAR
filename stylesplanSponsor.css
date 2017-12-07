@@ -3,8 +3,12 @@
 /*PlanSponsor CSS*/
 
 
+.v-align{
+vertical-align:top!important;s
+}
+
 .plansponsorfont {
-font-family: Open Sans !important;
+ font-family: open_sansregular !important;
 }
 
 
@@ -83,7 +87,7 @@ font-family: Open Sans !important;
 .searchtext {
   width: 396px;
   height: 24px;
-  font-family: Open Sans;
+  font-family: open_sansregular !important;
   font-size: 17px;
   text-align: left;
   color: #414141;
@@ -94,19 +98,20 @@ font-family: Open Sans !important;
   background-color: #7d3f98;
   font-weight: 600;
   color: #ffffff;
-  font-size: 16px;
+  font-size: 18px;
       letter-spacing: 1px;
-      font-family:'Open Sans';
+      font-family:open_sansregular !important;
 }
 
 
 /**/
 
 .selTitle {
-  font-size: 30px;
+ font-family: open_sansregular !important;
+  font-size: 24px;
   text-align: left;
   color: #414141;
-  padding-top: 31px;
+  padding-top: 0px;
   padding-bottom: 31px;
   border-bottom: solid 1px #dcdcdc;
 }
@@ -123,7 +128,7 @@ font-family: Open Sans !important;
   overflow: hidden;
   position: relative;
   padding-left: 0px;
-  font-family: Open Sans;
+  font-family: open_sansregular !important;
   font-size: 18px;
 }
 
@@ -133,7 +138,7 @@ font-family: Open Sans !important;
 
 .controlNumbers {
   font-size: 18px;
-  font-family: Open Sans;
+  font-family: open_sansregular !important;
   padding: 6px;
   display:block;
     width:100%;
@@ -168,31 +173,40 @@ font-family: Open Sans !important;
 
 .lessArrow {
   position: absolute;
-    bottom: 48px;
-    right: 69px;
+    bottom: 28px;
+    right: 38px;
 }
 
 .resultHead {
   font-size: 18px;
   color: #414141;
-  font-family: 'Open Sans';
+  font-family: open_sansregular !important;
   font-weight: 600;
 }
 
 .Searchbarplace{
 background-color:#fff;
 }
-
+.Searchbarplace td a,.Searchbarplace td a:hover,.Searchbarplace td a:focus,.Searchbarplace td a:active{
+	color:#414141;
+	cursor:pointer;
+}
 .psuidata {
-  font-family: 'Open Sans';
+  font-family: open_sansregular !important;
   color: #414141;
   font-size: 18px;
+	width:10%;
 }
 
 .psnamedata{
-  font-family: 'Open Sans';
+  font-family: open_sansregular !important;
   color: #414141;
   font-size: 18px;
+	width:16%;
+}
+
+.psdatacolor{
+color:#7d3f98 !important;
 }
 
 .table-responsive{
@@ -208,8 +222,8 @@ overflow-x: visible !important;
 }
 .errorplans{
 	height: 62px;
-    width: 1094px;
-    margin-left: 20px;
+    width: 1136px;
+    margin-left: -2px;
     margin-top: 19px;
     background-color: #fff0f7;
     border: 1px solid #d20962;
@@ -234,40 +248,29 @@ overflow-x: visible !important;
     margin: auto;
 }
 .textcontrol{
-	font-family: 'Open Sans';
+	font-family: open_sansregular !important;
 	font-size: 16px !important;
 	color: #d20962;
 	font-weight:500 !important;
-    padding-top: 18px;
-    position: absolute;
-    padding-left: 69px;
+    padding-top: 8px;
+    padding-left: 83px;
 }
 
 .icondesign{
-	color:#d20962;
-	float: left;
-    margin-left: 17px;
-    margin-top: 16px
+	    color: #d20962;
+    float: left;
+    margin-left: 18px;
+    margin-top: 8px;
 }
+    }
 
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
   -webkit-appearance: none; 
   margin: 0; 
 }
-/*input[type="search"] {
-  -webkit-appearance: searchfield;
-}
-input[type="search"]::-webkit-search-cancel-button {
-  -webkit-appearance: searchfield-cancel-button;
-  
-   
-  width:30px;
-  height:30px;
-  color:#ccc;
- 
-}*/
-input[type="search"]::-ms-clear {
+
+input[type=text]::-ms-clear {
 
 display:none;
 }
@@ -287,8 +290,12 @@ display:none;
 .errorexceptions .textcontrol span{
 	font-weight:normal !important;
 }
-.pscntrlnumber{
-	width:80%;
+.CareManagement-table .Searchbarplace td{
+	vertical-align:top !important
+}
+.CareManagement-table .Searchbarplace .pscntrlnumber{
+	width:65%;
+	
 }
 .ctrlNumbers{
 	width:90%;
@@ -297,10 +304,54 @@ display:none;
 	padding:5px 8px;
 	font-size: 18px;
 	display:inline-block;
+	user-select:all;
+	-webkit-user-select: all;
 }
-.ctrlNumbers span:first-child{
+.ctrlNumbers .hlight-cnum{
 	background-color: #7d3f98;
 	color:#fff; 
 	font-weight: 600;
 	border-radius:4px;
 }
+
+.min-data {
+  max-height: 70px;
+overflow: hidden;
+}
+
+.errorborder{
+border-color: #F21000
+}
+
+.psname.psnamedata{
+min-width:350px;
+
+}
+
+.searchclose{
+    top: 14px;
+    position: absolute;
+    left: 955px;
+}
+
+.validationimage{
+margin-top: -2px;
+    margin-right: 6px;
+}
+
+.error-msg{
+
+    margin-left:-12px
+}
+.modal-backdrop.fade.in{
+	height:100%;
+}
+
+
+
+.progress-bar{
+background-color:#7d3f98!important;
+}
+
+
+
