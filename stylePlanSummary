@@ -1,0 +1,205 @@
+.planSummary{
+	margin-left:-15px;
+}
+
+.plansponsortext{
+	padding-left: 5px;
+}
+
+.searchtext{
+	padding-right: 5px;
+}
+
+*{
+    font-family: 'Open Sans';
+}
+
+.planSummaryHeader{
+	font-size: 24px;
+    text-align: left;
+    color: #414141;
+    padding-top: 0px;
+    padding-bottom: 31px;
+    border-bottom: solid 1px #dcdcdc;
+    margin-left: 34px;
+}
+
+.legenddiv{
+	    margin-top: 10px;
+    	font-size: 12px;
+    	margin-left: 460px;
+    	margin-bottom: -20px;
+}
+
+.legendlist{
+	list-style-type: none;
+}
+
+.legendlist li{
+	display: inline-block;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+.legendlist li span{
+	margin-left:10px;
+}
+
+
+.transparentbreadcumb{
+	background-color: transparent;
+}
+
+a:visited {
+	color: #7d3f98;
+}
+
+.row1 {
+  background-color: white;
+  margin-top: 5px;
+  margin-left: 15px;
+}
+
+/*.plantSummary h3{
+    font-size: 24px;
+    text-align: left;
+    color: #414141;
+    padding-top: 0px;
+    padding-bottom: 31px;
+    border-bottom: solid 1px #dcdcdc;
+    margin-left: 15px;
+}*/
+
+.modifyButton {
+  width: 104px;
+  height: 50px;
+  border-radius: 5px;
+  background-color: #00a78e;
+  margin-left: 20px;
+  margin-top: 18px;
+}
+
+.table1{
+	margin-left:10px;
+}
+
+.table1> tbody>tr>td{
+    font-family: 'Open Sans';
+    font-size: 18px;
+    font-weight: 600;
+    border-top:0px;
+    }
+    
+ .table1> thead>tr>th{
+ 	border-bottom:0px;
+ }
+
+.th1{
+	background-color:transparent;
+    font-size: 14px;
+    color:black;
+    font-family: 'Open Sans';
+}
+
+.categorymenu{
+	width: 22%;
+}
+
+.categoryHeader a{
+	text-decoration : none;
+	height: 80px;
+}
+
+.categorytable{
+	width: 77.33%;
+}
+
+.left-menu a.active {
+    outline:none;
+    border:0px;
+    }
+
+.planSummary ul li a{ 
+    padding: 18px 18px;
+    display: block;
+    border-bottom: 1px solid #dfdfdf;
+    color: white;
+    background: #7d3f98;}
+/*.menu ul li a.active{font-family: 'open_sanssemibold'; color:#7d3f98; border-bottom:4px solid #fff}*/
+
+.planSummary ul li a.active1 {
+    color: #7d3f98;
+    background: white;
+    /* box-shadow: 4px 0 0 6px #7d3f98; */
+    border-bottom: 0;
+    border-radius: 1px;
+    padding: 13px 18px;
+}
+.badge1{
+	display: inline-block;
+    font-size: 12px;
+    line-height: 1;
+    color: #ffffff;
+    text-align: left;
+}
+
+.activebadge1{
+	display: inline-block;
+    font-size: 12px;
+    line-height: 1;
+    color: #ffffff;
+    text-align: left;
+}
+
+.planSummary .th2, .planSummary .td1{
+	color: white;
+    vertical-align: middle;
+    font-family: 'Open Sans';
+}
+
+.planSummary .td1{
+	min-width:160px;
+	height:30px;
+	border-right:1px solid #FFF;
+}
+
+.planSummary .td2{
+	height: 59px;
+}
+
+.planSummary .td3{
+	height: 49px;
+}
+
+.planSummary .purple{
+	background-color: rgba(125, 63, 152, 1);
+	word-break: break-word;
+}
+
+.planSummary .deepPurple{
+	background-color: rgba(86, 61, 130, 1);
+}
+
+.planSummary .green{
+	background-color: rgba(0, 167, 142, 1);
+}
+
+.fix {
+  position: absolute;
+  margin-left: -100px;
+  width: 100px;
+}
+
+.outer {
+  position: relative;
+  margin: -25px;
+}
+
+.inner {
+  overflow-x: scroll;
+  overflow-y: visible;
+  width: auto; 
+  margin-left: 100px;
+}
+
+
