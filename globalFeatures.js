@@ -1,3 +1,4 @@
+
 myapp = angular.module('myApp', ['ngSanitize','ui.router']);
 
 var states = [
@@ -21,11 +22,31 @@ var states = [
     {
       name: 'PLANSPONSOR',
       state: {
-        url: "#",
-        templateUrl: '../script/planSponsor.html',
-        controller: "planCtrl"
+        url: "/",
+        templateUrl: '../script/planSponsorHome.html',
+        controller: function($state){
+        	$state.go('PLANSPONSOR.SPONSOR');
+        }
       }
-    }]
+    },
+    {
+        name: 'PLANSPONSOR.SPONSOR',
+        state: {
+          url: "sponsor",
+          templateUrl: '../script/planSponsor.html',
+          controller: "planCtrl"
+        }
+      },
+   { 
+        name: 'PLANSPONSOR.SUMMARY',
+        
+      state: {
+         url: "summary",
+         templateUrl: '../script/planSummary.html',
+         controller: "summaryCtrl"
+        }
+     }
+    ]
 
    myapp.config(function($stateProvider, $urlRouterProvider) {
 
@@ -89,7 +110,7 @@ myapp.filter('myFilter', function () {
 
 
 myapp.controller('globalCtrl',['$scope', '$http', '$timeout', '$window', function($scope, $http, $timeout, $window) {
-	
+	$scope.title = 'GlobalFeatures';
 	if(!$window.cardData){
 		$scope.isDataAvailable = false;
 	}
@@ -158,6 +179,8 @@ console.log('selected is ',selItemName);
   $scope.toggleFailure = false;
   
   $scope.change = function(obj, inx, showingitems,$event) {
+	  //$scope.close();
+	  angular.element('.popover.in').popover('hide');
 	    $scope.showMessage = inx;
 	    $scope.showingitems = showingitems;
 	    $scope.currentEnabled = obj.enabled;
@@ -187,6 +210,8 @@ console.log('selected is ',selItemName);
 	    
 	      if(data.code == 200){
 	    	  $scope.toggleSuccess =true;
+	    	  obj.scheduledPeriod =[];
+		      
 	    	  obj.status=data.status; 
 	      }
 	      else if (data.code == 500){
@@ -234,6 +259,18 @@ console.log('selected is ',selItemName);
     });
   }, 2000);
 
+  
+   
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 //
@@ -264,16 +301,13 @@ console.log('selected is ',selItemName);
  // });
 }]);
 
-//myapp.controller('planCtrl',['$scope', '$http', '$timeout', '$window', function($scope, $http, $timeout, $window) {
-//               alert("load this");               
-//
-//                            }]);
+
 
 
 myapp.directive('statusPopover', function($compile,$timeout) {
     return {
         restrict: 'A',
-        controller: function($scope){
+        controller: function($scope,$http){
 //        	 var convertTimezone = function(date){
 //       		  var newDate = new Date(date.setTime(date.getTime() + (date.getTimezoneOffset() * 60000)));
 //       		  var offset = date.getTimezoneOffset()/60;
@@ -281,6 +315,7 @@ myapp.directive('statusPopover', function($compile,$timeout) {
 //       		  newDate.setHours(hours - offset);
 //       		  return newDate;
 //       	  };
+        	 
         	$scope.hideCalendar = function(typeOfCal){
 	
      		 	if(typeOfCal == 'from'){
@@ -293,46 +328,105 @@ myapp.directive('statusPopover', function($compile,$timeout) {
 	           $scope.convertDate = function(givenDate){      	        	
 	        	var dateSet = givenDate.split(/[^0-9]/);
 	        	var converted =new Date (dateSet[0],dateSet[1]-1,dateSet[2],dateSet[3],dateSet[4]);
-	        	return converted;
+	        	var changedDate = moment(converted).format('MM/DD/YYYY hh:mm A')
+	        	return changedDate;
 	           };
 	          $scope.statusChanged = function(currentValue){
+	        	  $scope.showStatusError = false;
+	        	  $scope.errMessage = '';
 	        	  if($scope.getFeatures.status == currentValue){
-	        		  $scope.isStatusChanged = true;
+	        		  $scope.isStatusChanged = true;	        		 
 	        	  }
 	        	  else{
 	        		  $scope.isStatusChanged = false;
 	        	  }
-	          }
-        	 $scope.setStatus =function(feature,$event){
-        		// hide all other popovers                 
-        		 angular.element('.status-column button').not($event.target).popover('hide');
-        		 $scope.isStatusChanged = true;
-        		 $scope.getFeatures = feature;
-        		 $scope.statusOptions = {};
-        		 $scope.statusOptions.status = feature.status;        		
-        		 if(feature.status == 'Scheduled offline'){
-        		 $scope.displaySOMessage = feature.statusMessage;
-        		 $scope.datetimeBegin = $scope.convertDate(feature.scheduledPeriod.datetimeBegin);
-        		 $scope.datetimeEnd =  $scope.convertDate(feature.scheduledPeriod.datetimeEnd);
-        		 $scope.startTime = moment($scope.datetimeBegin).format('MM/DD/YYYY hh:mm A');
-        		 $scope.endTime = moment($scope.datetimeEnd).format('MM/DD/YYYY hh:mm A');
+	        	  if(currentValue =='Scheduled offline'){
+	        		  if($scope.getFeatures.scheduledPeriod){
+	        			  !$scope.getFeatures.scheduledPeriod.datetimeBegin ? ($scope.startTime = $scope.endTime = $scope.displaySOMessage  =  null) : '' ;
+	        		  	}
+	        	  }
+	        	  else if(currentValue =='Temporary offline'){
+	        		  if((!$scope.getFeatures.statusMessage) ){
+	        			  $scope.displayTOMessage  =  null;
+	        		  }
+	        		  else if($scope.getFeatures.statusMessage && $scope.getFeatures.scheduledPeriod)
+	        			  {
+	        			  	$scope.getFeatures.scheduledPeriod.datetimeBegin ? $scope.displayTOMessage  =  null : '';
+	        			  }
+	        	  }
+	        	 };
+	          $scope.saveStatus = function(){
+        		  var newStatus = $scope.statusOptions.status;
+        		  var enabled = $scope.getFeatures.enabled;
+        		  var featurename= $scope.getFeatures.name;
+        		  var resourceId =$scope.getFeatures.featureIdentifier.resourceId;    		 
+          		  var statusPost = { name: featurename, status: newStatus, enabled: enabled, resourceId: resourceId };
+        		  if(newStatus == 'Scheduled offline'){
+        			  var datetimeStart = angular.element('.start-input').val();
+            		  var datetimeEnd = angular.element('.end-input').val();
+        			  statusPost.startTime = datetimeStart;
+        			  statusPost.endTime = datetimeEnd;
+        		  }
+        		   $scope.errMessage = '';
+        		   $scope.showStatusError = false;
+        		   //Empty field Validation
+        		  if ( newStatus == 'Scheduled offline' && (!datetimeStart || !datetimeEnd)){
+        			  if(datetimeStart  == ''){ $scope.errMessage = 'Start date / time cannot be empty.';}
+        			  else if(datetimeEnd == ''){$scope.errMessage = 'End date / time cannot be empty.';}        			  
+        		  }
+        		  else{
+        			  // POST request :
+        			$scope.statusLoading = true;
+              		$http({
+              		method: 'POST',
+              		url: 'updateStatus',
+              		data: JSON.stringify(statusPost),
+              		//headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+              		}).success(function (data) {
+              		    // Do stuff with data.
+              		    console.log('success response', data);
+              		    if(data.code == 200){
+              		    	$scope.getFeatures.status = data.status;
+              		    	$scope.getFeatures.scheduledPeriod ={};
+              		    	$scope.startTime = $scope.endTime = $scope.displaySOMessage = $scope.displayTOMessage =  null;
+              		    	 $scope.cancel ();
+              		    	if(data.status == 'Temporary offline'){
+              		    		$scope.getFeatures.statusMessage = $scope.displayTOMessage = data.message;
+              		    		}
+              		    	if(data.status == 'Scheduled offline'){
+              		    		$scope.getFeatures.statusMessage = $scope.displaySOMessage = data.message;
+              		    		$scope.getFeatures.scheduledPeriod.datetimeBegin = data.datetimeBegin;
+              		    		$scope.getFeatures.scheduledPeriod.datetimeEnd = data.datetimeEnd;
+              		    		$scope.startTime = $scope.convertDate(data.datetimeBegin);
+              		    		$scope.endTime = $scope.convertDate(data.datetimeEnd);              		    		
+              		    	}
+              		    	
+              		    	
+              		    }
+              		    else if(data.code == 555){ 
+              		    	$scope.showStatusError = true;
+              		    	$scope.statusException = data.errorMessage;
+              		    	
+              		    }
+              		    else {
+              		    	$scope.showStatusError = true;
+              		    	$scope.statusException = "Sorry! We are unable to save the status change request currently. Please contact the support service, if the problem persists.";
+              		    }
+              		  })
+              		  .catch(function (err) {
+              		    // Log error somehow.
+              		      console.log('failure response', err);
+              		  })
+              		  .finally(function () {
+              			$scope.statusLoading = false;
+              		    console.log('test');
+              		  });
+        		  console.log('3',datetimeStart)
+        		  }
+        		  
+              
         		
-	        		 if(angular.element('.start-date').hasClass('ng-pristine')){
-	        			// angular.element('.start-date').data("DateTimePicker").setDate($scope.startTime);        			
-	        			 }
-	        		// if(angular.element('.end-date').hasClass('ng-pristine')){angular.element('.end-date').data("DateTimePicker").setDate($scope.endTime); }       		         		 
-        		 }
-        		 else if(feature.status == 'Temporary offline'){
-        			 $scope.displayTOMessage = feature.statusMessage;
-        		 }
-        	 };
-        		        	  
-        		        	
-	  
-        		        	
-//        	  $scope.saveStatus = function(){
-//        		  var datetimeStart = $('.start-input').val();
-//        		  var datetimeEnd = $('.end-input').val();
+
 //        		  if(Date.parse(datetimeStart) < Date.parse(datetimeEnd)){
 //        			   //start is less than End
 //        			 $scope.startTimeError = true;
@@ -340,7 +434,40 @@ myapp.directive('statusPopover', function($compile,$timeout) {
 //        			   //end is less than start
 //        				alert("no");
 //        			}
-//        	  }
+        		  
+        		  
+        	  };
+        	 $scope.setStatus =function(feature,$event){
+        		// hide all other popovers                 
+        		 angular.element('.status-column button').not($event.target).popover('hide');
+        		 
+        		 $scope.isStatusChanged = true;
+        		 $scope.showStatusError = false;
+        		 $scope.errMessage = '';
+        		 $scope.getFeatures = feature;
+        		 $scope.statusOptions = {};
+        		 $scope.statusOptions.status = feature.status;        		
+        		 if(feature.status == 'Scheduled offline'){
+        		 $scope.displaySOMessage = feature.statusMessage;
+        		 $scope.startTime = $scope.convertDate(feature.scheduledPeriod.datetimeBegin);
+        		 $scope.endTime = $scope.convertDate(feature.scheduledPeriod.datetimeEnd);
+        		 
+        		
+	        		 if(angular.element('.start-date').hasClass('ng-pristine')){
+	        			angular.element('.start-date').data("DateTimePicker").setDate($scope.startTime);        			
+	        			 }
+	        		if(angular.element('.end-date').hasClass('ng-pristine')){angular.element('.end-date').data("DateTimePicker").setDate($scope.endTime); }       		         		 
+        		 }
+        		 else if(feature.status == 'Temporary offline'){
+        			 $scope.displayTOMessage = feature.statusMessage;
+        		 }
+        		// angular.element($event.target).popover('show');
+        	 };
+        		        	  
+        		        	
+	  
+        		        	
+        	 
         	 
         },
         link: function(scope, element, attrs) {
@@ -355,13 +482,16 @@ myapp.directive('statusPopover', function($compile,$timeout) {
              		return 'bottom';
              	}
              };
-             $('.collapsiblock').not(this)
              element.popover(options);
              scope.cancel = function() {
             	 element.popover('hide');
-            	 element.triggerHandler('click');
+            	// e.stopPropagation();            	 
+            	// element.triggerHandler('click');
             	 element.attr('disabled', false);
              }
+             element.on('hidden.bs.popover', function (e) {
+            	 element.data("bs.popover").inState = { click: false, hover: false, focus: false }
+             });
 
         }
       };
@@ -402,6 +532,7 @@ myapp.directive('datePicker', function($compile) {
         		defaultDate:scope.setDateObj,
         		autoclose:true,
         	});
+        
         	elem.on('dp.hide', function(e) {
         		//elem.data("DateTimePicker").options();
         		//widget.find('.picker-switch.accordion-toggle').click();
