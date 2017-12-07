@@ -7,7 +7,7 @@
 			
 				<h3 class="selTitle"> Search Plan Sponsors</h3>
 			
-			<!--   <a ui-sref="PLANSPONSOR.SUMMARY" ui-sref-active="active">Plan Sponsor</a> -->
+			
                 <div class="radiobuttons">
                 <input type="radio" name="status" value="option1"  id="inlineradio1"   disabled  />
                 <label class="radio-inline checkboxTitle " for="inlineradio1">All</label>
@@ -19,7 +19,7 @@
                 <label class="radio-inline checkboxTitle" for="inlineradio3">PSUID</label>
 
                 <input type="radio" name="status" value="option4" checked="" id="inlineradio4" />
-                <label class="radio-inline active checkboxTitlecontrol" for="inlineradio4">Control No</label>
+                <label class="radio-inline active checkboxTitlecontrol" for="inlineradio4">Control Number</label>
                 </div>
 		</div>
             <div class="container pull-left ">
@@ -27,16 +27,19 @@
 				
 				
 	<div ui-view ng-show = "!showResultTable"></div>
-	
+		
 	
 				<div class="inner-addon right-addon">
+				<form>
 					 <image class="searchclose" src="../themes/css2/icons/close.png" ng-click = "clearData()" ></image>
 
 
-					<input type="text" ng-class ="{'errorborder':showLimitError}" placeholder="Enter 7 digit Control Number" numbers-only ng-model="DataEntered"   class="form-control " maxlength ="7"/>
+					<input type="text" ng-class ="{'errorborder':showLimitError}"  placeholder="Enter 7 digit Control Number" numbers-only ng-model="DataEntered" ng-trim="false"  class="form-control" id ="searchInput" maxlength ="7"/>
 					
 					<button type="submit" class="btn btn-primary searchButton" ng-click="searchFun()">Search</button>
+				</form>
 				</div>
+			
 			</div>
 			<span class="error-msg" ng-show="showLimitError"><image class = "validationimage"src="../themes/css2/icons/icon_Validation.png"></image>Please enter 7 digit control number</span>
 		</div>
@@ -49,7 +52,7 @@
 
 <div class="jumbotron SearchResults" ng-show = "showResultTable" >
 <a class="resultHead">Search Results for</a>
-<a class="selectedSearch label label-default">{{DataEntered}}</a>
+<a class="selectedSearch label label-default">{{searchKey}}</a>
 
 
 
@@ -58,7 +61,7 @@
       <table class="table CareManagement-table  ">
          <thead>
         <tr class="spaceUnder">
-          <th class="tabHead psuid ">PSUID <span class="fa fa-sort"></span></th>
+          <th class="tabHead psuid ">PSUID</th>
           <th class="tabHead psname ">PS Name</th>
           <th class="tabHead controlnumber">Control Number</th>
 
@@ -68,11 +71,13 @@
 
 		<tbody class="tableSepeator">
 			<tr class="Searchbarplace ">
-				<td class="psuidata "style = "vertical-align:top!important;padding-top: 26px!important;"><a ui-sref="SUMMARY" ng-click ="showResultTable = !showResultTable">{{psDetails.planSponsorId}} </a></td>
-				<td class="psnamedata  "style = "vertical-align:top!important;padding-top: 26px!important;"><a ui-sref="SUMMARY">{{psDetails.nameFull}}</a></td>
+			<!-- 	<td class="psuidata "style = "vertical-align:top!important;padding-top: 26px!important;"><a ui-sref="SUMMARY" ng-click ="showResultTable = !showResultTable">{{psDetails.planSponsorId}} </a></td>
+			 -->
+				<td class="psuidata "style = "vertical-align:top!important;padding-top: 26px!important;"><a class = "psdatacolor"  ng-click= "getPSDetails()">{{psDetails.planSponsorId}} </a></td>
+				<td class="psnamedata  "style = "vertical-align:top!important;padding-top: 26px!important;" ><a class = "psdatacolor"  ng-click="getPSDetails()">{{psDetails.nameFull}}</a></td>
 				<td style="position:relative;" class="pscntrlnumber clearfix">
 				<div class="ctrlNumbers pull-left" ng-class="{'min-data' : !toggle }">
-				<span ng-repeat="controlNumber in psDetails.accountStructure" ng-class="{'hlight-cnum' : DataEntered == controlNumber.code}">{{controlNumber.code}}</span>
+				<span ng-repeat="controlNumber in psDetails.accountStructure" ng-class="{'hlight-cnum' : DataEntered == controlNumber.code}">{{controlNumber.code}}</span> 
 				</div>
 				<!-- 	<ul class="listStyle " ng-class="{'listfullview': expand}">
 						<li class="controlNumbers">
@@ -129,6 +134,15 @@
 		<div class="panel-panel-default errorplans">
 			<image class="icondesign" src="../themes/css2/icons/systemdown_icon.png"  aria-hidden="true"></image>
 			<p class="textcontrol">We are Sorry! <span>A system exception has occurred and prevented your request from being processed. Please contact the support service, if the problem persists.</span>  </p>
+		</div>
+	</div>
+</div>
+<!-- DIV ERROR 3-->
+<div class="jumbotron SearchResults" ng-show = "serviceTimeout">
+	<div class="errordiv">
+		<div class="panel-panel-default errorplans">
+			<image class="icondesign" src="../themes/css2/icons/systemdown_icon.png"  aria-hidden="true"></image>
+			<p class="textcontrol">Service Timed out.Please relogin and search </p>
 		</div>
 	</div>
 </div>
