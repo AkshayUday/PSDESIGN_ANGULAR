@@ -1,0 +1,92 @@
+<div class="planSummary" >
+	<div style="margin-left:15px;margin-top: 10px;margin-bottom: 10px;"><a class="searchtext" href="#" ng-click="stateChange()">Search</a> <img src="../images/chevron_-_grey.png"/><span class="plansponsortext">Plan Sponsor</span></div>
+	<div class="row">
+		<div class="row row1">
+	        <div class="clearfix mt25">
+	            <h3 class="planSummaryHeader">{{psName}} - PSUID {{psuId}}</h3>
+	        </div>
+	        <div class="mt10">
+	            <div class="col-sm-6">
+	                <table class="table table1">
+	                	<thead>
+	                		<tr>
+	                        	<th class="th1">Funding Type</th>
+	                        	<th class="th1">Benefit Type</th>
+	                        	<th class="th1">Effective Date</th>
+	                    	</tr>
+	                	</thead>
+	                    <tbody>
+	                    	<tr>
+	                        	<td>{{summary.fundingType}}</td>
+	                        	<td>{{summary.benefitType}}</td>
+	                        	<td>{{summary.effecitveDate}}</td>
+	                    	</tr>
+	                    </tbody>
+	                    
+	                </table>
+	            </div>
+	            <div class="col-sm-6">
+	                <button class="btn btn-primary modifyButton plansummaryfont">Modify</button>
+	            </div>
+	        </div>
+	    </div>
+	    <div class="legenddiv">
+			<ul class="legendlist">
+				<li><img src="../images/legend_infoicon_copy_6.png"/><span>More Information</span></li>
+				<li><img src="../images/copy_lineicon.svg"/><span>Copy Toggle Settings</span></li>
+				<li><img src="../images/online_icon.png"/><span>Online</span></li>
+				<li><img src="../images/scheduledoffline_icon.png"/><span>Scheduled Offline</span></li>
+				<li><img src="../images/temporaryoffline.png"/><span>Temporarily Offline</span></li>
+			</ul>
+		</div>
+		<!--                     <li><a href="#" ng-click="show('View All','showAllInx')"  ng-class="{active1:viewAll}">View All <span ng-class="{{(viewAll) ? activebadge1 : badge1}}">({{viewAllCount}})</span><i ng-if="viewAll" class="fa fa-caret-right pull-right fa-3" aria-hidden="true"/></a></li>
+		 -->
+	    <section class="clearfix mt30">
+        <div class="col-md-2 categorymenu">
+            <div class="shadow-box">
+                <ul class="left-menu">
+                	<li class="categoryHeader"><a><b>Feature Category</b></a></li>
+                    <li><a  ng-click="show('View All','showAllInx')"  ng-class="{active1:viewAll}">View All <span ng-class="{{(viewAll) ? activebadge1 : badge1}}">({{viewAllCount}})</span><i ng-if="viewAll" class="fa fa-caret-right pull-right fa-3" aria-hidden="true"/></a></li>
+                    <li ng-repeat="data1 in myData | unique : 'categoryName' | orderBy:'featureCategory.categoryName' "><a ng-click="show(data1,$index)" ng-class="{active1:$index == selected}">{{data1.featureCategory.categoryName}} <span ng-class="{{$index == selected ? activebadge1 : badge1}}">({{featureCount}})</span><i class="fa fa-caret-right pull-right fa-3" ng-if="$index == selected" aria-hidden="true"></i></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-10 categorytable">
+        	<div class="shadow-box right-container">
+        		<div class="outer">
+        			<div class="inner">
+		        		<table class="table">
+		       				<thead>
+		                           <tr style="margin: 5px">
+		                               <th class="th2 purple fix" style="height:130px;padding-top:28px">Features</th>
+		                               <td class="td1 purple" ng-repeat="feature in myData | orderBy:'name'">{{feature.name}}</td>
+		                           </tr>
+		                           <tr style="margin: 5px">
+		                           	  <th class="th2 deepPurple fix">PSUID {{psuId}}</th>
+		                           	  <td class="td2" ng-repeat="feature in myData">field value</td>
+		                           </tr>
+		                           <tr style="margin: 5px">
+		                           	  <th class="th2 green fix" style="margin-top:10px">Control4</th>
+		                           	  <td class="td3" ng-repeat="feature in myData">field value</td>
+		                           </tr style="margin: 5px">
+		                           <tr style="margin: 5px">
+		                           	  <th class="th2 green fix" style="margin-top:10px">Control1</th>
+		                           	  <td class="td3" ng-repeat="feature in myData">field value</td>
+		                           </tr>
+		                           <tr style="margin: 5px">
+		                           	  <th class="th2 green fix" style="margin-top:10px">Control 2</th>
+		                           	  <td class="td3" ng-repeat="feature in myData">field value</td>
+		                           </tr>
+		                           <tr style="margin: 5px">
+		                           	  <th class="th2 green fix" style="margin-top:10px">Control3</th>
+		                           	  <td class="td3" ng-repeat="feature in myData">field value</td>
+		                           </tr>
+		                      </thead>
+		       			</table>
+        			</div>
+        		</div>
+        	</div>
+        </div>
+    </section>
+	</div>
+</div>
