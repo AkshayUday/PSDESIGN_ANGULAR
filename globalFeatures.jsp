@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="myApp">
 
 <head>
-
+	
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=10" /> 
 	<link rel="stylesheet" href="../themes/css2/bootstrap-3.3.2.min.css">
@@ -10,27 +10,32 @@
  	<link rel="stylesheet" href="../themes/css2/bootstrap-toggle.css">
 	<link rel="stylesheet" href="../themes/css2/bootstrap-datetimepicker.min.css">
 	 <link rel="stylesheet" href="../themes/css2/styles.css">
- <link rel="stylesheet" href="../themes/css2/stylesplanSponsor.css"> 
+ 	<link rel="stylesheet" href="../themes/css2/stylesplanSponsor.css"> 
+ 	<link rel="stylesheet" href="../themes/css2/styleplanSummary.css"> 
  
  
  
- 	<script src="../script/jquery-2.2.4.min.js"></script>
-	<script src="../script/bootstrap-toggle.js" type ="text/javascript"></script>	
-	<script src="../script/bootstrap-3.3.2.min.js" type ="text/javascript"></script>
-
-    <script src="../script/angular.min.js" type ="text/javascript"></script>
-	<script src="../script/angular-sanitize.js" type ="text/javascript"></script>
-	<script src="../script/angular-ui-router.min.js" type ="text/javascript"></script>
+ 	<!-- <script src="../script/jquery-2.2.4.min.js"></script> -->
+ 	<script src="../script/jquery_3.0.min.js" type ="text/javascript"></script>
+	<script src="../script/jquery-migrate.min.js" type ="text/javascript"></script>	
+	<script src="../script/bootstrap-toggle.js" type ="text/javascript"></script>
 	
+	<script src="../script/bootstrap-3.3.2.min.js" type ="text/javascript"></script>
+	<script src="../script/bootstrap-waitingfor.js"></script>
+    <script src="../script/angular.min.js" type ="text/javascript"></script>
+    <script src="../script/angular-sanitize.js" type ="text/javascript"></script>
+	<script src="../script/angular-ui-router.min.js" type ="text/javascript"></script>
 	<script type='text/javascript' src="../script/moment-with-locales.min.js"></script>
 	<script type='text/javascript' src="../script/bootstrap-datetimepicker-3.1.4.min.js"></script>
 		<script src="../script/globalFeatures.js" type ="text/javascript"></script>
 	<script src="../script/planSponsor.js" type ="text/javascript"></script>
+		<script src="../script/planSummary.js" type ="text/javascript"></script>
+	
 	<script>window.cardData=${getGlobalFeaturesList}</script>
-</head>
-<body ng-app="myApp" ng-controller="globalCtrl">
+	</head>
+<body>
 	<header>
-		<div class="purple-header ">
+			<div class="purple-header ">
  			<div class="container">
  				<div class="clearfix ">
  				<div class="pull-left logo"><span class="f-bold">PS</span> <span class="f-light">Admin </span></div>
@@ -40,33 +45,36 @@
  				</div>
  			</div>
  		</div>
- 		<div class="main-menu">
+ 		<div class="main-menu"> 		
  			<div class="container">
  				<nav class="menu">
  					<ul class="clearfix">
- 				 		<!--  <li><a href="" class="active" disabled="disabled">Home </a></li>
+ 						<!--  <li><a href="" class="active" disabled="disabled">Home </a></li>
  						<li><a href="" class="active" disabled="disabled"> Features </a></li>
  						<li><a href="script/planSponsor.html" class="active" disabled="disabled">Plan Sponsor </a></li>
  						-->
  						
  						<li><a ui-sref="HOME"> Home </a></li>
-						<li><a ui-sref="FEATURES" ui-sref-active="active"> Global Features </a></li>
+						<li><a ui-sref="FEATURES" ui-sref-active="active">  Global Features</a></li>
 						<li><a ui-sref="PLANSPONSOR" ui-sref-active="active">Plan Sponsor</a></li>
+					
  					</ul>
  				</nav>
  			</div>
  		</div>
  
  	</header>
- 	<div class="container">
+ 	<div class="container content">
 		<div ui-view>
 		</div>
+		
 	</div>
 	<!--Footer-->
+	<footer>
                 <div class="copyright">
                 <p>Copyright &copy; 2001-2017 Aetna Inc.</p>
                 </div>
-	</div>
+	</footer>
 	<!-- jQuery first, then Tether, then Bootstrap JS. -->
 
 <!--  	<script>
