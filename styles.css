@@ -1,4 +1,3 @@
-
 @font-face {
     font-family: 'open_sansregular';
     src: url('fonts/open-sans.regular-webfont.woff2') format('woff2'),
@@ -7,6 +6,7 @@
     font-style: normal;
 
 }
+@font-face {
     font-family: 'open_sanssemibold';
     src: url('fonts/open-sans.semibold-webfont.woff2') format('woff2'),
          url('fonts/open-sans.semibold-webfont.woff') format('woff');
@@ -22,13 +22,23 @@
     font-style: normal;
 
 }
-body{font-family: 'open_sansregular';  font-size:16px; background:#eef2f4}
+body{
+	font-family: 'open_sansregular';
+  font-size:16px; 
+  background:#eef2f4;
+  position:relative;
+  min-height:100%;	}
 /* @media (min-width: 1200px){
 .container {
     width: 1360px;
 }
 } */
-
+td,th,.popover{
+	font-family: 'open_sansregular';
+}
+.content{
+	padding-bottom: 8em;
+}
 .purple-header {
     background: #7d3f98 !important;
     color: #fff;
@@ -36,6 +46,7 @@ body{font-family: 'open_sansregular';  font-size:16px; background:#eef2f4}
 }
 .user-name {
 margin-right:16px !important;
+	font-size:16px;
 }
 .main-menu {
     background: #fff;
@@ -45,8 +56,8 @@ margin-right:16px !important;
 .f-bold{ font-family: 'open_sanssemibold';}
 .f-light{ font-family: 'open_sanslight';}
 #logout {
-    font-size: 18px;
-    font-family: 'open_sanslight';
+    font-size: 14px;
+    font-family: 'open_sansregular';
     color: #fff !important;
     padding-bottom: 9px;
     margin-right: 9px;
@@ -90,10 +101,13 @@ input[type=number]::-webkit-inner-spin-button {
 .btn-green[disabled]{
 	color: #ccc;
 	}
+
 .btn-pencil {
     padding: 3px 9px;
-    margin-top: -2.5px;
+   // margin-top: -2.5px;
     margin-left: 31px;
+    float: right !important;
+    margin-top: 6px;
 }
 .btn{ font-size:16px;}
 .fa-2{font-size:22px; margin-left:15px;}
@@ -103,7 +117,20 @@ input[type=number]::-webkit-inner-spin-button {
 .mt10{ margin-top:10px;}
 .mt30{ margin-top:30px;}
 .mt5{ margin-top:5px;}
+.mb10{margin-bottom:10px;}
+.mb20{margin-bottom:20px;}
+.mb25{ margin-bottom:25px;}
+.mb15{ margin-bottom:15px;}
 .p0{ padding:0px !important;}
+.pl15{padding-left:15px;}
+.bold-text{font-weight:bold;}
+
+.home {
+	color: #0066cc!important;
+}	
+ .error-msg {
+    color: #F21000;
+    }
 .shadow-box{
 	background: #fff;
     box-shadow: 0 0px 10px 2px #d2d2d2;
@@ -158,7 +185,7 @@ padding-left: 15px;}
 .CareManagement-table th {
     border-top: 0;
     background: #7d3f98;
-    font-family: 'open_sanslight';
+    font-family: 'open_sansregular';
     color: #fff;
 	
 }
@@ -167,7 +194,7 @@ padding-left: 15px;}
 }
 .CareManagement-table th , .CareManagement-table td{
     padding: 20px 15px !important;
-    vertical-align: initial !important; 
+    vertical-align: middle !important; 
   
 }
 .status {
@@ -177,8 +204,7 @@ padding-left: 15px;}
    
 }
 .featurename{
-word-wrap:break-word;
-    -ms-word-wrap:break-word;
+word-break:break-word!important;
     overflow-wrap:break-word;
  width:140px;
 }
@@ -286,8 +312,13 @@ color:#008000!important;
     margin-top: 20px;
     text-align: left;
     color: #6A6A6A;
-    margin-left: 141px;
+    padding-left: 60px;
+    padding: 20px 0px 50px 115px;
     font-size: 13px;
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    border-top: 1px solid #ccc;
 }
 hr.style7 {
 	border-top: 1px solid #8c8b8b;
@@ -299,7 +330,7 @@ hr.style7 {
 .pos-relative{
     
     position: relative;
-    width: 295px !important
+    width: 160px !important
 }
 
 .table_Des {
@@ -353,28 +384,28 @@ cursor:pointer;
  
  
  .status {
-    padding: 5px 15px;
+    padding: 5px 0px 5px 15px;
     border-radius: 5px;
-    margin:  0 4px 0 -16px;
+    margin:  0 0px 0 -16px;
+    float: left;
+    word-wrap: break-word;
+    width: 75%;
    
 }
 
   @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {  
  .featurename{
-    word-wrap:break-word;
+   word-break:break-all;
     }
  .status {
-    margin: 0 4px 0 -20px;
+    margin: 0 0px 0 -14px;
     }
  .left-menu a.active {
     outline:none;
     border:0px;
     }
  
-    .copyright{
-    margin-left: 111px!important;
-    }
-   
+       
 }
  input[type=radio][disabled] + label{
 	opacity: 0.6;
@@ -384,7 +415,7 @@ cursor:pointer;
  
  .failureToggle{
  margin-top:10px;
- } 
+ }
  
  .exception-msg{
  padding-top:13px;
@@ -393,3 +424,13 @@ cursor:pointer;
  .error500{
  height:144px;
  }
+.textcontrolglobal{
+
+    font-family: 'open_sansregular';
+    font-size: 16px !important;
+    color: #d20962;
+    font-weight: 500 !important;
+    padding-top: 9px;
+	padding-left: 69px;
+		
+		}
