@@ -1,2 +1,25 @@
-$scope.valCount = Object.keys($scope.psDetails).length;
-&& valCount >18
+DATA FOR TOGGLE
+
+To show the ON/OFF/MIX at Plansponsor level for a given feature, we would need to use “getToggleInfo” and map the “resourceId” from “getCategoryFeaturesResponse” with “resourceId” in “getToggleInfo”.  Below table show how we will be deriving toggle value based on “enabled” flag.
+1.	First set of “featureLevelId” in “featureSet” will correspond to “PSUID”. Use the first set to populate the toggle info at PSUID level.
+2.	Second set onward(2-n), “featureSet” is for Control Numbers
+
+
+
+Enabled value	Toggle value
+ 	 
+TRUE	ON
+FALSE	OFF
+<not having enabled element>	MIX
+
+Sample output for category features:
+
+"getCategoryFeaturesResponse":{"ReadCategoryFeaturesResponse":{"totalFeaturesCount":40,"featureSet":[{"featuresCount":1,"category":{"categoryName":"Accumulators","categoryDescription":"Accumulators"},"features":[{"featureIdentifier":{"resourceId":"110004~AccExpanded","idValue":"AccExpanded"},"description":"Displays full set of member and family accumulators","name":"Accumulators - Expanded"}]},{"featuresCount":3,"category":{"categoryName":"Apple Wallet","categoryDescription":"Apple Wallet"},"features":[{"featureIdentifier":{"resourceId":"110004~Wallet","idValue":"Wallet"},"description":"Gives members the ability to add their ID card to their apple wallet for iOS","name":"Apple Wallet"},{"featureIdentifier":{"resourceId":"110004~WalletDiscovery","idValue":"WalletDiscovery"},"description":"Gives members the ability to add their ID card to their apple wallet for iOS","name":"Apple Wallet"},{"featureIdentifier":{"resourceId":"110004~WalletVoyager","idValue":"WalletVoyager"},"description":"Gives members the ability to add their ID card to their apple wallet for iOS","name":"Apple Wallet"}]}}
+
+Sample output for Plansponsor features:
+
+"getPlanSponsorResponse":{"ReadFeaturesResponse":{"featureSet":[{"featureLevelId":"1234567","features":[{"enabled":true,"resourceId":"110004~AccExpanded"},{"enabled":false,"resourceId":"110004~AetnaHealthEnabled"},{"enabled":true,"resourceId":"110004~BenTracker"},{"enabled":true,"resourceId":"110004~ClaimsList"},
+{"enabled":false,"resourceId":"110004~DigitalCoaching"},{"enabled":false,"resourceId":"110004~HeaAction"},{"enabled":false,"resourceId":"110004~HeaOppAssessment"},{"enabled":true,"resourceId":"110004~IdCard"},{"enabled":true,"resourceId":"110004~IdentVitSav"},{"enabled":false,"resourceId":"110004~NurseEmail"},
+{"enabled":false,"resourceId":"110004~Payflex"},{"enabled":false,"resourceId":"110004~Payments"},{"enabled":false,"resourceId":"110004~PersonalHealthRecord"},{"enabled":true,"resourceId":"110004~Pricing"},{"enabled":true,"resourceId":"110004~ProviderSearch"},{"enabled":true,"resourceId":"110004~RealIdCardMed"},}
+
+
