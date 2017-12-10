@@ -46,8 +46,14 @@
             <div class="shadow-box">
                 <ul class="left-menu">
                 	<li class="categoryHeader"><a><b>Feature Category</b></a></li>
-                    <li><a  ng-click="show('View All','showAllInx')"  ng-class="{active1:viewAll}">View All <span ng-class="{{(viewAll) ? activebadge1 : badge1}}">({{viewAllCount}})</span><i ng-if="viewAll" class="fa fa-caret-right pull-right fa-3" aria-hidden="true"/></a></li>
-                    <li ng-repeat="data1 in myData | unique : 'categoryName' | orderBy:'featureCategory.categoryName' "><a ng-click="show(data1,$index)" ng-class="{active1:$index == selected}">{{data1.featureCategory.categoryName}} <span ng-class="{{$index == selected ? activebadge1 : badge1}}">({{featureCount}})</span><i class="fa fa-caret-right pull-right fa-3" ng-if="$index == selected" aria-hidden="true"></i></a></li>
+                    <li><a  ng-click="showFeature('View All','showAllInx')"  
+                    ng-class="{active1:viewAll}">View All <span
+                     ng-class="{{(viewAll) ? activebadge1 : badge1}}">({{resData.getCategoryFeaturesResponse.ReadCategoryFeaturesResponse.totalFeaturesCount}})</span><i ng-if="viewAll" class="fa fa-caret-right pull-right fa-3" aria-hidden="true"/></a></li>
+                    <li ng-repeat="data1 in myData   | orderBy:'category.categoryName'"><a
+                     ng-click="showFeature(data1,$index)" 
+                     ng-class="{active1:$index == selected}">{{data1.category.categoryName}} <span 
+                     ng-class="{{$index == selected ? activebadge1 : badge1}}">({{data1.featuresCount}})</span><i 
+                     class="fa fa-caret-right pull-right fa-3" ng-if="$index == selected" aria-hidden="true"></i></a></li>
                 </ul>
             </div>
         </div>
@@ -57,29 +63,29 @@
         			<div class="inner">
 		        		<table class="table">
 		       				<thead>
-		                           <tr style="margin: 5px">
+		                           <tr style="margin: 5px" >
 		                               <th class="th2 purple fix" style="height:130px;padding-top:28px">Features</th>
-		                               <td class="td1 purple" ng-repeat="feature in myData | orderBy:'name'">{{feature.name}}</td>
+		                               <td class="td1 purple" ng-repeat="data2 in selectedData | orderBy:'name'" >{{data2.name}}</td>
 		                           </tr>
 		                           <tr style="margin: 5px">
 		                           	  <th class="th2 deepPurple fix">PSUID {{psuId}}</th>
-		                           	  <td class="td2" ng-repeat="feature in myData">field value</td>
+		                           	  <td class="td2" ng-repeat="featureName in selectedData"><span class = "summaryButtons button">{{data2.name}}</span></td>
 		                           </tr>
 		                           <tr style="margin: 5px">
-		                           	  <th class="th2 green fix" style="margin-top:10px">Control4</th>
-		                           	  <td class="td3" ng-repeat="feature in myData">field value</td>
+		                           	  <th class="th2 green fix" style="margin-top:10px">Control 4</th>
+		                           	  <td class="td3" ng-repeat="featureName in selectedData">OFF</td>
 		                           </tr style="margin: 5px">
 		                           <tr style="margin: 5px">
-		                           	  <th class="th2 green fix" style="margin-top:10px">Control1</th>
-		                           	  <td class="td3" ng-repeat="feature in myData">field value</td>
+		                           	  <th class="th2 green fix" style="margin-top:10px">Control 1</th>
+		                           	  <td class="td3" ng-repeat="featureName in selectedData">MIX</td>
 		                           </tr>
 		                           <tr style="margin: 5px">
 		                           	  <th class="th2 green fix" style="margin-top:10px">Control 2</th>
-		                           	  <td class="td3" ng-repeat="feature in myData">field value</td>
+		                           	  <td class="td3" ng-repeat="featureName in selectedData">On</td>
 		                           </tr>
 		                           <tr style="margin: 5px">
-		                           	  <th class="th2 green fix" style="margin-top:10px">Control3</th>
-		                           	  <td class="td3" ng-repeat="feature in myData">field value</td>
+		                           	  <th class="th2 green fix" style="margin-top:10px">Control 3</th>
+		                           	  <td class="td3" ng-repeat="featureName in selectedData">OFF</td>
 		                           </tr>
 		                      </thead>
 		       			</table>
