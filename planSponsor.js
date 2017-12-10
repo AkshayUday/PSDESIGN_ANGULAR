@@ -22,12 +22,15 @@ myapp.directive('numbersOnly', function () {
 myapp.controller('planCtrl',function($scope,$timeout,$http,$state) {
     //alert("load this"); 
 	$('#searchInput').focus();
-	$scope.showLimitError = $scope.showResultTable = $scope.systemDown = $scope.errorSet = $scope.serviceTimeout = false;
+//	var plansponsorState = function(){
+//		console.log($state);
+//	}
+	$scope.showLimitError = $scope.showResultTable = $scope.systemDown = $scope.errorSet = $scope.serviceTimeout = $scope.psumryError = false;
 	     
 	
 	$scope.searchFun = function(){
 		
-		$scope.showLimitError = $scope.showResultTable = $scope.systemDown = $scope.errorSet = $scope.serviceTimeout = false;
+		$scope.showLimitError = $scope.showResultTable = $scope.systemDown = $scope.errorSet = $scope.serviceTimeout = $scope.psumryError = false;
 		$scope.toggle = false;
 		if(!$scope.DataEntered || $scope.DataEntered.length < 7 ){
 			$scope.showLimitError = true;
@@ -73,7 +76,7 @@ myapp.controller('planCtrl',function($scope,$timeout,$http,$state) {
 			    .finally(function () {
 			    	waitingDialog.hide();
 			    });
-			  }, 2000);
+			  }, 300);
 		}
 	  }
 	$scope.clearData = function() {
@@ -82,23 +85,26 @@ myapp.controller('planCtrl',function($scope,$timeout,$http,$state) {
 	};
 	$scope.getPSDetails = function() 
 	{
-
+		 $scope.psumryError = false;
 		$timeout(function () {$http({
 			  method: 'GET',
-			  url: 'getPSDetails?psuid='+$scope.psuid,
+			  //url: 'getPSDetails?psuid='+$scope.psuid,
+			  url: 'getPSDetails?controlNumber='+$scope.DataEntered,
 			  	}).success(function (data) {
-			  	 console.log('success response', data);					  
-			      if(data.code == 200){
+			  	 console.log('success response');	
+			  	
+			      if(data.getCategoryFeaturesCode == 200 && data.getToggleInfo.getToggleLevelCode == 200){
 			    	  console.log(data);
-			    	  $state.go('PLANSPONSOR.SUMMARY');
+			    	  $state.go('PLANSPONSOR.SUMMARY',{obj:data});
 			    	  
 			      }
-			      else if (data.code == 500){
-			    	 
-			    	  console.log(data);
+			      else if (data.getCategoryFeaturesCode == 500 || data.getToggleInfo.getToggleLevelCode == 500){
+			    	 // $scope.systemDown = true;
 			      }
-			      else if(data.code ==  555){
+			      else if(data.getToggleInfo.getToggleLevelCode ==  555){
 			    	  console.log(data);
+			    	  var errorObject = data.getToggleInfo.errorMessage;
+			    	  $scope.psErrorData = errorObject.split('|')[1].split(']')[0];
 			      }
 			
 			    })
