@@ -1,3 +1,66 @@
+relace below lines from 60-85 in plansummary.html
+<thead>
+		                           <tr style="margin: 5px">
+		                               <th class="th2 purple fix" style="height:130px;padding-top:28px">Features</th>
+		                               <td class="td1 purple" ng-repeat="feature in myData | filter: {resourceId: selectedItem }">{{feature.resouceName}}</td>
+		                           </tr>
+		                           <tr style="margin: 5px">
+		                           	  <th class="th2 deepPurple fix">PSUID {{psuId}}</th>
+		                           	  <td class="td2" ng-repeat="feature in selectedData">{{feature.enabled}}</td>
+		                           </tr>
+		                           <tr style="margin: 5px">
+		                           	  <th class="th2 green fix" style="margin-top:10px">Control4</th>
+		                           	  <td class="td3" ng-repeat="feature in selectedData">field value</td>
+		                           </tr style="margin: 5px">
+		                           <tr style="margin: 5px">
+		                           	  <th class="th2 green fix" style="margin-top:10px">Control1</th>
+		                           	  <td class="td3" ng-repeat="feature in selectedData">field value</td>
+		                           </tr>
+		                           <tr style="margin: 5px">
+		                           	  <th class="th2 green fix" style="margin-top:10px">Control 2</th>
+		                           	  <td class="td3" ng-repeat="feature in selectedData">field value</td>
+		                           </tr>
+		                           <tr style="margin: 5px">
+		                           	  <th class="th2 green fix" style="margin-top:10px">Control3</th>
+		                           	  <td class="td3" ng-repeat="feature in selectedData">{{feature.enabled}}</td>
+		                           </tr>
+		                      </thead>
+                        
+////////////////////////////////////////////////
+replace 37 to 64 with below code in plansummar.js
+
+    $scope.show = function(selItemName, ind){
+    // $scope.viewAll = false;
+    console.log('selected is ',selItemName);
+    if(selItemName == 'View All'){
+	      $scope.viewAll = true;
+	      $scope.showItems = 'View All';
+				$scope.selectedItem = '';
+//	      $scope.myData = $scope.resData;
+//	      $scope.categorydescription = 'View All';
+$scope.selectedData = $scope.myDataSummary;
+	       $scope.selected = ind;
+    	}else{
+	        $scope.viewAll = false;
+//	         $scope.categorydescription = selItemName.featureCategory.categoryDescription;
+//	         $scope.featureCount = 40;
+	         $scope.selected = ind;
+					 //filter through selected items
+					  $scope.selectedItem = selItemName.resourceId;
+
+					 $scope.selectedData = $scope.myDataSummary.filter(function(item){
+						 console.log('analy', item.resourceId == selItemName.resourceId, item.resourceId,selItemName.resourceId)
+
+						 return item.resourceId == selItemName.resourceId;
+					 })
+					 console.log('filtered data is ', $scope.selectedData)
+    	}
+    	$window.scrollTo(0, angular.element('.shadow-box').offsetTop);
+    }
+
+//////////////////////////////////////////////////////
+
+
 DATA FOR TOGGLE
 
 To show the ON/OFF/MIX at Plansponsor level for a given feature, we would need to use “getToggleInfo” and map the “resourceId” from “getCategoryFeaturesResponse” with “resourceId” in “getToggleInfo”.  Below table show how we will be deriving toggle value based on “enabled” flag.
