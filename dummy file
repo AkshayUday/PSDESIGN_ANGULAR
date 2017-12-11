@@ -1,3 +1,23 @@
+$scope.serialData = response.features.map(function (group) {
+				console.log('inside')
+			return {
+				resourceId: group.resourceId,
+				resourceName: findByKey($scope.myData , 'resourceId', group.resourceId, 'resouceName'),
+				enabled: group.enabled
+			};
+		});
+		
+		
+		// findByKey is used to find an object inside an array
+// of object, by the value of a key.
+function findByKey (array, key, value,outkey) {
+	return array.filter(function (obj) {
+
+		return  obj[key] === value;
+	})[0];
+}
+
+///////////////////////////
 relace below lines from 60-85 in plansummary.html
 <thead>
 		                           <tr style="margin: 5px">
