@@ -22,7 +22,7 @@ var states = [
     {
       name: 'PLANSPONSOR',
       state: {
-        url: "/",
+        url: "/ps",
         templateUrl: '../script/planSponsorHome.html',
         controller: function($state){
         	$state.go('PLANSPONSOR.SPONSOR');
@@ -32,27 +32,26 @@ var states = [
     {
         name: 'PLANSPONSOR.SPONSOR',
         state: {
-          url: "sponsor",
+          url: "/sponsor",
           templateUrl: '../script/planSponsor.html',
-          controller: "planCtrl"
+          controller: "planCtrl",params:{source:null}
         }
       },
    { 
         name: 'PLANSPONSOR.SUMMARY',
         
       state: {
-         url: "summary",
+         url: "/summary",
          templateUrl: '../script/planSummary.html',
-         controller: "summaryCtrl"
+         controller: "summaryCtrl",params:{obj:null}
         }
      }
     ]
 
    myapp.config(function($stateProvider, $urlRouterProvider) {
-
-   $urlRouterProvider.otherwise('/');
-
-   angular.forEach(states, function(state) {
+	  $urlRouterProvider.when('/ps', '/ps/sponsor');	 
+	  $urlRouterProvider.otherwise('/');
+      angular.forEach(states, function(state) {
      $stateProvider.state(state.name, state.state);
    });
  });
@@ -71,7 +70,12 @@ myapp.filter('unique', function() {
       // this takes in our original collection and an iterator function
       angular.forEach(collection, function(item) {
           // we check to see whether our object exists
+    	  if(item.featureCategory){
           var key = item.featureCategory[keyname];
+    	  }
+    	  else{
+    		  var key = item.category[keyname];
+    	  }
           // if it's not already part of our keys array
           if(keys.indexOf(key) === -1) {
               // add it to our keys array
