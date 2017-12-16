@@ -1,512 +1,723 @@
-
-
-{
-"ReadFeaturesResponse": {
-      "features": [
-         {
-            "enabled": "false",
-            "featureIdentifier": {
-               "idSource": "110004",
-               "idValue": "AccExpanded",
-               "idType": "features",
-               "resourceId": "110004~AccExpanded"
-            },
-            "name": "Accumulators - Expanded",
-            "description": "Displays full set of member and family accumulators",
-            "featureStatus": "Online",
-            "featureStatusMessage": null,
-            "featureScheduledPeriod": {
-               "datetimeBegin": "2017-09-27 21:03:06.073917",
-               "datetimeEnd": "2017-09-27 21:03:06.073917"
-            },
-            "featureCategory": {
-               "categoryName": "Accumulators",
-               "categoryDescription": "Accumulators"
-            }
-         },
-         {
-            "enabled": "false",
-            "featureIdentifier": {
-               "idSource": "110004",
-               "idValue": "BenTracker",
-               "idType": "features",
-               "resourceId": "110004~BenTracker"
-            },
-            "name": "Benefits Tracker",
-            "description": "No customizations identified yet.  Tentative agreement with AIS to handle unusual benefit structures on the AIS side (R3 or later)",
-            "featureStatus": "ONLINE",
-            "featureStatusMessage": "Benefits Tracker",
-            "featureScheduledPeriod": {
-               "datetimeBegin": "2017-09-27 14:43:24.992938",
-               "datetimeEnd": "2017-09-27 14:43:24.992938"
-            },
-            "featureCategory": {
-               "categoryName": "Benefits",
-               "categoryDescription": "Benefits"
-            }
-         },
-         {
-            "enabled": "false",
-            "featureIdentifier": {
-               "idSource": "110004",
-               "idValue": "IdCard",
-               "idType": "features",
-               "resourceId": "110004~IdCard"
-            },
-            "name": "ID Cards",
-            "description": "Displays member and family ID card(s)",
-            "featureStatus": "Online",
-            "featureStatusMessage": null,
-            "featureScheduledPeriod": {
-               "datetimeBegin": "2017-09-27 21:03:24.828434",
-               "datetimeEnd": "2017-09-27 21:03:24.828434"
-            },
-            "featureCategory": {
-               "categoryName": "ID Cards",
-               "categoryDescription": "Displays member and family Id card(s)"
-            }
-         },
-         {
-            "enabled": "false",
-            "featureIdentifier": {
-               "idSource": "110004",
-               "idValue": "ViewPrintELG",
-               "idType": "features",
-               "resourceId": "110004~ViewPrintELG"
-            },
-            "name": "View Print ELG",
-            "description": null,
-            "featureStatus": "Online",
-            "featureStatusMessage": null,
-            "featureScheduledPeriod": {
-               "datetimeBegin": "2017-09-27 21:03:28.43965",
-               "datetimeEnd": "2017-09-27 21:03:28.43965"
-            },
-            "featureCategory": {
-               "categoryName": "ID Cards",
-               "categoryDescription": "Displays member and family Id card(s)"
-            }
-         },
-         {
-            "enabled": "false",
-            "featureIdentifier": {
-               "idSource": "110004",
-               "idValue": "RealIdCardMed",
-               "idType": "features",
-               "resourceId": "110004~RealIdCardMed"
-            },
-            "name": "Real Id Card Medical",
-            "description": null,
-            "featureStatus": "Online",
-            "featureStatusMessage": null,
-            "featureScheduledPeriod": {
-               "datetimeBegin": "2017-09-27 21:03:28.446004",
-               "datetimeEnd": "2017-09-27 21:03:28.446004"
-            },
-            "featureCategory": {
-               "categoryName": "ID Cards",
-               "categoryDescription": "Displays member and family Id card(s)"
-            }
-         },
-         {
-            "enabled": "true",
-            "featureIdentifier": {
-               "idSource": "110004",
-               "idValue": "TempIdCardDen",
-               "idType": "features",
-               "resourceId": "110004~TempIdCardDen"
-            },
-            "name": "Temp Id Dental",
-            "description": null,
-            "featureStatus": "Online",
-            "featureStatusMessage": null,
-            "featureScheduledPeriod": {
-               "datetimeBegin": "2017-09-27 21:03:28.451938",
-               "datetimeEnd": "2017-09-27 21:03:28.451938"
-            },
-            "featureCategory": {
-               "categoryName": "ID Cards",
-               "categoryDescription": "Displays member and family Id card(s)"
-            }
-         },
-         {
-            "enabled": "true",
-            "featureIdentifier": {
-               "idSource": "110004",
-               "idValue": "RealIdcardDen",
-               "idType": "features",
-               "resourceId": "110004~RealIdcardDen"
-            },
-            "name": "Real Id Card Dental",
-            "description": null,
-            "featureStatus": "Online",
-            "featureStatusMessage": null,
-            "featureScheduledPeriod": {
-               "datetimeBegin": "2017-09-27 21:03:28.457784",
-               "datetimeEnd": "2017-09-27 21:03:28.457784"
-            },
-            "featureCategory": {
-               "categoryName": "ID Cards",
-               "categoryDescription": "Displays member and family Id card(s)"
-            }
-         },
-         {
-            "enabled": "true",
-            "featureIdentifier": {
-               "idSource": "110004",
-               "idValue": "TempIdCardMedDen",
-               "idType": "features",
-               "resourceId": "110004~TempIdCardMedDen"
-            },
-            "name": "Temp Id - Medical Dental",
-            "description": null,
-            "featureStatus": "Online",
-            "featureStatusMessage": null,
-            "featureScheduledPeriod": {
-               "datetimeBegin": "2017-09-27 21:03:28.464295",
-               "datetimeEnd": "2017-09-27 21:03:28.464295"
-            },
-            "featureCategory": {
-               "categoryName": "ID Cards",
-               "categoryDescription": "Displays member and family Id card(s)"
-            }
-         },
-         {
-            "enabled": "true",
-            "featureIdentifier": {
-               "idSource": "110004",
-               "idValue": "RealIdCardMedDen",
-               "idType": "features",
-               "resourceId": "110004~RealIdCardMedDen"
-            },
-            "name": "Real Id Card - Combined Medical Dental",
-            "description": null,
-            "featureStatus": "Online",
-            "featureStatusMessage": null,
-            "featureScheduledPeriod": {
-               "datetimeBegin": "2017-09-27 21:03:28.470065",
-               "datetimeEnd": "2017-09-27 21:03:28.470065"
-            },
-            "featureCategory": {
-               "categoryName": "ID Cards",
-               "categoryDescription": "Displays member and family Id card(s)"
-            }
-         },
-         {
-            "enabled": "true",
-            "featureIdentifier": {
-               "idSource": "110004",
-               "idValue": "RealIdCardRx",
-               "idType": "features",
-               "resourceId": "110004~RealIdCardRx"
-            },
-            "name": "Real Id Card RX",
-            "description": null,
-            "featureStatus": "Online",
-            "featureStatusMessage": null,
-            "featureScheduledPeriod": {
-               "datetimeBegin": "2017-09-27 21:03:28.475707",
-               "datetimeEnd": "2017-09-27 21:03:28.475707"
-            },
-            "featureCategory": {
-               "categoryName": "ID Cards",
-               "categoryDescription": "Displays member and family Id card(s)"
-            }
-         },
-         {
-            "enabled": "true",
-            "featureIdentifier": {
-               "idSource": "110004",
-               "idValue": "IdentVitSav",
-               "idType": "features",
-               "resourceId": "110004~IdentVitSav"
-            },
-            "name": "Identification Vital Savings",
-            "description": null,
-            "featureStatus": "Online",
-            "featureStatusMessage": null,
-            "featureScheduledPeriod": {
-               "datetimeBegin": "2017-09-27 21:03:28.481416",
-               "datetimeEnd": "2017-09-27 21:03:28.481416"
-            },
-            "featureCategory": {
-               "categoryName": "ID Cards",
-               "categoryDescription": "Displays member and family Id card(s)"
-            }
-         },
-         {
-            "enabled": "true",
-            "featureIdentifier": {
-               "idSource": "110004",
-               "idValue": "RealIdCardVitSav",
-               "idType": "features",
-               "resourceId": "110004~RealIdCardVitSav"
-            },
-            "name": "Real Id Card Vital Savings",
-            "description": null,
-            "featureStatus": "Online",
-            "featureStatusMessage": null,
-            "featureScheduledPeriod": {
-               "datetimeBegin": "2017-09-27 21:03:28.487168",
-               "datetimeEnd": "2017-09-27 21:03:28.487168"
-            },
-            "featureCategory": {
-               "categoryName": "ID Cards",
-               "categoryDescription": "Displays member and family Id card(s)"
-            }
-         },
-         {
-            "enabled": "false",
-            "featureIdentifier": {
-               "idSource": "110004",
-               "idValue": "ClaimsList",
-               "idType": "features",
-               "resourceId": "110004~ClaimsList"
-            },
-            "name": "ClaimsList",
-            "description": "Displays a list of claims for the member and his/her family",
-            "featureStatus": "Online",
-            "featureStatusMessage": null,
-            "featureScheduledPeriod": {
-               "datetimeBegin": "2017-09-27 21:03:28.551767",
-               "datetimeEnd": "2017-09-27 21:03:28.551767"
-            },
-            "featureCategory": {
-               "categoryName": "Claims",
-               "categoryDescription": "Displays member and family claims"
-            }
-         },
-         {
-            "enabled": "false",
-            "featureIdentifier": {
-               "idSource": "110004",
-               "idValue": "HeaOppAssessment",
-               "idType": "features",
-               "resourceId": "110004~HeaOppAssessment"
-            },
-            "name": "Health opportunity assessment (HOA)",
-            "description": "Ability to ask the member a short series of questions to be able to personalize their experience and programs.",
-            "featureStatus": "Not applicable",
-            "featureStatusMessage": null,
-            "featureScheduledPeriod": {
-               "datetimeBegin": "2017-09-27 21:03:28.498716",
-               "datetimeEnd": "2017-09-27 21:03:28.498716"
-            },
-            "featureCategory": {
-               "categoryName": "Improve",
-               "categoryDescription": "Group of functionalities helping members manage their chronic conditions"
-            }
-         },
-         {
-            "enabled": "false",
-            "featureIdentifier": {
-               "idSource": "110004",
-               "idValue": "HeaAction",
-              "idType": "features",
-               "resourceId": "110004~HeaAction"
-            },
-            "name": "Health Action",
-            "description": "Ability to show members personalized health actions based on their claims history",
-            "featureStatus": "PHR",
-            "featureStatusMessage": "health assessment and more.",
-            "featureScheduledPeriod": {
-               "datetimeBegin": "Not applicable",
-               "datetimeEnd": null
-            },
-            "featureCategory": {
-               "categoryName": "2017-09-27 21:03:28.50496",
-               "categoryDescription": "2017-09-27 21:03:28.50496"
-            }
-         },
-         {
-            "enabled": "false",
-            "featureIdentifier": {
-               "idSource": "110004",
-               "idValue": "DigitalCoaching",
-               "idType": "features",
-               "resourceId": "110004~DigitalCoaching"
-            },
-            "name": "Digital Coaching",
-            "description": "Ability to help members set and achieve their health and wellness goals.",
-            "featureStatus": "Not applicable",
-            "featureStatusMessage": null,
-            "featureScheduledPeriod": {
-               "datetimeBegin": "2017-09-27 21:03:28.510787",
-               "datetimeEnd": "2017-09-27 21:03:28.510787"
-            },
-            "featureCategory": {
-               "categoryName": "Improve",
-               "categoryDescription": "Group of functionalities helping members manage their chronic conditions"
-            }
-         },
-         {
-            "enabled": "false",
-            "featureIdentifier": {
-               "idSource": "110004",
-               "idValue": "PersonalHealthRecord",
-               "idType": "features",
-               "resourceId": "110004~PersonalHealthRecord"
-            },
-            "name": "Personal Health RecordÂ ",
-            "description": "Ability for member to view and edit their personal health record including medications",
-            "featureStatus": "allergies",
-            "featureStatusMessage": "conditions",
-            "featureScheduledPeriod": {
-               "datetimeBegin": "etc.",
-               "datetimeEnd": "Not applicable"
-            },
-            "featureCategory": {
-               "categoryName": null,
-               "categoryDescription": "2017-09-27 21:03:28.517062"
-            }
-         },
-         {
-            "enabled": "false",
-            "featureIdentifier": {
-               "idSource": "110004",
-               "idValue": "NurseEmail",
-               "idType": "features",
-               "resourceId": "110004~NurseEmail"
-            },
-            "name": "Nurse / Coach Communication",
-            "description": "Ability for members to communicate with nurses via email style messaging within the app.",
-            "featureStatus": "Not applicable",
-            "featureStatusMessage": null,
-            "featureScheduledPeriod": {
-               "datetimeBegin": "2017-09-27 21:03:28.52334",
-               "datetimeEnd": "2017-09-27 21:03:28.52334"
-            },
-            "featureCategory": {
-               "categoryName": "Improve",
-               "categoryDescription": "Group of functionalities helping members manage their chronic conditions"
-            }
-         },
-         {
-            "enabled": "false",
-            "featureIdentifier": {
-               "idSource": "110004",
-               "idValue": "Trackers",
-               "idType": "features",
-               "resourceId": "110004~Trackers"
-            },
-            "name": "Trackers",
-            "description": "Ability to show members biometric data like BMI",
-            "featureStatus": "blood pressure",
-            "featureStatusMessage": "blood glucose",
-            "featureScheduledPeriod": {
-               "datetimeBegin": "etc.",
-               "datetimeEnd": "Not applicable"
-            },
-            "featureCategory": {
-               "categoryName": null,
-               "categoryDescription": "2017-09-27 21:03:28.529113"
-            }
-         },
-         {
-            "enabled": "true",
-            "featureIdentifier": {
-               "idSource": "110004",
-               "idValue": "TouchID",
-               "idType": "features",
-               "resourceId": "110004~TouchID"
-            },
-            "name": "Touch ID",
-            "description": "Ability for members to login via Touch Id (i.e. NGA Lite) on Mobile devices.",
-            "featureStatus": "Online",
-            "featureStatusMessage": null,
-            "featureScheduledPeriod": {
-               "datetimeBegin": "2017-09-27 21:03:28.534694",
-               "datetimeEnd": "2017-09-27 21:03:28.534694"
-            },
-            "featureCategory": {
-               "categoryName": "Login",
-               "categoryDescription": "Group of functionalities to enable members to access the app."
-            }
-         },
-         {
-            "enabled": "true",
-            "featureIdentifier": {
-               "idSource": "110004",
-               "idValue": "Pricing",
-               "idType": "features",
-               "resourceId": "110004~Pricing"
-            },
-            "name": "Cost Transparency",
-            "description": "Displays estimated prices for a procedure",
-            "featureStatus": "Online",
-            "featureStatusMessage": null,
-            "featureScheduledPeriod": {
-               "datetimeBegin": "2017-09-27 21:03:28.492749",
-               "datetimeEnd": "2017-09-27 21:03:28.492749"
-            },
-            "featureCategory": {
-               "categoryName": "Pricing",
-               "categoryDescription": "Prices procedures  n119493"
-            }
-         },
-         {
-            "enabled": "false",
-            "featureIdentifier": {
-               "idSource": "110004",
-               "idValue": "ProviderSearch",
-               "idType": "features",
-               "resourceId": "110004~ProviderSearch"
-            },
-            "name": "Provider Search",
-            "description": "Enables member to search for a provider by specialty or name",
-            "featureStatus": "Online",
-            "featureStatusMessage": null,
-            "featureScheduledPeriod": {
-               "datetimeBegin": "2017-09-27 21:03:18.239499",
-               "datetimeEnd": "2017-09-27 21:03:18.239499"
-            },
-            "featureCategory": {
-               "categoryName": "Provider",
-               "categoryDescription": "Provider"
-            }
-         },
-         {
-            "enabled": "false",
-            "featureIdentifier": {
-               "idSource": "110004",
-               "idValue": "RewAction",
-               "idType": "features",
-               "resourceId": "110004~RewAction"
-            },
-            "name": "Reward Action",
-            "description": "Provide members with a Rewards and Incentive program",
-            "featureStatus": "Not applicable",
-            "featureStatusMessage": null,
-            "featureScheduledPeriod": {
-               "datetimeBegin": "2017-09-27 21:03:28.540569",
-               "datetimeEnd": "2017-09-27 21:03:28.540569"
-            },
-            "featureCategory": {
-               "categoryName": "Rewards",
-               "categoryDescription": "Rewards and Incentive functionality"
-            }
-         },
-         {
-            "enabled": "false",
-            "featureIdentifier": {
-               "idSource": "110004",
-               "idValue": "AetnaHealthEnabled",
-               "idType": "features",
-               "resourceId": "110004~AetnaHealthEnabled"
-            },
-            "name": "Rollout ready",
-            "description": "Has the plan sponsor been configured to use Aetna Health",
-            "featureStatus": "Not applicable",
-            "featureStatusMessage": null,
-            "featureScheduledPeriod": {
-               "datetimeBegin": "2017-09-27 21:03:28.546163",
-               "datetimeEnd": "2017-09-27 21:03:28.546163"
-            },
-            "featureCategory": {
-               "categoryName": "Readiness",
-               "categoryDescription": "System setup"
-            }
-         }
-      ]
-   }
-}
+[
+  {
+    "enabled": true,
+    "featureIdentifier": {
+      "idType": "features",
+      "resourceId": "110004~AccExpanded",
+      "idSource": "110004",
+      "idValue": "AccExpanded"
+    },
+    "status": "Online",
+    "description": "Displays full set of member and family accumulators",
+    "featureCategory": {
+      "categoryName": "Accumulators",
+      "categoryDescription": "Accumulators"
+    },
+    "name": "Accumulators - Expanded",
+    "$$hashKey": "object:7"
+  },
+  {
+    "enabled": true,
+    "featureIdentifier": {
+      "idType": "features",
+      "resourceId": "110004~Wallet",
+      "idSource": "110004",
+      "idValue": "Wallet"
+    },
+    "status": "Online",
+    "description": "Gives members the ability to add their ID card to their apple wallet for iOS",
+    "featureCategory": {
+      "categoryName": "Apple Wallet",
+      "categoryDescription": "Apple Wallet"
+    },
+    "name": "Apple Wallet",
+    "$$hashKey": "object:8"
+  },
+  {
+    "enabled": true,
+    "featureIdentifier": {
+      "idType": "features",
+      "resourceId": "110004~BenTracker",
+      "idSource": "110004",
+      "idValue": "BenTracker"
+    },
+    "status": "Online",
+    "description": "Benefits Tracker",
+    "featureCategory": {
+      "categoryName": "Benefits",
+      "categoryDescription": "Benefits"
+    },
+    "name": "Benefits Tracker",
+    "$$hashKey": "object:9"
+  },
+  {
+    "enabled": true,
+    "featureIdentifier": {
+      "idType": "features",
+      "resourceId": "110004~ClaimsList",
+      "idSource": "110004",
+      "idValue": "ClaimsList"
+    },
+    "status": "Online",
+    "description": "Displays a list of claims for the member and his/her family",
+    "featureCategory": {
+      "categoryName": "Claims",
+      "categoryDescription": "Displays member and family claims"
+    },
+    "name": "Claims List",
+    "$$hashKey": "object:10"
+  },
+  {
+    "enabled": true,
+    "featureIdentifier": {
+      "idType": "features",
+      "resourceId": "110004~IdCard",
+      "idSource": "110004",
+      "idValue": "IdCard"
+    },
+    "status": "Online",
+    "description": "Displays member and family ID card(s)",
+    "featureCategory": {
+      "categoryName": "ID Cards",
+      "categoryDescription": "Displays member and family Id card(s)"
+    },
+    "name": "ID Cards",
+    "$$hashKey": "object:11"
+  },
+  {
+    "enabled": true,
+    "featureIdentifier": {
+      "idType": "features",
+      "resourceId": "110004~IdentVitSav",
+      "idSource": "110004",
+      "idValue": "IdentVitSav"
+    },
+    "status": "Online",
+    "description": "Displays member and family Id card(s) vital savings",
+    "featureCategory": {
+      "categoryName": "ID Cards",
+      "categoryDescription": "Displays member and family Id card(s)"
+    },
+    "name": "Identification Vital Savings",
+    "$$hashKey": "object:93"
+  },
+  {
+    "enabled": true,
+    "featureIdentifier": {
+      "idType": "features",
+      "resourceId": "110004~RealIdCardMedDen",
+      "idSource": "110004",
+      "idValue": "RealIdCardMedDen"
+    },
+    "status": "Online",
+    "description": "Displays member and family Id card(s) enables member entitlement to view real combined medical & dental id card",
+    "featureCategory": {
+      "categoryName": "ID Cards",
+      "categoryDescription": "Displays member and family Id card(s)"
+    },
+    "name": "Real Id Card - Combined Medical Dental",
+    "$$hashKey": "object:94"
+  },
+  {
+    "enabled": true,
+    "featureIdentifier": {
+      "idType": "features",
+      "resourceId": "110004~RealIdcardDen",
+      "idSource": "110004",
+      "idValue": "RealIdcardDen"
+    },
+    "status": "Online",
+    "description": "Displays member and family Id card(s) enables member entitlement to view/display Real Dental id Card",
+    "featureCategory": {
+      "categoryName": "ID Cards",
+      "categoryDescription": "Displays member and family Id card(s)"
+    },
+    "name": "Real Id Card Dental",
+    "$$hashKey": "object:95"
+  },
+  {
+    "enabled": true,
+    "featureIdentifier": {
+      "idType": "features",
+      "resourceId": "110004~RealIdCardMed",
+      "idSource": "110004",
+      "idValue": "RealIdCardMed"
+    },
+    "status": "Online",
+    "description": "Displays member and family Id card(s)enables member entitlement to view/display read id card-medical",
+    "featureCategory": {
+      "categoryName": "ID Cards",
+      "categoryDescription": "Displays member and family Id card(s)"
+    },
+    "name": "Real Id Card Medical",
+    "$$hashKey": "object:96"
+  },
+  {
+    "enabled": true,
+    "featureIdentifier": {
+      "idType": "features",
+      "resourceId": "110004~RealIdCardRx",
+      "idSource": "110004",
+      "idValue": "RealIdCardRx"
+    },
+    "status": "Online",
+    "description": "Displays member and family Id card(s) enables member entitlement to view real pharmacy id card.",
+    "featureCategory": {
+      "categoryName": "ID Cards",
+      "categoryDescription": "Displays member and family Id card(s)"
+    },
+    "name": "Real Id Card RX",
+    "$$hashKey": "object:97"
+  },
+  {
+    "enabled": true,
+    "featureIdentifier": {
+      "idType": "features",
+      "resourceId": "110004~RealIdCardVitSav",
+      "idSource": "110004",
+      "idValue": "RealIdCardVitSav"
+    },
+    "status": "Online",
+    "description": "Displays member and family Id card(s) enables member entitlement to view/display vital savings real id card.",
+    "featureCategory": {
+      "categoryName": "ID Cards",
+      "categoryDescription": "Displays member and family Id card(s)"
+    },
+    "name": "Real Id Card Vital Savings",
+    "$$hashKey": "object:98"
+  },
+  {
+    "enabled": true,
+    "featureIdentifier": {
+      "idType": "features",
+      "resourceId": "110004~TempIdCardMedDen",
+      "idSource": "110004",
+      "idValue": "TempIdCardMedDen"
+    },
+    "status": "Online",
+    "description": "Displays member and family Id card(s) enables member entitlement to view temporary combined medical & dental id card",
+    "featureCategory": {
+      "categoryName": "ID Cards",
+      "categoryDescription": "Displays member and family Id card(s)"
+    },
+    "name": "Temp Id - Medical Dental",
+    "$$hashKey": "object:99"
+  },
+  {
+    "enabled": true,
+    "featureIdentifier": {
+      "idType": "features",
+      "resourceId": "110004~TempIdCardDen",
+      "idSource": "110004",
+      "idValue": "TempIdCardDen"
+    },
+    "status": "Online",
+    "description": "Displays member and family Id card(s) enables member entitlement to view/display temp id card-dental",
+    "featureCategory": {
+      "categoryName": "ID Cards",
+      "categoryDescription": "Displays member and family Id card(s)"
+    },
+    "name": "Temp Id Dental",
+    "$$hashKey": "object:100"
+  },
+  {
+    "enabled": true,
+    "featureIdentifier": {
+      "idType": "features",
+      "resourceId": "110004~ViewPrintELG",
+      "idSource": "110004",
+      "idValue": "ViewPrintELG"
+    },
+    "status": "Online",
+    "description": "Displays member and family Id card(s) member eligibility to print IdCard or not",
+    "featureCategory": {
+      "categoryName": "ID Cards",
+      "categoryDescription": "Displays member and family Id card(s)"
+    },
+    "name": "View Print ELG",
+    "$$hashKey": "object:101"
+  },
+  {
+    "enabled": true,
+    "featureIdentifier": {
+      "idType": "features",
+      "resourceId": "110004~DigitalCoaching",
+      "idSource": "110004",
+      "idValue": "DigitalCoaching"
+    },
+    "status": "Online",
+    "description": "Ability to help members set and achieve their health and wellness goals.",
+    "featureCategory": {
+      "categoryName": "Improve",
+      "categoryDescription": "Group of functionalities helping members manage their chronic conditions, and engage in wellness activities."
+    },
+    "name": "Digital Coaching",
+    "$$hashKey": "object:12"
+  },
+  {
+    "enabled": true,
+    "featureIdentifier": {
+      "idType": "features",
+      "resourceId": "110004~HeaAction",
+      "idSource": "110004",
+      "idValue": "HeaAction"
+    },
+    "status": "Online",
+    "description": "Ability to show members personalized health actions based on their claims history, PHR, health assessment and more.",
+    "featureCategory": {
+      "categoryName": "Improve",
+      "categoryDescription": "Group of functionalities helping members manage their chronic conditions, and engage in wellness activities."
+    },
+    "name": "Health Action",
+    "$$hashKey": "object:183"
+  },
+  {
+    "enabled": true,
+    "featureIdentifier": {
+      "idType": "features",
+      "resourceId": "110004~HeaOppAssessment",
+      "idSource": "110004",
+      "idValue": "HeaOppAssessment"
+    },
+    "status": "Online",
+    "description": "Ability to ask the member a short series of questions to be able to personalize their experience and programs.",
+    "featureCategory": {
+      "categoryName": "Improve",
+      "categoryDescription": "Group of functionalities helping members manage their chronic conditions, and engage in wellness activities."
+    },
+    "name": "Health opportunity assessment (HOA)",
+    "$$hashKey": "object:184"
+  },
+  {
+    "enabled": false,
+    "featureIdentifier": {
+      "idType": "features",
+      "resourceId": "110004~NurseEmail",
+      "idSource": "110004",
+      "idValue": "NurseEmail"
+    },
+    "status": "N/A",
+    "description": "Ability for members to communicate with nurses via email style messaging within the app.",
+    "featureCategory": {
+      "categoryName": "Improve",
+      "categoryDescription": "Group of functionalities helping members manage their chronic conditions, and engage in wellness activities."
+    },
+    "name": "Nurse / Coach Communication",
+    "$$hashKey": "object:185"
+  },
+  {
+    "enabled": true,
+    "featureIdentifier": {
+      "idType": "features",
+      "resourceId": "110004~PersonalHealthRecord",
+      "idSource": "110004",
+      "idValue": "PersonalHealthRecord"
+    },
+    "status": "Online",
+    "description": "Ability for member to view and edit their personal health record including medications, allergies, conditions, etc.",
+    "featureCategory": {
+      "categoryName": "Improve",
+      "categoryDescription": "Group of functionalities helping members manage their chronic conditions, and engage in wellness activities."
+    },
+    "name": "Personal Health Record",
+    "$$hashKey": "object:186"
+  },
+  {
+    "enabled": false,
+    "featureIdentifier": {
+      "idType": "features",
+      "resourceId": "110004~Trackers",
+      "idSource": "110004",
+      "idValue": "Trackers"
+    },
+    "status": "N/A",
+    "description": "Ability to show members biometric data like BMI, blood pressure, blood glucose, etc.",
+    "featureCategory": {
+      "categoryName": "Improve",
+      "categoryDescription": "Group of functionalities helping members manage their chronic conditions, and engage in wellness activities."
+    },
+    "name": "Trackers",
+    "$$hashKey": "object:187"
+  },
+  {
+    "enabled": true,
+    "featureIdentifier": {
+      "idType": "features",
+      "resourceId": "110004~TouchID",
+      "idSource": "110004",
+      "idValue": "TouchID"
+    },
+    "status": "Online",
+    "description": "Ability for members to login via Touch Id (i.e. NGA Lite) on Mobile devices.",
+    "featureCategory": {
+      "categoryName": "Login",
+      "categoryDescription": "Group of functionalities to enable members to access the app."
+    },
+    "name": "Touch ID",
+    "$$hashKey": "object:13"
+  },
+  {
+    "enabled": true,
+    "featureIdentifier": {
+      "idType": "features",
+      "resourceId": "110004~Payflex",
+      "idSource": "110004",
+      "idValue": "Payflex"
+    },
+    "status": "Online",
+    "description": "Displays Payflex FSA/HSA/HRA Account Balances to the subscriber.",
+    "featureCategory": {
+      "categoryName": "Payflex",
+      "categoryDescription": "Displays subscriber Payflex Account Balances"
+    },
+    "name": "PayflexAccountBalance",
+    "$$hashKey": "object:14"
+  },
+  {
+    "enabled": false,
+    "featureIdentifier": {
+      "idType": "features",
+      "resourceId": "110004~PayflexNATesting",
+      "idSource": "110004",
+      "idValue": "PayflexNATesting"
+    },
+    "status": "N/A",
+    "description": "Displays Payflex FSA/HSA/HRA Account Balances to the subscriber TEST.",
+    "featureCategory": {
+      "categoryName": "Payflex For Testing",
+      "categoryDescription": "Displays subscriber Payflex Account Balances TEST"
+    },
+    "name": "PayflexNATestingQA2",
+    "$$hashKey": "object:15"
+  },
+  {
+    "enabled": true,
+    "featureIdentifier": {
+      "idType": "features",
+      "resourceId": "110004~PayflexOnlineTesting",
+      "idSource": "110004",
+      "idValue": "PayflexOnlineTesting"
+    },
+    "status": "Online",
+    "description": "Displays Payflex FSA/HSA/HRA Account Balances to the subscriber TEST.",
+    "featureCategory": {
+      "categoryName": "Payflex For Testing",
+      "categoryDescription": "Displays subscriber Payflex Account Balances TEST"
+    },
+    "name": "PayflexOnlineTestingQA2",
+    "$$hashKey": "object:255"
+  },
+  {
+    "enabled": true,
+    "featureIdentifier": {
+      "idType": "features",
+      "resourceId": "110004~PayflexScheduledOfflineTesting",
+      "idSource": "110004",
+      "idValue": "PayflexScheduledOfflineTesting"
+    },
+    "status": "Scheduled offline",
+    "description": "Displays Payflex FSA/HSA/HRA Account Balances to the subscriber TEST.",
+    "featureCategory": {
+      "categoryName": "Payflex For Testing",
+      "categoryDescription": "Displays subscriber Payflex Account Balances TEST"
+    },
+    "name": "PayflexScheduledOfflineTestingQA2",
+    "scheduledPeriod": {
+      "datetimeEnd": "2018-08-01T11:00:00",
+      "datetimeBegin": "2018-02-01T10:00:00"
+    },
+    "statusMessage": "QA_Automation related features are unavailable due to scheduled maintenance",
+    "$$hashKey": "object:256"
+  },
+  {
+    "enabled": true,
+    "featureIdentifier": {
+      "idType": "features",
+      "resourceId": "110004~PayflexTemporarilyOfflineTesting",
+      "idSource": "110004",
+      "idValue": "PayflexTemporarilyOfflineTesting"
+    },
+    "status": "Temporary offline",
+    "description": "Displays Payflex FSA/HSA/HRA Account Balances to the subscriber TEST.",
+    "featureCategory": {
+      "categoryName": "Payflex For Testing",
+      "categoryDescription": "Displays subscriber Payflex Account Balances TEST"
+    },
+    "name": "PayflexTemporarilyOfflineTestingQA2",
+    "statusMessage": "QA_Automation is temporarily down",
+    "$$hashKey": "object:257"
+  },
+  {
+    "enabled": false,
+    "featureIdentifier": {
+      "idType": "features",
+      "resourceId": "110004~Payments",
+      "idSource": "110004",
+      "idValue": "Payments"
+    },
+    "status": "N/A",
+    "description": "Provides members the ability to pay claims online.",
+    "featureCategory": {
+      "categoryName": "Payment",
+      "categoryDescription": "Allow online claims payments"
+    },
+    "name": "Online Claims Payment",
+    "$$hashKey": "object:16"
+  },
+  {
+    "enabled": true,
+    "featureIdentifier": {
+      "idType": "features",
+      "resourceId": "110004~Pricing",
+      "idSource": "110004",
+      "idValue": "Pricing"
+    },
+    "status": "Online",
+    "description": "Displays estimated prices for a procedure",
+    "featureCategory": {
+      "categoryName": "Pricing",
+      "categoryDescription": "Prices procedures"
+    },
+    "name": "Cost Transparency",
+    "$$hashKey": "object:17"
+  },
+  {
+    "enabled": true,
+    "featureIdentifier": {
+      "idType": "features",
+      "resourceId": "110004~BHCarveOut",
+      "idSource": "110004",
+      "idValue": "BHCarveOut"
+    },
+    "status": "Online",
+    "description": "Excludes behavioral health specialties/procedures in search and allows front end display rules on BH providers via name search",
+    "featureCategory": {
+      "categoryName": "Provider",
+      "categoryDescription": "Provider"
+    },
+    "name": "Behavioral Health Carve Out",
+    "$$hashKey": "object:18"
+  },
+  {
+    "enabled": true,
+    "featureIdentifier": {
+      "idType": "features",
+      "resourceId": "110004~ProviderSearch",
+      "idSource": "110004",
+      "idValue": "ProviderSearch"
+    },
+    "status": "Online",
+    "description": "Enables member to search for a provider by specialty or name",
+    "featureCategory": {
+      "categoryName": "Provider",
+      "categoryDescription": "Provider"
+    },
+    "name": "Provider Search",
+    "$$hashKey": "object:317"
+  },
+  {
+    "enabled": true,
+    "featureIdentifier": {
+      "idType": "features",
+      "resourceId": "110004~Telemedicine",
+      "idSource": "110004",
+      "idValue": "Telemedicine"
+    },
+    "status": "Online",
+    "description": "Enables member to view and price telemedicine providers",
+    "featureCategory": {
+      "categoryName": "Provider",
+      "categoryDescription": "Provider"
+    },
+    "name": "Telemedicine",
+    "$$hashKey": "object:318"
+  },
+  {
+    "enabled": true,
+    "featureIdentifier": {
+      "idType": "features",
+      "resourceId": "110004~AetnaHealthEnabled",
+      "idSource": "110004",
+      "idValue": "AetnaHealthEnabled"
+    },
+    "status": "Online",
+    "description": "Has the plan sponsor been configured to use Aetna Health",
+    "featureCategory": {
+      "categoryName": "Readiness",
+      "categoryDescription": "System setup"
+    },
+    "name": "Rollout ready",
+    "$$hashKey": "object:19"
+  },
+  {
+    "enabled": false,
+    "featureIdentifier": {
+      "idType": "features",
+      "resourceId": "110004~RewAction",
+      "idSource": "110004",
+      "idValue": "RewAction"
+    },
+    "status": "N/A",
+    "description": "Provide members with a Rewards and Incentive program",
+    "featureCategory": {
+      "categoryName": "Rewards",
+      "categoryDescription": "Rewards and Incentive functionality"
+    },
+    "name": "Reward Action",
+    "$$hashKey": "object:20"
+  },
+  {
+    "enabled": true,
+    "featureIdentifier": {
+      "idType": "features",
+      "resourceId": "110004~V_AutomatonIdCardTestingQA2",
+      "idSource": "110004",
+      "idValue": "V_AutomatonIdCardTestingQA2"
+    },
+    "status": "Temporary offline",
+    "description": "V_AutomatonIdCardTestingQA2",
+    "featureCategory": {
+      "categoryName": "TestingVoyager",
+      "categoryDescription": "Testing Voyager"
+    },
+    "name": "V_AutomatonIdCardTestingQA2",
+    "statusMessage": "IdCardVoyager is currently unavailable",
+    "$$hashKey": "object:21"
+  },
+  {
+    "enabled": true,
+    "featureIdentifier": {
+      "idType": "features",
+      "resourceId": "110004~V_AutomatonProviderSearchTestingQA2",
+      "idSource": "110004",
+      "idValue": "V_AutomatonProviderSearchTestingQA2"
+    },
+    "status": "Scheduled offline",
+    "description": "V_AutomatonProviderSearchTestingQA2",
+    "featureCategory": {
+      "categoryName": "TestingVoyager",
+      "categoryDescription": "Testing Voyager"
+    },
+    "name": "V_AutomatonProviderSearchTestingQA2",
+    "scheduledPeriod": {
+      "datetimeEnd": "2017-12-31T10:00:00",
+      "datetimeBegin": "2017-10-01T09:00:00"
+    },
+    "statusMessage": "ProviderSearchVoyager is scheduled for maintenance",
+    "$$hashKey": "object:362"
+  },
+  {
+    "enabled": true,
+    "featureIdentifier": {
+      "idType": "features",
+      "resourceId": "110004~V_AutomatonRealIdCardMedTestingQA2",
+      "idSource": "110004",
+      "idValue": "V_AutomatonRealIdCardMedTestingQA2"
+    },
+    "status": "Temporary offline",
+    "description": "V_AutomatonRealIdCardMedTestingQA2",
+    "featureCategory": {
+      "categoryName": "TestingVoyager",
+      "categoryDescription": "Testing Voyager"
+    },
+    "name": "V_AutomatonRealIdCardMedTestingQA2",
+    "statusMessage": "V_AutomatonRealIdCardMedTestingQA2 is currently unavailable",
+    "$$hashKey": "object:363"
+  },
+  {
+    "enabled": true,
+    "featureIdentifier": {
+      "idType": "features",
+      "resourceId": "110004~V_AutomatonTempIdCardDenTestingQA2",
+      "idSource": "110004",
+      "idValue": "V_AutomatonTempIdCardDenTestingQA2"
+    },
+    "status": "Scheduled offline",
+    "description": "V_AutomatonTempIdCardDenTestingQA2",
+    "featureCategory": {
+      "categoryName": "TestingVoyager",
+      "categoryDescription": "Testing Voyager"
+    },
+    "name": "V_AutomatonTempIdCardDenTestingQA2",
+    "scheduledPeriod": {
+      "datetimeEnd": "2017-12-31T11:00:00",
+      "datetimeBegin": "2017-10-01T09:00:00"
+    },
+    "statusMessage": "V_AutomatonTempIdCardDenTestingQA2 is scheduled for maintenance",
+    "$$hashKey": "object:364"
+  },
+  {
+    "enabled": false,
+    "featureIdentifier": {
+      "idType": "features",
+      "resourceId": "110004~Z_AutomationNATesting",
+      "idSource": "110004",
+      "idValue": "Z_AutomationNATesting"
+    },
+    "status": "N/A",
+    "description": "Z_AutomationNATestingQA2",
+    "featureCategory": {
+      "categoryName": "Z_Automation",
+      "categoryDescription": "Z_Automation"
+    },
+    "name": "Z_AutomationNATestingQA2",
+    "$$hashKey": "object:22"
+  },
+  {
+    "enabled": true,
+    "featureIdentifier": {
+      "idType": "features",
+      "resourceId": "110004~Z_AutomationOnlineTesting",
+      "idSource": "110004",
+      "idValue": "Z_AutomationOnlineTesting"
+    },
+    "status": "Online",
+    "description": "Z_AutomationOnlineTestingQA2",
+    "featureCategory": {
+      "categoryName": "Z_Automation",
+      "categoryDescription": "Z_Automation"
+    },
+    "name": "Z_AutomationOnlineTestingQA2",
+    "$$hashKey": "object:398"
+  },
+  {
+    "enabled": true,
+    "featureIdentifier": {
+      "idType": "features",
+      "resourceId": "110004~Z_AutomationScheduledOfflineTesting",
+      "idSource": "110004",
+      "idValue": "Z_AutomationScheduledOfflineTesting"
+    },
+    "status": "Scheduled offline",
+    "description": "Z_AutomationScheduledOfflineTestingQA2",
+    "featureCategory": {
+      "categoryName": "Z_Automation",
+      "categoryDescription": "Z_Automation"
+    },
+    "name": "Z_AutomationScheduledOfflineTestingQA2",
+    "scheduledPeriod": {
+      "datetimeEnd": "2017-12-23T18:40:00",
+      "datetimeBegin": "2017-12-22T18:40:00"
+    },
+    "statusMessage": "We are scheduled to be offline for maintenance from 12/22/2017 6:40 PM (EST) to 12/23/2017 6:40 PM (EST)",
+    "$$hashKey": "object:399"
+  },
+  {
+    "enabled": true,
+    "featureIdentifier": {
+      "idType": "features",
+      "resourceId": "110004~Z_AutomationTemporarilyOfflineTesting",
+      "idSource": "110004",
+      "idValue": "Z_AutomationTemporarilyOfflineTesting"
+    },
+    "status": "Temporary offline",
+    "description": "Z_AutomationTemporarilyOfflineTestingQA2",
+    "featureCategory": {
+      "categoryName": "Z_Automation",
+      "categoryDescription": "Z_Automation"
+    },
+    "name": "Z_AutomationTemporarilyOfflineTestingQA2",
+    "statusMessage": "We are currently offline due to unplanned maintenance.",
+    "$$hashKey": "object:400"
+  }
+]
