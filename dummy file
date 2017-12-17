@@ -6,6 +6,21 @@
 	 if (filterValues ==(input.featureCategory.categoryName) )
 
 /////////////////////////
+
+*** Inserting a linke inside a table
+
+put the below line after first row in table
+
+<tr><td colspan="3"><hr class="line1"></td></tr>
+
+** in css fo that file  add belwo styles
+
+hr.line1{
+    border: 1px solid #f00; 
+}
+
+/////////////////////////////////
+
 $scope.serialData = response.features.map(function (group) {
 				console.log('inside')
 			return {
