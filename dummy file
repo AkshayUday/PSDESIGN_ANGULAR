@@ -1,3 +1,11 @@
+         
+	replace line no 103 in globalfeatures.js:------> if (filterValues.indexOf(input.featureCategory.categoryName) !== -1) 
+	   
+	 with:
+	 
+	 if (filterValues ==(input.featureCategory.categoryName) )
+
+/////////////////////////
 $scope.serialData = response.features.map(function (group) {
 				console.log('inside')
 			return {
