@@ -1,29 +1,53 @@
-			<div class="pane pane--table1">
-  <div class="pane-hScroll">
+* {
+  box-sizing: border-box;
+}
+body {
+  font: 14px/1 Arial, sans-serif;
+}
+table {
+  border-collapse: collapse;
+  background: white;
+  table-layout: fixed;
+  width: 100%;
+}
+th, td {
+  padding: 8px 16px;
+  border: 1px solid #ddd;
+  width: 160px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 
-    <table>
-      <thead>
-				<th class="th2 purple " style="height:130px;padding-top:28px">Features</th>
-				<th class="td1 purple " ng-repeat="feature in myData | filter: {resourceId: selectedItem} ">{{feature.resouceName}}</th>
-      </thead>
-    </table>
+.pane {
+  background: #eee;
+}
+.pane-hScroll {
+  overflow: auto;
+  width: 400px;
+  background: green;
+}
+.pane-vScroll {
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 200px;
+  background: red;
+}
 
-    <div class="pane-vScroll">
-      <table>
-        <tbody>
-          <tr><td class="th2 deepPurple  ">PSUID {{psuId}}</td>
-					<td class="td2" ng-repeat="featureName in selectedData ">{{featureName.enabled}}</td></tr>
-          <tr><td class="th2 green " style="margin-top:10px">Control4</td>
-					<td class="td3" ng-repeat="feature in selectedData">field value</td></tr>
-          <tr><td class="th2 green " style="margin-top:10px">Control1</td>
-					<td class="td3" ng-repeat="feature in selectedData">field value</td></tr>
-          <tr><td class="th2 green " style="margin-top:10px">Control 2</td>
-					<td class="td3" ng-repeat="feature in selectedData">field value</td></tr>
-          <tr> <td class="th2 green " style="margin-top:10px">Control3</td>
-					 <td class="td3" ng-repeat="feature in myData ">{{feature.resourceName}}</td></tr>
-
-        </tbody>
-      </table>
-    </div>
-  </div>
-</div>
+.pane--table2 {
+  width: 400px;
+  overflow-x: scroll;
+}
+.pane--table2 th, .pane--table2 td {
+  width: auto;
+  min-width: 160px;
+}
+.pane--table2 tbody {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  display: block;
+  height: 200px;
+}
+.pane--table2 thead {
+    display: table-row;
+}
