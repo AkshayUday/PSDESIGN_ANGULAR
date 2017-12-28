@@ -1,165 +1,29 @@
-//table header fixed
+			<div class="pane pane--table1">
+  <div class="pane-hScroll">
 
-.table-fixed thead {
-  width: 97%;
-}
-.table-fixed tbody {
-  height: 230px;
-  overflow-y: auto;
-  width: 100%;
-}
-.table-fixed thead, .table-fixed tbody, .table-fixed tr, .table-fixed td, .table-fixed th {
-  display: block;
-}
-.table-fixed tbody td, .table-fixed thead > tr> th {
-  float: left;
-  border-bottom-width: 0;
-}
+    <table>
+      <thead>
+				<th class="th2 purple " style="height:130px;padding-top:28px">Features</th>
+				<th class="td1 purple " ng-repeat="feature in myData | filter: {resourceId: selectedItem} ">{{feature.resouceName}}</th>
+      </thead>
+    </table>
 
-///////////////////////
+    <div class="pane-vScroll">
+      <table>
+        <tbody>
+          <tr><td class="th2 deepPurple  ">PSUID {{psuId}}</td>
+					<td class="td2" ng-repeat="featureName in selectedData ">{{featureName.enabled}}</td></tr>
+          <tr><td class="th2 green " style="margin-top:10px">Control4</td>
+					<td class="td3" ng-repeat="feature in selectedData">field value</td></tr>
+          <tr><td class="th2 green " style="margin-top:10px">Control1</td>
+					<td class="td3" ng-repeat="feature in selectedData">field value</td></tr>
+          <tr><td class="th2 green " style="margin-top:10px">Control 2</td>
+					<td class="td3" ng-repeat="feature in selectedData">field value</td></tr>
+          <tr> <td class="th2 green " style="margin-top:10px">Control3</td>
+					 <td class="td3" ng-repeat="feature in myData ">{{feature.resourceName}}</td></tr>
 
-
-
-table {
-    border-collapse: separate;
-    border-spacing: 10px;
-    margin: 0 -10px;
-    min-width: 100%;
-}
-
-
-
-/////////////////////////
-
-
-         
-	replace line no 103 in globalfeatures.js:------> if (filterValues.indexOf(input.featureCategory.categoryName) !== -1) 
-	   
-	 with:
-	 
-	 if (filterValues ==(input.featureCategory.categoryName) )
-
-/////////////////////////
-
-*** Inserting a linke inside a table
-
-put the below line after first row in table
-
-<tr><td colspan="3"><hr class="line1"></td></tr>
-
-** in css fo that file  add belwo styles
-
-hr.line1{
-    border: 1px solid #f00; 
-}
-
-/////////////////////////////////
-
-$scope.serialData = response.features.map(function (group) {
-				console.log('inside')
-			return {
-				resourceId: group.resourceId,
-				resourceName: findByKey($scope.myData , 'resourceId', group.resourceId, 'resouceName'),
-				enabled: group.enabled
-			};
-		});
-		
-		
-		// findByKey is used to find an object inside an array
-// of object, by the value of a key.
-function findByKey (array, key, value,outkey) {
-	return array.filter(function (obj) {
-
-		return  obj[key] === value;
-	})[0];
-}
-
-///////////////////////////
-relace below lines from 60-85 in plansummary.html
-<thead>
-		                           <tr style="margin: 5px">
-		                               <th class="th2 purple fix" style="height:130px;padding-top:28px">Features</th>
-		                               <td class="td1 purple" ng-repeat="feature in myData | filter: {resourceId: selectedItem }">{{feature.resouceName}}</td>
-		                           </tr>
-		                           <tr style="margin: 5px">
-		                           	  <th class="th2 deepPurple fix">PSUID {{psuId}}</th>
-		                           	  <td class="td2" ng-repeat="feature in selectedData">{{feature.enabled}}</td>
-		                           </tr>
-		                           <tr style="margin: 5px">
-		                           	  <th class="th2 green fix" style="margin-top:10px">Control4</th>
-		                           	  <td class="td3" ng-repeat="feature in selectedData">field value</td>
-		                           </tr style="margin: 5px">
-		                           <tr style="margin: 5px">
-		                           	  <th class="th2 green fix" style="margin-top:10px">Control1</th>
-		                           	  <td class="td3" ng-repeat="feature in selectedData">field value</td>
-		                           </tr>
-		                           <tr style="margin: 5px">
-		                           	  <th class="th2 green fix" style="margin-top:10px">Control 2</th>
-		                           	  <td class="td3" ng-repeat="feature in selectedData">field value</td>
-		                           </tr>
-		                           <tr style="margin: 5px">
-		                           	  <th class="th2 green fix" style="margin-top:10px">Control3</th>
-		                           	  <td class="td3" ng-repeat="feature in selectedData">{{feature.enabled}}</td>
-		                           </tr>
-		                      </thead>
-                        
-////////////////////////////////////////////////
-replace 37 to 64 with below code in plansummar.js
-
-    $scope.show = function(selItemName, ind){
-    // $scope.viewAll = false;
-    console.log('selected is ',selItemName);
-    if(selItemName == 'View All'){
-	      $scope.viewAll = true;
-	      $scope.showItems = 'View All';
-				$scope.selectedItem = '';
-//	      $scope.myData = $scope.resData;
-//	      $scope.categorydescription = 'View All';
-$scope.selectedData = $scope.myDataSummary;
-	       $scope.selected = ind;
-    	}else{
-	        $scope.viewAll = false;
-//	         $scope.categorydescription = selItemName.featureCategory.categoryDescription;
-//	         $scope.featureCount = 40;
-	         $scope.selected = ind;
-					 //filter through selected items
-					  $scope.selectedItem = selItemName.resourceId;
-
-					 $scope.selectedData = $scope.myDataSummary.filter(function(item){
-						 console.log('analy', item.resourceId == selItemName.resourceId, item.resourceId,selItemName.resourceId)
-
-						 return item.resourceId == selItemName.resourceId;
-					 })
-					 console.log('filtered data is ', $scope.selectedData)
-    	}
-    	$window.scrollTo(0, angular.element('.shadow-box').offsetTop);
-    }
-
-//////////////////////////////////////////////////////
-
-
-DATA FOR TOGGLE
-
-To show the ON/OFF/MIX at Plansponsor level for a given feature, we would need to use “getToggleInfo” and map the “resourceId” from “getCategoryFeaturesResponse” with “resourceId” in “getToggleInfo”.  Below table show how we will be deriving toggle value based on “enabled” flag.
-1.	First set of “featureLevelId” in “featureSet” will correspond to “PSUID”. Use the first set to populate the toggle info at PSUID level.
-2.	Second set onward(2-n), “featureSet” is for Control Numbers
-
-
-
-Enabled value	Toggle value
- 	 
-TRUE	ON
-FALSE	OFF
-<not having enabled element>	MIX
-
-Sample output for category features:
-
-"getCategoryFeaturesResponse":{"ReadCategoryFeaturesResponse":{"totalFeaturesCount":40,"featureSet":[{"featuresCount":1,"category":{"categoryName":"Accumulators","categoryDescription":"Accumulators"},"features":[{"featureIdentifier":{"resourceId":"110004~AccExpanded","idValue":"AccExpanded"},"description":"Displays full set of member and family accumulators","name":"Accumulators - Expanded"}]},{"featuresCount":3,"category":{"categoryName":"Apple Wallet","categoryDescription":"Apple Wallet"},"features":[{"featureIdentifier":{"resourceId":"110004~Wallet","idValue":"Wallet"},"description":"Gives members the ability to add their ID card to their apple wallet for iOS","name":"Apple Wallet"},{"featureIdentifier":{"resourceId":"110004~WalletDiscovery","idValue":"WalletDiscovery"},"description":"Gives members the ability to add their ID card to their apple wallet for iOS","name":"Apple Wallet"},{"featureIdentifier":{"resourceId":"110004~WalletVoyager","idValue":"WalletVoyager"},"description":"Gives members the ability to add their ID card to their apple wallet for iOS","name":"Apple Wallet"}]}}
-
-Sample output for Plansponsor features:
-
-"getPlanSponsorResponse":{"ReadFeaturesResponse":{"featureSet":[{"featureLevelId":"1234567","features":[{"enabled":true,"resourceId":"110004~AccExpanded"},{"enabled":false,"resourceId":"110004~AetnaHealthEnabled"},{"enabled":true,"resourceId":"110004~BenTracker"},{"enabled":true,"resourceId":"110004~ClaimsList"},
-{"enabled":false,"resourceId":"110004~DigitalCoaching"},{"enabled":false,"resourceId":"110004~HeaAction"},{"enabled":false,"resourceId":"110004~HeaOppAssessment"},{"enabled":true,"resourceId":"110004~IdCard"},{"enabled":true,"resourceId":"110004~IdentVitSav"},{"enabled":false,"resourceId":"110004~NurseEmail"},
-{"enabled":false,"resourceId":"110004~Payflex"},{"enabled":false,"resourceId":"110004~Payments"},{"enabled":false,"resourceId":"110004~PersonalHealthRecord"},{"enabled":true,"resourceId":"110004~Pricing"},{"enabled":true,"resourceId":"110004~ProviderSearch"},{"enabled":true,"resourceId":"110004~RealIdCardMed"},}
-
-
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
