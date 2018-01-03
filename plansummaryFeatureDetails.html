@@ -1,20 +1,13 @@
-<div> 
-			<button class="btn btn-shadow-previous" ng-hide="totalNumberOfPage === 1 || currentPage===0" ng-click="prev()"><img alt="prvious" src="../themes/css2/icons/whitearrowback.png"/></button>
-			<button class="btn btn-shadow-next" ng-hide="totalNumberOfPage === 1 || currentPage===totalNumberOfPage - 1" ng-click="next()"><img alt="next" src="../themes/css2/icons/whitearrow.png" /></button>
-			 <div class="btn-shadow-Purple"></div><!-- 
-			<div class="btn-shadow-deepPurple" ></div>
-			<div class="btn-shadow-green1" ></div>
-			<div class="btn-shadow-green2" ></div>
-			<div class="btn-shadow-green3" ></div>
-			<div class="btn-shadow-green4" ></div>
-			-->
+<div>    
+			<button class="btn btn-shadow-previous "  ng-hide="totalNumberOfPage === 1 || currentPage===0" ng-click="prev()"><img alt="prvious" src="../themes/css2/icons/whitearrowback.png"/></button>
+			<button class="btn btn-shadow-next"    ng-hide="totalNumberOfPage === 1 || currentPage===totalNumberOfPage - 1" ng-click="next()"><img alt="next" src="../themes/css2/icons/whitearrow.png" /></button>
+      
 		</div>
-		        		<table class="table table3  ">
-		        		
-		       				<thead>
-		                           <tr  style="margin: 5px" >
+		        		<table class="table table3" id=categoryDetail>
+		       				<thead fsm-sticky-header scroll-body="#categoryDetail" scrollstop="0" >
+		                           <tr style="margin: 5px" >
 		                               <th class="th2 purple " style="padding-left: 5px;">Features<br/><span>{{currentPage + 1}} of {{totalNumberOfPage}}</th>
-		                               <td class="td1 purple columnwidth  " ng-repeat="column in currentColumns" >{{column.name}}</td>
+		                               <td class="td1 purple columnwidth" ng-repeat="column in currentColumns" >{{column.name}}</td>
 		                           </tr>
 		                    </thead>
 		                    <tbody>
@@ -32,11 +25,11 @@
 		                           </tr>
 		                       		<tr class="emptyRow shadowBorder"><td></td></tr>
 		                           	<tr class="emptyRow"><td colspan='12'></td></tr>
-		                           <tr style="background-color: transparent;" class="ctrlNumrow"  ng-repeat="control in controls">
+		                           <tr style="background-color: transparent;" class="ctrlNumrow"   id="{{control.featureLevelId}}" ng-repeat="control in controls">
 		                           	<td colspan="6" class="ctrlNumtd">
 		                           		<table class="table table4">
 		                           	  	<thead>
-		                           	  		<tr>
+		                           	  		<tr class="parentRow">
 		                           	  			<th class="th2 green clearfix" style="margin-top:10px"> <img src = "../themes/css2/icons/plus.png" ng-click ="showCntrlDetails($event,control.featureLevelId)" class="expandIcon" />Control {{control.featureLevelId}}</th>
 		                           	  			<td class="td3" ng-repeat="contolColumn in controlData[$index]">
 													<span class = "summaryButtonsOn button" ng-if ="contolColumn.name != '' && contolColumn.enabled.enabled == true"><span class="onoffmix">ON</span></span>
@@ -46,6 +39,26 @@
 		                           	  				<span ng-if="contolColumn.name == ''"><span class="onoffmix"></span></span>
 									 			</td>
 		                           	  		</tr>
+		                           	  		<tr class="childRow" ng-if="control.summaryResponse">
+		                           	  			<td colspan="12" class="psummaryColumn">
+		                           	  				<table class="childTable" ng-repeat="summaryInfo in control.summaryResponse">
+		                           	  				
+		                           	  					<tr style="margin: 5px" class="ctrlNumrow inner-control" >
+		                           	  						<th class="pscolumnHead turqoise"  style="margin-top:10px">{{summaryInfo.featureLevelId}}</th>
+		                           	  						<td class="td4" ng-repeat="feature in control.paginatedFeatureSet[$index]">
+		                           	  							<span class = "summaryButtonsOn button" ng-if ="feature.name != '' && feature.enabled.enabled == true"><span class="onoffmix">ON</span></span>
+		                           	  							<span class = "summaryButtonsOff button" ng-if ="feature.name != '' && feature.enabled.enabled== false" ><span class="onoffmix">OFF</span></span>
+		                           	  							<span class = "summaryButtonsMix button" ng-if ="feature.name != '' && feature.enabled.enabled == undefined && feature.resourceId !== undefined " ><span class="onoffmix">MIX</span></span>
+		                           	  							<span class = "summaryButtonsMix button" ng-if ="feature.name != '' && feature.enabled.resourceId == undefined" ><span class="onoffmix">N/A</span></span>
+		                           	  							<span ng-if="feature.name == ''"><span class="onoffmix"></span></span> 
+		                           	  						</td>
+		                           	  						<th class="btn-shadow-turqoise"></th>
+		                           	  					</tr>
+		                           	  				</table>
+		                           	  			</td>
+		                           	  			<th class="white-background"></th>
+		                           	  		</tr>
+		                           	  		
 		                           	  	</thead>
 		                           	  </table>
 		                           	</td>
@@ -54,9 +67,3 @@
 		                     
 							</tbody>
 		       			</table>
-		       			
-		       			
-	
-		       			
-		       			
-	       			
