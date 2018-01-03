@@ -1,0 +1,56 @@
+<ul class="left-menu persist-area">
+                	<li class="categoryHeader persist-header"><a><b>Feature Category</b></a></li>
+                    <li><a  style="padding-left: 10px; font-size: 14px" ng-click="showFeature('View All','showAllInx')"  
+                    ng-class="{active1:viewAll}">View All <span style="font-size: 14px"
+                     ng-class="{{(viewAll) ? activebadge1 : badge1}}">({{viewAllCount}})</span><i style="padding-top: 4px" ng-if="viewAll" class="fa fa-caret-right pull-right fa-3" aria-hidden="true"/></a></li>
+                    <li ng-repeat="data1 in myData   | orderBy:'category.categoryName'"><a style="padding-left: 10px; font-size: 14px"
+                     ng-click="showFeature(data1,$index)" 
+                     ng-class="{active1:$index == selected}">{{data1.category.categoryName}} <span style="font-size: 14px"
+                     ng-class="{{$index == selected ? activebadge1 : badge1}}">({{data1.featuresCount}})</span><i style="padding-top: 4px"
+                     class="fa fa-caret-right pull-right fa-3" ng-if="$index == selected" aria-hidden="true"></i></a></li>
+                </ul>
+                
+                		       			<script>
+function UpdateTableHeaders() {
+   $(".persist-area").each(function() {
+
+       var el             = $(this),
+           offset         = el.offset(),
+           scrollTop      = $(window).scrollTop(),
+           floatingHeader = $(".floatingHeader", this)
+
+       if ((scrollTop > offset.top) && (scrollTop < offset.top + el.height())) {
+           floatingHeader.css({
+            "visibility": "visible"
+           });
+       } else {
+           floatingHeader.css({
+            "visibility": "hidden"
+           });
+       };
+   });
+}
+
+// DOM Ready
+$(function() {
+
+   var clonedHeaderRow;
+
+   $(".persist-area").each(function() {
+       clonedHeaderRow = $(".persist-header", this);
+       clonedHeaderRow
+         .before(clonedHeaderRow.clone())
+         .css("width", clonedHeaderRow.width())
+         .addClass("floatingHeader");
+
+   });
+
+   $(window)
+    .scroll(UpdateTableHeaders)
+    .trigger("scroll");
+
+});
+
+</script>
+
+	
