@@ -2,3 +2,7 @@
 $('.pane-hScroll').scroll(function() {
   $('.pane-vScroll').width($('.pane-hScroll').width() + $('.pane-hScroll').scrollLeft());
 });
+
+
+
+https://stackoverflow.com/questions/27211881/how-to-fix-an-element-after-scroll-in-an-angularjs-webpage
