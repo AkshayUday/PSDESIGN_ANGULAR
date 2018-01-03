@@ -1,98 +1,73 @@
 <div class="planSummary" >
-	<div style="margin-left:15px;margin-top: 10px;margin-bottom: 10px;"><a class="searchtext" href="#" ng-click="stateChange()">Search</a> <img src="../images/chevron_-_grey.png"/><span class="plansponsortext">Plan Sponsor</span></div>
-	<div class="row">
+	<div style="margin-left:15px;margin-top: 10px;margin-bottom: 10px;">
+	<a class="searchtext" href="javascript:void(0)" ng-click="stateChange()">Search</a> <img src="../images/chevron_-_grey.png"/><span class="plansponsortext">Plan Sponsor</span></div>
+	<div class="row" ng-hide = "hideTable">
 		<div class="row row1">
 	        <div class="clearfix mt25">
-	            <h3 class="planSummaryHeader">{{psName}} - PSUID {{psuId}}</h3>
+	            <h3 class="planSummaryHeader">{{psName}} - {{psuId}}</h3>
+	            
 	        </div>
 	        <div class="mt10">
-	            <div class="col-sm-6">
-	                <table class="table table1">
-	                	<thead>
-	                		<tr>
-	                        	<th class="th1">Funding Type</th>
-	                        	<th class="th1">Benefit Type</th>
-	                        	<th class="th1">Effective Date</th>
-	                    	</tr>
-	                	</thead>
-	                    <tbody>
-	                    	<tr>
-	                        	<td>{{summary.fundingType}}</td>
-	                        	<td>{{summary.benefitType}}</td>
-	                        	<td>{{summary.effecitveDate}}</td>
-	                    	</tr>
-	                    </tbody>
-	                    
-	                </table>
-	            </div>
-	            <div class="col-sm-6">
-	                <button class="btn btn-primary modifyButton plansummaryfont">Modify</button>
-	            </div>
+	            <plan-summary-details></plan-summary-details>
 	        </div>
 	    </div>
 	    <div class="legenddiv">
 			<ul class="legendlist">
-				<li><img src="../images/legend_infoicon_copy_6.png"/><span>More Information</span></li>
-				<li><img src="../images/copy_lineicon.svg"/><span>Copy Toggle Settings</span></li>
+				
+				<!--  <li><img src="../images/copy_lineicon.svg"/><span>Copy Toggle Settings</span></li>
 				<li><img src="../images/online_icon.png"/><span>Online</span></li>
 				<li><img src="../images/scheduledoffline_icon.png"/><span>Scheduled Offline</span></li>
 				<li><img src="../images/temporaryoffline.png"/><span>Temporarily Offline</span></li>
+				-->
+				<li><img src="../images/legend_infoicon_copy_6.png"/><span>More Information</span></li>
 			</ul>
 		</div>
 		<!--                     <li><a href="#" ng-click="show('View All','showAllInx')"  ng-class="{active1:viewAll}">View All <span ng-class="{{(viewAll) ? activebadge1 : badge1}}">({{viewAllCount}})</span><i ng-if="viewAll" class="fa fa-caret-right pull-right fa-3" aria-hidden="true"/></a></li>
 		 -->
-	    <section class="clearfix mt30">
+	    <section class="clearfix mt30 categorySection">
         <div class="col-md-2 categorymenu">
             <div class="shadow-box">
-                <ul class="left-menu">
-                	<li class="categoryHeader"><a><b>Feature Category</b></a></li>
-                    <li><a  ng-click="showFeature('View All','showAllInx')"  
-                    ng-class="{active1:viewAll}">View All <span
-                     ng-class="{{(viewAll) ? activebadge1 : badge1}}">({{resData.getCategoryFeaturesResponse.ReadCategoryFeaturesResponse.totalFeaturesCount}})</span><i ng-if="viewAll" class="fa fa-caret-right pull-right fa-3" aria-hidden="true"/></a></li>
-                    <li ng-repeat="data1 in myData   | orderBy:'category.categoryName'"><a
-                     ng-click="showFeature(data1,$index)" 
-                     ng-class="{active1:$index == selected}">{{data1.category.categoryName}} <span 
-                     ng-class="{{$index == selected ? activebadge1 : badge1}}">({{data1.featuresCount}})</span><i 
-                     class="fa fa-caret-right pull-right fa-3" ng-if="$index == selected" aria-hidden="true"></i></a></li>
-                </ul>
+                <summary-category-list></summary-category-list>
             </div>
         </div>
         <div class="col-md-10 categorytable">
-        	<div class="shadow-box right-container">
-        		<div class="outer">
-        			<div class="inner">
-		        		<table class="table">
-		       				<thead>
-		                           <tr style="margin: 5px" >
-		                               <th class="th2 purple fix" style="height:130px;padding-top:28px">Features</th>
-		                               <td class="td1 purple" ng-repeat="data2 in selectedData | orderBy:'name'" >{{data2.name}}</td>
-		                           </tr>
-		                           <tr style="margin: 5px">
-		                           	  <th class="th2 deepPurple fix">PSUID {{psuId}}</th>
-		                           	  <td class="td2" ng-repeat="featureName in selectedData"><span class = "summaryButtons button">{{data2.name}}</span></td>
-		                           </tr>
-		                           <tr style="margin: 5px">
-		                           	  <th class="th2 green fix" style="margin-top:10px">Control 4</th>
-		                           	  <td class="td3" ng-repeat="featureName in selectedData">OFF</td>
-		                           </tr style="margin: 5px">
-		                           <tr style="margin: 5px">
-		                           	  <th class="th2 green fix" style="margin-top:10px">Control 1</th>
-		                           	  <td class="td3" ng-repeat="featureName in selectedData">MIX</td>
-		                           </tr>
-		                           <tr style="margin: 5px">
-		                           	  <th class="th2 green fix" style="margin-top:10px">Control 2</th>
-		                           	  <td class="td3" ng-repeat="featureName in selectedData">On</td>
-		                           </tr>
-		                           <tr style="margin: 5px">
-		                           	  <th class="th2 green fix" style="margin-top:10px">Control 3</th>
-		                           	  <td class="td3" ng-repeat="featureName in selectedData">OFF</td>
-		                           </tr>
-		                      </thead>
-		       			</table>
-        			</div>
-        		</div>
+        	<div class="right-container" style="padding: 0px;background-color: transparent;margin-left: 5px;">  
+        		<summary-feature-details></summary-feature-details>
         	</div>
         </div>
     </section>
+  
+	</div>
+</div>
+  <!-- DIV ERROR 1 -->
+
+
+<!-- DIV ERROR 3-->
+<div class="jumbotron SearchResults" ng-show = "systemDown">
+	<div class="errordiv">
+		<div class="panel-panel-default errorplans systemdown">
+			<image class="icondesign systemdownicon" src="../themes/css2/icons/systemdown_icon.png"  aria-hidden="true"></image>
+			<p class="textcontrol ">We are Sorry! <br><span>A system exception has occurred and prevented your request from being processed. Please contact the support service, if the problem persists.</span>  </p>
+		</div>
+	</div>
+</div>
+<!-- DIV ERROR 3-->
+<div class="jumbotron SearchResults" ng-show = "serviceTimeout">
+	<div class="errordiv">
+		<div class="panel-panel-default errorplans">
+			<image class="icondesign serviceicon" src="../themes/css2/icons/systemdown_icon.png"  aria-hidden="true"></image>
+			<p class="textcontrol servicetext">Service Timed out.Please relogin and search </p>
+		</div>
+	</div>
+</div>
+
+
+<!-- DIV ERROR 4-->	
+<div class="jumbotron SearchResults p0" ng-show = "psumryError">
+	<div class="errordiv">
+		<div class="panel-panel-default errorplans">
+			<image class="icondesignSummary" src="../themes/css2/icons/systemdown_icon.png"  aria-hidden="true"></image>
+			<p class="textcontrol textsummary">{{psErrorData}}</p>
+		</div>
 	</div>
 </div>
