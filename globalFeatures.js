@@ -1,5 +1,5 @@
 
-myapp = angular.module('myApp', ['ngSanitize','ui.router']);
+myapp = angular.module('myApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap','ui.router']);
 
 var states = [
 //              {
@@ -11,6 +11,7 @@ var states = [
 //      }
 //    },
    
+
     {
       name: 'FEATURES',
       state: {
@@ -26,6 +27,10 @@ var states = [
         templateUrl: '../script/planSponsorHome.html',
         controller: function($state){
         	$state.go('PLANSPONSOR.SPONSOR');
+        	// if($state.current.url == '/summary'){
+//        		
+//        	}
+//        	else{$state.go('PLANSPONSOR.SPONSOR');}
         }
       }
     },
@@ -49,7 +54,8 @@ var states = [
     ]
 
    myapp.config(function($stateProvider, $urlRouterProvider) {
-	  $urlRouterProvider.when('/ps', '/ps/sponsor');	 
+	  $urlRouterProvider.when('/ps', '/ps/sponsor');
+	  //$urlRouterProvider.when('/ps/summary', '');
 	  $urlRouterProvider.otherwise('/');
       angular.forEach(states, function(state) {
      $stateProvider.state(state.name, state.state);
@@ -70,11 +76,11 @@ myapp.filter('unique', function() {
       // this takes in our original collection and an iterator function
       angular.forEach(collection, function(item) {
           // we check to see whether our object exists
-    	  if(item.featureCategory){
-          var key = item.featureCategory[keyname];
+    	  if(item.category){
+          var key = item.category[keyname];
     	  }
     	  else{
-    		  var key = item.category[keyname];
+    		  var key = item.keyname;
     	  }
           // if it's not already part of our keys array
           if(keys.indexOf(key) === -1) {
@@ -100,7 +106,7 @@ myapp.filter('myFilter', function () {
           return output;
       }else{
         angular.forEach(inputs, function (input) {
-          if (filterValues.indexOf(input.featureCategory.categoryName) !== -1)
+        	 if (filterValues ==(input.category.categoryName))
               output.push(input);
          });
          return output;
@@ -114,16 +120,23 @@ myapp.filter('myFilter', function () {
 
 
 myapp.controller('globalCtrl',['$scope', '$http', '$timeout', '$window', function($scope, $http, $timeout, $window) {
-	$scope.title = 'GlobalFeatures';
-	if(!$window.cardData){
-		$scope.isDataAvailable = false;
-	}
-	else{
+	$scope.title = 'GlobalFeatures';	
+	$scope.globalFeaturesResponse = $window.cardData;
+	
+	if($scope.globalFeaturesResponse.getGlobalFeatureCode == 200 && $scope.globalFeaturesResponse.getCategoryFeaturesCode == 200){
 	$scope.isDataAvailable = true;	
-	$scope.resData = ($window.cardData.ReadFeaturesResponse.feature);
+	function findByKey (array, key, value,outkey) {
+	 	return array.filter(function (obj) {
+	 		return  obj[key] === value;
+	 	})[0];
+	 }
+	//$scope.resData = ($window.cardData.ReadFeaturesResponse.feature);
+	console.log($scope.resData);
 	$('.home-state a').removeClass('.active');
 	$('.feature-state a').addClass('.active');
-      $scope.myData = $scope.resData;
+    //  $scope.myData = $scope.resData;
+	
+      console.log('GLOBAL FEATURES',$scope.myData)
 	
   $scope.myArrayData = [];
   $scope.showItems = 'View All';
@@ -137,24 +150,58 @@ myapp.controller('globalCtrl',['$scope', '$http', '$timeout', '$window', functio
       $scope.toggleFailure = false;
       $event.stopPropagation();
        }
-
+  $scope.readFeatures = $scope.globalFeaturesResponse.getGlobalFeaturesInfo;
+  $scope.categoryDetails =$scope.globalFeaturesResponse.getCategoryFeaturesResponse;
+ 
   
 
-  
-  
+  //$scope.myData = $scope.categoryDetails.ReadCategoryFeaturesResponse.featureSet;
+  $scope.leftNavData = $scope.categoryDetails.ReadCategoryFeaturesResponse.featureSet;
+  var featureSets = $scope.categoryDetails.ReadCategoryFeaturesResponse.featureSet;
+  var featureObjs = [];
+  $scope.categorydescription = 'View All';
+   //$scope.selected = ind;
+   $scope.viewAllCount = $scope.categoryDetails.ReadCategoryFeaturesResponse.totalFeaturesCount;
+      $scope.selectedData = [];
+      $scope.serialData1 = [];
+      angular.forEach(featureSets, function (featureSet) {
+    	  var featureObjs =[];
+    	  featureObjs= featureSet.features;
+    	  
+    	  angular.forEach(featureObjs, function (featureObj) {
+    		  featureObj.category ={'categoryName':featureSet.category.categoryName,'categoryDescription':featureSet.category.categoryDescription };
+    		  $scope.serialData1.push(featureObj);
+    	  });
+    	});
+      $scope.toggleInfo = $scope.readFeatures.ReadFeaturesResponse.featureSet;
+      $scope.selectedData = $scope.serialData1.map(function (group) {
+			console.log('inside',group);
+		return {
+			resourceId: group.resourceId,
+			enabled: findByKey($scope.toggleInfo[0].features , 'resourceId', group.featureIdentifier.resourceId, 'resourceName'),
+			name: group.name,
+			description:group.description,
+			category:group.category
+			
+		};
+	});
+      console.log($scope.selectedData + "asdasd");
+      $scope.myData = $scope.selectedData;
   $scope.show = function(selItemName,ind) {
     // $scope.viewAll = false;
 console.log('selected is ',selItemName);
     if(selItemName == 'View All'){
-      $scope.viewAll = true;
-      $scope.showItems = 'View All';
-      $scope.myData = $scope.resData;
-      $scope.categorydescription = 'View All';
-       $scope.selected = ind;
+    	$scope.viewAll = true;
+        $scope.showItems = 'View All';
+        $scope.myData = $scope.selectedData;
+        $scope.categorydescription = 'View All';
+         $scope.selected = ind;
+     
     }else{
       $scope.viewAll = false;
-      $scope.showItems = selItemName.featureCategory.categoryName;
-       $scope.categorydescription = selItemName.featureCategory.categoryDescription;
+      //$scope.myData = selItemName;
+      $scope.showItems = selItemName.category.categoryName;
+       $scope.categorydescription = selItemName.category.categoryDescription;
        $scope.selected = ind;
     }
     $window.scrollTo(0, angular.element('.shadow-box').offsetTop);
@@ -187,12 +234,12 @@ console.log('selected is ',selItemName);
 	  angular.element('.popover.in').popover('hide');
 	    $scope.showMessage = inx;
 	    $scope.showingitems = showingitems;
-	    $scope.currentEnabled = obj.enabled;
+	    $scope.currentEnabled = obj.enabled.enabled;
   //  if (!obj.enabled) {
   //    $scope.showMessage = inx;
     //}
 
-  var Pdata = { name: obj.name, enabled: !obj.enabled, resourceId: obj.featureIdentifier.
+  var Pdata = { name: obj.name, enabled: !obj.enabled.enabled, resourceId: obj.enabled.
 		  resourceId}
 
 
@@ -214,81 +261,60 @@ console.log('selected is ',selItemName);
 	    
 	      if(data.code == 200){
 	    	  $scope.toggleSuccess =true;
-	    	  obj.scheduledPeriod =[];
+	    	  obj.enabled.scheduledPeriod =[];
 		      
-	    	  obj.status=data.status; 
+	    	  obj.enabled.status=data.status; 
 	      }
-	      else if (data.code == 500){
+	      else if (data.code == 500 || data.code == 555){
 	    	  $scope.toggleFailure = true;
 	    	  $scope.exceptionMsg = data.errorMsg;
 	    	  $scope.showException = false;
 	    	  // console.log('500',data.errorMsg);
-	    	  if($scope.currentEnabled == false){
-	    	  obj.enabled =false;
+	    	  
+	    	  if($scope.currentEnabled == false)
+	    	  {
+	    	  obj.enabled.enabled=false;
 	    	  }
-	    	  else{obj.enabled = true;}
+	    	  else{obj.enabled.enabled=true;
+	    	  }
+	    	  $event.stopPropagation();
+	 //   	  if($scope.currentEnabled.status == false){
+	    		
+	 //   		  obj.enabled.enabled =false;
+	   // 	  }
+	    //	  else{obj.enabled.enabled = true;
+	    	//  }
+	    	  
     	 
 	      }
-	      else{
-	    	  $scope.toggleFailure = true;
-	    	  $scope.exceptionMsg = data.errorMsg;
-	    	  $scope.showException = false;	  
+	      else{	    	  
+//	    	  $scope.toggleFailure = true;
+//	    	  $scope.exceptionMsg = data.errorMsg;
+//	    	  $scope.showException = false;	  
 	    	  //obj.enabled =!obj.enabled;
 	    	  if($scope.currentEnabled == false){
-		    	  obj.enabled =false;
+		    	  obj.enabled.enabled =false;
 		    	  }
-	    	  else{obj.enabled = true;}
-	    	  console.log('500',data.errorMsg);
-	    	  $event.stopPropagation();
-	    	  $event.preventDefault();
+	    	  else{obj.enabled.enabled = true;}
+	    	  $(location).attr('href', '../service/home');
+	    	  console.log('500',data.errorMsg);   	  
 	    	  
 	      }
 	
 	    })
     .catch(function (err) {
       // Log error somehow.
-    	obj.enabled =!obj.enabled;
+    	obj.enabled.enabled =!obj.enabled.enabled;
         console.log('failure response', err)
     })
     .finally(function () {
       // Hide loading spinner whether our call succeeded or failed.
       console.log('checking whether loading is working')
-      $scope.loading = false;
-     
-    // $timeout(function(){
-    // $scope.msgtimeout = false;
-   //  $scope.toggleSuccess = false;
-     //$scope.toggleFailure = false;
-     // },4000);
+      $scope.loading = false;    
     });
   }, 2000);
 
   
-   
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-//
-// .then(function successCallback(response) {
-//   console.log('success response', response)
-//     // this callback will be called asynchronously
-//     // when the response is available
-//
-//   }, function errorCallback(response) {
-//     console.log('failure response', response.status)
-//     // called asynchronously if an error occurs
-//     // or server returns response with an error status.
-//   });
-
     console.log('changed1', obj.enabled);
   };
 
@@ -298,11 +324,21 @@ console.log('selected is ',selItemName);
     }
   }
 }
- // $http.get("script/data.json").success(function(response) {
-   // console.log('response is ', response.ReadFeaturesResponse.features)
-   // $scope.resData = response.ReadFeaturesResponse.features;
-   //   $scope.myData = $scope.resData;
- // });
+else if($scope.globalFeaturesResponse.code == 500){
+	$scope.isDataAvailable = false;
+	$scope.exception500 = true;
+}
+
+else if($scope.globalFeaturesResponse.getGlobalFeatureCode  || $scope.globalFeaturesResponse.getCategoryFeaturesCode ==  555){
+	$scope.isDataAvailable = false;
+	var errorObject = $scope.globalFeaturesResponse.errorMessage;
+	$scope.gfErrorData = errorObject.split('|')[1].split(']')[0];
+	$scope.exception555 = true;
+}
+else{
+	  $(location).attr('href', '../service/home');
+}
+ 
 }]);
 
 
@@ -359,11 +395,11 @@ myapp.directive('statusPopover', function($compile,$timeout) {
 	        			  }
 	        	  }
 	        	 };
-	          $scope.saveStatus = function(){
+	          $scope.saveStatus = function(featuresData){
         		  var newStatus = $scope.statusOptions.status;
-        		  var enabled = $scope.getFeatures.enabled;
-        		  var featurename= $scope.getFeatures.name;
-        		  var resourceId =$scope.getFeatures.featureIdentifier.resourceId;    		 
+        		  var enabled = featuresData.enabled.enabled;
+        		  var featurename= featuresData.name;
+        		  var resourceId =featuresData.enabled.resourceId;    		 
           		  var statusPost = { name: featurename, status: newStatus, enabled: enabled, resourceId: resourceId };
         		  if(newStatus == 'Scheduled offline'){
         			  var datetimeStart = angular.element('.start-input').val();
@@ -407,14 +443,19 @@ myapp.directive('statusPopover', function($compile,$timeout) {
               		    	
               		    	
               		    }
-              		    else if(data.code == 555){ 
+             		    else if(data.code == 666){ 
+             		    	$scope.showStatusError = true;
+             		    	$scope.statusException = data.errorMsg;
+            		    	
+            		    }
+              		    else if(data.code == 500 || data.code == 555){
               		    	$scope.showStatusError = true;
-              		    	$scope.statusException = data.errorMessage;
-              		    	
+              		    	$scope.statusException = "Sorry! We are unable to save the status change request currently. Please contact the support service, if the problem persists. " + data.errorMsg ;
               		    }
               		    else {
-              		    	$scope.showStatusError = true;
-              		    	$scope.statusException = "Sorry! We are unable to save the status change request currently. Please contact the support service, if the problem persists.";
+              		    	 $(location).attr('href', '../service/home');
+//              		    	$scope.showStatusError = true;
+//              		    	$scope.statusException = "Sorry! We are unable to save the status change request currently. Please contact the support service, if the problem persists.";
               		    }
               		  })
               		  .catch(function (err) {
