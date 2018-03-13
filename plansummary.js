@@ -7,7 +7,8 @@ myapp.controller('summaryCtrl',function($scope,$window,$state,$stateParams,$filt
     	var currentRow = document.getElementById(cntrlNum);
     	console.log(cntrlNum);
     	if(currentRow.nextElementSibling){
-    	var nextRow = currentRow.nextElementSibling.className.indexOf('childRow')>-1 ? true : false;
+    	//var nextRow = currentRow.nextElementSibling.className.indexOf('childRow')>-1 ? true : false;
+    	var nextRow = currentRow.children[0].children[0].children[0].children[1].children.length>0 ? true : false;
     	}
     	else{
     		var nextRow = false;
@@ -26,8 +27,9 @@ myapp.controller('summaryCtrl',function($scope,$window,$state,$stateParams,$filt
    			    	  console.log(data);
    			    	angular.forEach($scope.controls, function(item, key){
    			    		if(item.featureLevelId == [$(currentRow || "").attr("id")]){
-   			    			if(item.summaryResponse){
-   			    				delete item.summaryResponse;
+   			    			if(item.errorResponse || item.summaryResponse){
+			    				if(item.summaryResponse) delete item.summaryResponse;
+			    				else delete item.errorResponse;
    			    				$event.target.src = '../themes/css2/icons/plus.png';
    			    				return;
    			    			}
@@ -51,13 +53,54 @@ myapp.controller('summaryCtrl',function($scope,$window,$state,$stateParams,$filt
    			    		})
    			    	  
    			      }
-   			      else if (data.code == 500){
-   			    	
-   			      }
-   			      else if(data.getToggleInfo.getToggleLevelCode ==  555){
-   			    	  
-   			    	  
-   			      }
+   			   else if (data.code == 500){
+
+			    	angular.forEach($scope.controls, function(item, key){
+			    		if(item.featureLevelId == [$(currentRow || "").attr("id")]){
+			    			if(item.errorResponse || item.summaryResponse){
+			    				if(item.summaryResponse) delete item.summaryResponse;
+			    				else delete item.errorResponse;
+			    				$event.target.src = '../themes/css2/icons/plus.png';
+			 	       		//var removeRow = currentRow.nextElementSibling.remove();
+			    				return;
+			    			}
+			    			item.errorResponse={};
+			    			item.errorResponse.code = data.code;
+			    			$event.target.src = '../themes/css2/icons/minus.png';
+			   			    
+			   			    
+			    			
+			    		}
+
+
+			    		})
+			     
+			      }
+			      else if(data.getToggleInfo && data.getToggleInfo.getToggleLevelCode ==  555){
+			    	angular.forEach($scope.controls, function(item, key){
+			    		if(item.featureLevelId == [$(currentRow || "").attr("id")]){
+			    			if(item.errorResponse || item.summaryResponse){
+			    				if(item.summaryResponse) delete item.summaryResponse;
+			    				else delete item.errorResponse;
+			    				$event.target.src = '../themes/css2/icons/plus.png';
+			 	       		//var removeRow = currentRow.nextElementSibling.remove();
+			    				return;
+			    			}
+			    			item.errorResponse={};
+			    			item.errorResponse.code = data.getToggleInfo.getToggleLevelCode;
+			    			var errorObject = data.getToggleInfo.errorMessage;
+			    			item.errorResponse.psErrorMessage = errorObject.split('|')[1].split(']')[0];
+			    			$event.target.src = '../themes/css2/icons/minus.png';
+			   			  
+			    			}
+			    	})
+			    	  
+			      }
+			      else{
+			    	  //$scope.serviceTimeout = true;
+			    	  console.log('Session timed out');
+			    	  $(location).attr('href', '../service/home');					      
+			      }
    			
    			    })
    		    .catch(function (err) {
@@ -68,16 +111,19 @@ myapp.controller('summaryCtrl',function($scope,$window,$state,$stateParams,$filt
    		    	waitingDialog.hide();
    		    });
    		  }, 0);
-    	
-   		  
-    		
-    		
-    		
-    		
-    		
-    		
-    		
 	       	}else{
+	       		angular.forEach($scope.controls, function(item, key){
+		    		if(item.featureLevelId == [$(currentRow || "").attr("id")]){
+		    			if(item.errorResponse || item.summaryResponse){
+		    				if(item.summaryResponse) delete item.summaryResponse;
+		    				else delete item.errorResponse;
+		    				$event.target.src = '../themes/css2/icons/plus.png';
+		 	       		//var removeRow = currentRow.nextElementSibling.remove();
+		    				return;
+		    			}
+		    		}
+	       		});
+	       		
 	       	}    	
     };
    if(typeof($stateParams.obj) == "string"){
@@ -117,6 +163,98 @@ myapp.controller('summaryCtrl',function($scope,$window,$state,$stateParams,$filt
 	 	})[0];
 	 }
 	 
+//	 plan summary popover starts
+	 
+	$scope.closePopover = function(){
+		$scope.isOpen = false;
+		angular.element('.emptyRow').trigger('click');
+		//$('.psummary-tabledata .popover').hide();
+	};
+	
+	$scope.disabledOption = $scope.selectOption = '';
+	$scope.setCBValues = function(toggleValue,$event){
+		$scope.showErrorContent = $scope.showControlErrorContent = $scope.showIdErrorContent = false;
+		
+		if(toggleValue == 'on'){			
+			$scope.disabledOption = 'on';
+			$scope.selectOption = 'off';
+		}
+		else if(toggleValue == 'off'){
+			$scope.disabledOption = 'off';
+			$scope.selectOption = 'on';
+		}
+		else{
+			$scope.disabledOption = $scope.selectOption = '';
+		}
+		
+//		var selectedBox = $event.target.parentNode.parentNode;
+//		angular.element('.td2').not(selectedBox).css('background','red');
+		
+	};
+	$scope.toggleChanged = function(toggleValue){
+		$scope.selectOption = toggleValue;
+	};
+	$scope.updateDetails = function(level,feature,control,summaryData){
+		if(level =="psuid")
+		{
+		//$scope.showIdErrorContent = true;
+		var PSdata = { planSponsorId: $scope.psuId, enabled: $scope.selectOption, resourceId: feature.enabled.resourceId};
+		}else if(level =="control")
+			{
+			//$scope.showControlErrorContent = true;
+			var PSdata = { controlNumber: control.featureLevelId, enabled: $scope.selectOption, resourceId: feature.enabled.resourceId};
+			}
+		else if(level =="summary")
+			{
+			//$scope.showErrorContent = true;
+			var PSdata = {controlNumber: control.featureLevelId, planSummaryCode :summaryData.featureLevelId, enabled: $scope.selectOption, resourceId: feature.enabled.resourceId};
+			}
+		
+		$timeout(function () {$http({
+			  method: 'POST',
+			  
+			  url: 'updatePSStatus',
+			 data: JSON.stringify(PSdata)
+			  //headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+			}).success(function (data) {
+				console.log(data);
+				if(data.code==200)
+					{
+					 var updateEnable = false;
+					 if($scope.selectOption == 'on'){updateEnable =true;}
+						feature.enabled.enabled=updateEnable;
+						angular.element('.emptyRow').trigger('click');
+					}
+				else{
+					
+				}
+			})
+		    .catch(function (err) {
+		      // Log error somehow.
+		    	
+		        console.log('failure response', err)
+		    })
+		    .finally(function () {
+		      // Hide loading spinner whether our call succeeded or failed.
+		      console.log('checking whether loading is working')
+		      $scope.loading = false;    
+		    });
+		  }, 900);
+		
+	};
+//	$scope.setPsPopover = function(level,toggleValue,column,controlData,psControl){
+//		if(level == 'psuid'){
+//			$scope.popoverTitle = 'PSUID - '+$scope.psuId+' | Feature - '+column.name;
+//		}
+//		else if(level == 'controlNum'){
+//			$scope.popoverTitle = 'Control - '+controlData.featureLevelId+' | Feature - '+column.name;			
+//		}
+//		else if(level == 'summary'){
+//			$scope.popoverTitle = 'Control - '+psControl.featureLevelId+'  | ' + controlData.featureLevelId +' | Feature - '+column.name;			
+//		}
+//	}
+	
+//	 plan summary popover ends
 	
 	    
 	    $scope.showFeature = function(selItemName, ind){
@@ -145,6 +283,10 @@ myapp.controller('summaryCtrl',function($scope,$window,$state,$stateParams,$filt
 					
 				};
 			});
+		      
+		      
+		      
+		      
 		      
 		    $scope.selectedControlDataList = [];
 		    $scope.controls = [];
@@ -215,7 +357,7 @@ myapp.controller('summaryCtrl',function($scope,$window,$state,$stateParams,$filt
 			    	
 			    }
 			    
-
+			    $scope.selectedData = $filter('orderBy')($scope.selectedData,'name');
 		      	angular.forEach($scope.controls, function(item){
 		    			item.mappedFeatureset = [];
 		    			angular.forEach(item.summaryResponse,function(response){
@@ -605,4 +747,26 @@ myapp.directive('fsmStickyHeader', function(){
         }
     };
 });
+
+
+
+myapp.directive('setClassWhenAtTop', function ($window) {
+	  var $win = angular.element($window); // wrap window object as jQuery object
+
+	  return {
+	    restrict: 'A',
+	    link: function (scope, element, attrs) {
+	      var topClass = attrs.setClassWhenAtTop, // get CSS class from directive's attribute value
+	          offsetTop = element.offset().top; // get element's offset top relative to document
+
+	      $win.on('scroll', function (e) {
+	        if ($win.scrollTop() >= offsetTop) {
+	          element.addClass(topClass);
+	        } else {
+	          element.removeClass(topClass);
+	        }
+	      });
+	    }
+	  };
+	});
 
