@@ -19,17 +19,29 @@ myapp.directive('numbersOnly', function () {
         }
     };
 });
-myapp.controller('planCtrl',function($scope,$timeout,$http,$state) {
-    //alert("load this"); 
+myapp.controller('planCtrl',function($scope,$timeout,$http,$state,$stateParams,$location) {
+    //alert("load this");
+	//$location.path = 'ps/sponsor';
+	
+   
 	$('#searchInput').focus();
 //	var plansponsorState = function(){
 //		console.log($state);
 //	}
 	$scope.showLimitError = $scope.showResultTable = $scope.systemDown = $scope.errorSet = $scope.serviceTimeout = $scope.psumryError = false;
-	     
-	
-	$scope.searchFun = function(){
+	if($stateParams.source){		
+		  $scope.psDetails = JSON.parse(localStorage.getItem('controlNumbers'));  	 
+	  	  $scope.psuid = $scope.psDetails.planSponsorId;
+	  	  $scope.valCount = $scope.psDetails.accountStructure.length;
+	  	  $scope.searchKey = $scope.DataEntered = $scope.psDetails.controlNum;
+		$scope.showResultTable = true;
+		}
+		else{
+			localStorage.clear();
+		}    
 		
+	$scope.searchFun = function(){
+		localStorage.clear();
 		$scope.showLimitError = $scope.showResultTable = $scope.systemDown = $scope.errorSet = $scope.serviceTimeout = $scope.psumryError = false;
 		$scope.toggle = false;
 		if(!$scope.DataEntered || $scope.DataEntered.length < 7 ){
@@ -47,6 +59,9 @@ myapp.controller('planCtrl',function($scope,$timeout,$http,$state) {
 				  	 console.log('success response', data);					  
 				      if(data.code == 200){
 				    	  $scope.psDetails = data.plansponsorResponse.ReadPlanSponsorsResponse.planSponsors[0];
+				    	  var sponsorDetails = $scope.psDetails;
+				    	  sponsorDetails.controlNum = $scope.searchKey;
+				    	  localStorage.setItem('controlNumbers',JSON.stringify(sponsorDetails));
 				    	  $scope.psuid = $scope.psDetails.planSponsorId;
 				    	  $scope.valCount = $scope.psDetails.accountStructure.length;
 						  $scope.showResultTable = true;
@@ -62,8 +77,7 @@ myapp.controller('planCtrl',function($scope,$timeout,$http,$state) {
 				    	  $scope.errorData = errorObject.split('|')[1].split(']')[0];
 				    	  console.log($scope.errorData);
 				      }
-				      else{
-				    	  //$scope.serviceTimeout = true;
+				      else{				    	  
 				    	  console.log('Session timed out');
 				    	  $(location).attr('href', '../service/home');					      
 				      }
@@ -76,7 +90,7 @@ myapp.controller('planCtrl',function($scope,$timeout,$http,$state) {
 			    .finally(function () {
 			    	waitingDialog.hide();
 			    });
-			  }, 300);
+			  },900);
 		}
 	  }
 	$scope.clearData = function() {
@@ -85,26 +99,45 @@ myapp.controller('planCtrl',function($scope,$timeout,$http,$state) {
 	};
 	$scope.getPSDetails = function() 
 	{
+		waitingDialog.show('Loading...');
 		 $scope.psumryError = false;
 		$timeout(function () {$http({
 			  method: 'GET',
-			  //url: 'getPSDetails?psuid='+$scope.psuid,
-			  url: 'getPSDetails?controlNumber='+$scope.DataEntered,
+			  url: 'getPSDetails?psuid='+$scope.psuid,
+			  //url: 'getPSDetails?controlNumber='+$scope.DataEntered,
 			  	}).success(function (data) {
 			  	 console.log('success response');	
 			  	
 			      if(data.getCategoryFeaturesCode == 200 && data.getToggleInfo.getToggleLevelCode == 200){
 			    	  console.log(data);
-			    	  $state.go('PLANSPONSOR.SUMMARY',{obj:data});
+			    	  var summaryData = data;
+			    	  summaryData.planSponsorId = $scope.psDetails.planSponsorId;
+			    	  summaryData.nameFull = $scope.psDetails.nameFull;
+			    	  localStorage.setItem('summaryResponse', JSON.stringify(summaryData));
+			    	  $state.go('PLANSPONSOR.SUMMARY',{obj:summaryData});
 			    	  
 			      }
-			      else if (data.getCategoryFeaturesCode == 500 || data.getToggleInfo.getToggleLevelCode == 500){
-			    	 // $scope.systemDown = true;
+			      else if (data.code == 500){
+			    	  $scope.systemDown = true;
+			    	  
+			    	  $state.go('PLANSPONSOR.SUMMARY',{obj:$scope.systemDown});
 			      }
-			      else if(data.getToggleInfo.getToggleLevelCode ==  555){
+			      else if(data.getCategoryFeaturesCode ==  555){
 			    	  console.log(data);
+			    	  $scope.psumryError = true;
+			    	  var errorObject = data.errorMessage;
+			    	  $scope.errorData = errorObject.split('|')[1].split(']')[0];
+			    	  $state.go('PLANSPONSOR.SUMMARY',{obj:$scope.errorData});
+			      }
+			      else if(data.getToggleInfo && data.getToggleInfo.getToggleLevelCode ==  555){
+			    	  console.log(data);
+			    	  $scope.psumryError = true;
 			    	  var errorObject = data.getToggleInfo.errorMessage;
-			    	  $scope.psErrorData = errorObject.split('|')[1].split(']')[0];
+			    	  $scope.errorData = errorObject.split('|')[1].split(']')[0];
+			    	  $state.go('PLANSPONSOR.SUMMARY',{obj:$scope.errorData});
+			      }
+			      else{
+			    	  $(location).attr('href', '../service/home');
 			      }
 			
 			    })
@@ -113,8 +146,9 @@ myapp.controller('planCtrl',function($scope,$timeout,$http,$state) {
 		        console.log('failure response', err)
 		    })
 		    .finally(function () {
-		    	
+		    	waitingDialog.hide();
 		    });
-		  }, 2000);
-		}                 
+		  }, 900);
+		}  
+	$location.path('ps/sponsor');
 	});
